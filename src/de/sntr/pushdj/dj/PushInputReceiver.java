@@ -12,7 +12,7 @@ public class PushInputReceiver implements Receiver {
         
     }
     
-	@Override//kann man komplett fertig machen
+	@Override
 	public void send(MidiMessage message, long timeStamp) {
 		if(message instanceof ShortMessage) {
 			ShortMessage sm = (ShortMessage) message;
@@ -28,20 +28,227 @@ public class PushInputReceiver implements Receiver {
 					case 15:
 						PushAdapter.encoders[1].increased();
 						break;
+					case 71:
+						PushAdapter.encoders[2].increased();
+						break;
+					case 72:
+						PushAdapter.encoders[3].increased();
+						break;
+					case 73:
+						PushAdapter.encoders[4].increased();
+						break;
+					case 74:
+						PushAdapter.encoders[5].increased();
+						break;
+					case 75:
+						PushAdapter.encoders[6].increased();
+						break;
+					case 76:
+						PushAdapter.encoders[7].increased();
+						break;
+					case 77:
+						PushAdapter.encoders[8].increased();
+						break;
+					case 78:
+						PushAdapter.encoders[9].increased();
+						break;
+					case 79:
+						PushAdapter.encoders[10].increased();
+						break;
 					default:
 						break;
 					}
 				}
 				else if(data2 == 127) {
 					switch (cc) {
+					case 3:
+						PushAdapter.tapTempo.pressed();
+						break;
+					case 9:
+						PushAdapter.metronome.pressed();
+						break;
 					case 14:
 						PushAdapter.encoders[0].decreased();
 						break;
 					case 15:
 						PushAdapter.encoders[1].decreased();
 						break;
+					case 20:
+						PushAdapter.trackTop[0].pressed();
+						break;
+					case 21:
+						PushAdapter.trackTop[1].pressed();
+						break;
+					case 22:
+						PushAdapter.trackTop[2].pressed();
+						break;
+					case 23:
+						PushAdapter.trackTop[3].pressed();
+						break;
+					case 24:
+						PushAdapter.trackTop[4].pressed();
+						break;
+					case 25:
+						PushAdapter.trackTop[5].pressed();
+						break;
+					case 26:
+						PushAdapter.trackTop[6].pressed();
+						break;
+					case 27:
+						PushAdapter.trackTop[7].pressed();
+						break;
+					case 28:
+						PushAdapter.master.pressed();
+						break;
+					case 29:
+						PushAdapter.stop.pressed();
+						break;
+					case 44:
+						PushAdapter.left.pressed();
+						break;
+					case 45:
+						PushAdapter.right.pressed();
+						break;
+					case 46:
+						PushAdapter.up.pressed();
+						break;
+					case 47:
+						PushAdapter.down.pressed();
+						break;
+					case 48:
+						PushAdapter.select.pressed();
+						break;
+					case 49:
+						PushAdapter.shift.pressed();
+						break;
+					case 50:
+						PushAdapter.note.pressed();
+						break;
+					case 51:
+						PushAdapter.session.pressed();
+						break;
+					case 52:
+						PushAdapter.addEffect.pressed();
+						break;
+					case 53:
+						PushAdapter.addTrack.pressed();
+						break;
+					case 54:
+						PushAdapter.octaveDown.pressed();
+						break;
+					case 55:
+						PushAdapter.octaveUp.pressed();
+						break;
+					case 56:
+						PushAdapter.repeat.pressed();
+						break;
+					case 57:
+						PushAdapter.accent.pressed();
+						break;
+					case 58:
+						PushAdapter.scales.pressed();
+						break;
+					case 59:
+						PushAdapter.user.pressed();
+						break;
+					case 60:
+						PushAdapter.mute.pressed();
+						break;
+					case 61:
+						PushAdapter.solo.pressed();
+						break;
+					case 62:
+						PushAdapter.in.pressed();
+						break;
+					case 63:
+						PushAdapter.out.pressed();
+						break;
+					case 71:
+						PushAdapter.encoders[2].decreased();
+						break;
+					case 72:
+						PushAdapter.encoders[3].decreased();
+						break;
+					case 73:
+						PushAdapter.encoders[4].decreased();
+						break;
+					case 74:
+						PushAdapter.encoders[5].decreased();
+						break;
+					case 75:
+						PushAdapter.encoders[6].decreased();
+						break;
+					case 76:
+						PushAdapter.encoders[7].decreased();
+						break;
+					case 77:
+						PushAdapter.encoders[8].decreased();
+						break;
+					case 78:
+						PushAdapter.encoders[9].decreased();
+						break;
+					case 79:
+						PushAdapter.encoders[10].decreased();
+						break;
 					case 85:
 						PushAdapter.play.pressed();
+						break;
+					case 86:
+						PushAdapter.record.pressed();
+						break;
+					case 87:
+						PushAdapter.nnew.pressed();
+						break;
+					case 88:
+						PushAdapter.duplicate.pressed();
+						break;
+					case 89:
+						PushAdapter.automation.pressed();
+						break;
+					case 90:
+						PushAdapter.fixedLength.pressed();
+						break;
+					case 102:
+						PushAdapter.trackBottom[0].pressed();
+						break;
+					case 103:
+						PushAdapter.trackBottom[1].pressed();
+						break;
+					case 104:
+						PushAdapter.trackBottom[2].pressed();
+						break;
+					case 105:
+						PushAdapter.trackBottom[3].pressed();
+						break;
+					case 106:
+						PushAdapter.trackBottom[4].pressed();
+						break;
+					case 107:
+						PushAdapter.trackBottom[5].pressed();
+						break;
+					case 108:
+						PushAdapter.trackBottom[6].pressed();
+						break;
+					case 109:
+						PushAdapter.trackBottom[7].pressed();
+						break;
+					case 110:
+						PushAdapter.device.pressed();
+						break;
+					case 111:
+						PushAdapter.browse.pressed();
+						break;
+					case 112:
+						PushAdapter.tracck.pressed();
+						break;
+					case 113:
+						PushAdapter.clip.pressed();
+						break;
+					case 114:
+						PushAdapter.volume.pressed();
+						break;
+					case 115:
+						PushAdapter.panSend.pressed();
 						break;
 					case 116:
 						PushAdapter.quantize.pressed();
@@ -63,6 +270,9 @@ public class PushInputReceiver implements Receiver {
 					switch (cc) {
 					case 85:
 						PushAdapter.play.released();
+						break;
+					case 86:
+						PushAdapter.record.released();
 						break;
 	
 					default:

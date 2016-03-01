@@ -104,7 +104,7 @@ public class TrackDeck extends Deck {
 	TraktorMessage hotcue8DeleteMessage;
 	
 	Button shiftControl;
-	TraktorMessage shiftMessage;
+	Button deleteControl;
 	
 	TraktorMessage hotcue1TypeMessage;
 	TraktorMessage hotcue2TypeMessage;
@@ -124,9 +124,13 @@ public class TrackDeck extends Deck {
 	HotcueType hotcue7Type = HotcueType.None;
 	HotcueType hotcue8Type = HotcueType.None;
 	
-	boolean shift = false;
 	boolean playing = false;
 	
+	DJController djc;
+	
+	public TrackDeck(DJController djc) {
+		this.djc = djc;
+	}
 	
 	void playPause() {
 		if(playing) {
@@ -152,7 +156,6 @@ public class TrackDeck extends Deck {
 			setColor(cueControl, cueOff);
 			setColor(playControl, playOff);
 		} else {
-//			cuePlaying = true;
 			setColor(cueControl, cueOn);
 			setColor(playControl, playOn);
 		}
@@ -160,7 +163,6 @@ public class TrackDeck extends Deck {
 	
 	void cueReleased() {
 		send(cueReleasedMessage);
-//		cuePlaying = false;
 		if (!playing) {
 			setColor(playControl, playOff);
 		}
@@ -208,19 +210,9 @@ public class TrackDeck extends Deck {
 		send(beatjumpCoarseBackwardReleaseMessage);
 		setColor(beatjumpCoarseBackwardControl, beatjumpCoarseBackwardOff);
 	}
-	
-	void shiftPressed() {
-		shift = true;
-		setColor(shiftControl, TitleButton.BRIGHT_ON);
-	}
-	
-	void shiftReleased() {
-		shift = false;
-		setColor(shiftControl, TitleButton.MEDIUM_ON);
-	}
 
 	void hotcue1Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue1DeleteMessage);
 			return;
 		}
@@ -241,7 +233,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue2Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue2DeleteMessage);
 			return;
 		}
@@ -262,7 +254,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue3Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue3DeleteMessage);
 			return;
 		}
@@ -283,7 +275,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue4Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue4DeleteMessage);
 			return;
 		}
@@ -304,7 +296,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue5Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue5DeleteMessage);
 			return;
 		}
@@ -325,7 +317,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue6Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue6DeleteMessage);
 			return;
 		}
@@ -346,7 +338,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue7Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue7DeleteMessage);
 			return;
 		}
@@ -367,7 +359,7 @@ public class TrackDeck extends Deck {
 	}
 
 	void hotcue8Pressed() {
-		if(shift) {
+		if(djc.shiftRedDown) {
 			send(hotcue8DeleteMessage);
 			return;
 		}
@@ -390,10 +382,7 @@ public class TrackDeck extends Deck {
 	@Override
 	public void buttonPressed(Button control) {
 		if(active) {
-			if(control == shiftControl) {
-				shiftPressed();
-			}
-			else if(control == playControl) {
+			if(control == playControl) {
 				playPause();
 			}
 			else if(control == cueControl) {
@@ -442,10 +431,7 @@ public class TrackDeck extends Deck {
 	@Override
 	public void buttonReleased(Button control) {
 		if(active) {
-			if (control == shiftControl) {
-				shiftReleased();
-			}
-			else if (control == cueControl) {
+			if (control == cueControl) {
 				cueReleased();
 			}
 			else if(control == beatjumpCoarseBackwardControl) {
@@ -527,7 +513,7 @@ public class TrackDeck extends Deck {
 	@Override
 	public void activate() {
 		if(active) {
-			throw new RuntimeException("Deck allready active");
+			throw new RuntimeException("Deck already active");
 		}
 		active = true;
 		if(playing) {
@@ -667,10 +653,15 @@ public class TrackDeck extends Deck {
 		hotcue8ReleasedMessage = release;
 		hotcue8DeleteMessage = delete;
 	}
+
 	public void setShiftButton(Button control) {
 		control.addListener(this);
 		shiftControl = control;
-		
+	}
+
+	public void setDeleteButton(Button control) {
+		control.addListener(this);
+		deleteControl = control;
 	}
 
 	public void setHotcueType1Message(TraktorMessage message) {
