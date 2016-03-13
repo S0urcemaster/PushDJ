@@ -12,6 +12,7 @@ public class TraktorAdapter {
 
 	public static TraktorMessage playDeckA;
 	public static TraktorMessage pauseDeckA;
+	public static TraktorMessage playReturnDeckA;
 	public static TraktorMessage loadDeckA;
 	public static TraktorMessage cueDeckAPress;
 	public static TraktorMessage cueDeckARelease;
@@ -98,6 +99,7 @@ public class TraktorAdapter {
         vMidi = new TeVirtualMIDI("PushDJ");
         TraktorAdapter.mappings = mappings;
         playDeckA = new TraktorMessage("playDeckA", mappings.get("playDeckA"));
+        playReturnDeckA = getMessage("playReturnDeckA");
         pauseDeckA = new TraktorMessage("pauseDeckA", mappings.get("pauseDeckA"));
         cueDeckAPress = new TraktorMessage("cueDeckAPress", mappings.get("cueDeckAPress"));
         cueDeckARelease = new TraktorMessage("cueDeckARelease", mappings.get("cueDeckARelease"));

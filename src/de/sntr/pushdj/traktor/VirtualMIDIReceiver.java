@@ -6,6 +6,11 @@ import javax.sound.midi.ShortMessage;
 import de.tobiaserichsen.tevm.TeVirtualMIDI;
 import de.tobiaserichsen.tevm.TeVirtualMIDITest;
 
+/**
+ * Receives Traktor Messages
+ * @author sntrAdmin
+ *
+ */
 public class VirtualMIDIReceiver extends Thread {
 
 	public static volatile boolean running = true;
@@ -68,6 +73,10 @@ public class VirtualMIDIReceiver extends Thread {
 						case 36:
 							TraktorAdapter.hotcueTypeDeckA8.data2 = sm.getData2();
 							TraktorAdapter.hotcueTypeDeckA8.sent();
+							break;
+						case 37:
+							TraktorAdapter.playReturnDeckA.data2 = sm.getData2();
+							TraktorAdapter.playReturnDeckA.sent();
 							break;
 
 						default:

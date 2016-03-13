@@ -22,6 +22,10 @@ public class TrackDeck extends Deck {
 	static final int beatjumpCoarseBackwardOff = MatrixButton.BLUEGREEN_DARKPALE;
 	static final int beatjumpCoarseForwardOn = MatrixButton.BLUEGREEN_BRIGHT;
 	static final int beatjumpCoarseForwardOff = MatrixButton.BLUEGREEN_DARKPALE;
+	static final int jogTurnFineOn = MatrixButton.ORANGE1_BRIGHT;
+	static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
+	static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
+	static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
 
 	static final int[] hotcueColors = new int[7];
 	static final int hotcuePlay = MatrixButton.YELLOW2;
@@ -40,6 +44,7 @@ public class TrackDeck extends Deck {
 
 	Button playControl;
 	TraktorMessage playMessage;
+	TraktorMessage playReturnMessage;
 	TraktorMessage pauseMessage;
 	
 	Button cueControl;
@@ -124,6 +129,11 @@ public class TrackDeck extends Deck {
 	HotcueType hotcue7Type = HotcueType.None;
 	HotcueType hotcue8Type = HotcueType.None;
 	
+	Button jogTurnFineForwardControl;
+	Button jogTurnFineBackwardControl;
+	Button jogTurnCoarseForwardControl;
+	Button jogTurnCoarseBackwardControl;
+	
 	boolean playing = false;
 	
 	DJController djc;
@@ -134,13 +144,12 @@ public class TrackDeck extends Deck {
 	
 	void playPause() {
 		if(playing) {
-			playing = false;
-			setColor(playControl, playOff);
+			//playing = false; if sent with mouse or from other controller it has to be set on 'out' message
+			//but is it enough for synchronisity?
 			send(pauseMessage);
 		}
 		else {
-			playing = true;
-			setColor(playControl, playOn);
+			//playing = true;
 			send(playMessage);
 		}
 	}
@@ -508,6 +517,16 @@ public class TrackDeck extends Deck {
 			hotcue8Type = HotcueType.values()[message.data2];
 			setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
 		}
+		else if(message == playReturnMessage) {
+			if(message.data2 == 0) {
+				playing = false;
+				setColor(playControl, playOff);
+			}
+			else {
+				playing = true;
+				setColor(playControl, playOn);
+			}
+		}
 	}
 	
 	@Override
@@ -664,6 +683,11 @@ public class TrackDeck extends Deck {
 		deleteControl = control;
 	}
 
+	public void setPlayReturnDeckAMessage(TraktorMessage message) {
+		message.addListener(this);
+		playReturnMessage = message;
+	}
+	
 	public void setHotcueType1Message(TraktorMessage message) {
 		message.addListener(this);
 		hotcue1TypeMessage = message;

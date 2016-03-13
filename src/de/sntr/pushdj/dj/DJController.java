@@ -56,6 +56,7 @@ public class DJController implements ButtonListener, EncoderListener {
 				TraktorAdapter.selectSetHotcueDeckA8Release, TraktorAdapter.deleteHotcueDeckA8);
 		deckA.setShiftButton(PushAdapter.play);
 
+		deckA.setPlayReturnDeckAMessage(TraktorAdapter.playReturnDeckA);
 		deckA.setHotcueType1Message(TraktorAdapter.hotcueTypeDeckA1);
 		deckA.setHotcueType2Message(TraktorAdapter.hotcueTypeDeckA2);
 		deckA.setHotcueType3Message(TraktorAdapter.hotcueTypeDeckA3);
