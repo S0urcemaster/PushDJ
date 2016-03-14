@@ -2,6 +2,9 @@ package de.sntr.pushdj.dj;
 
 import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
+
+import java.util.Timer;
+
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.TitleButton;
@@ -9,6 +12,9 @@ import de.sntr.pushdj.traktor.HotcueType;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
 public class TrackDeck extends Deck {
+	
+	static final int jogFineRepeatSpeed = 100;
+	static final int jogCoarseRepeatSpeed = 50;
 	
 	static final int playOn = MatrixButton.GREEN_BRIGHT;
 	static final int playOff = MatrixButton.RED_BRIGHT;
@@ -133,10 +139,17 @@ public class TrackDeck extends Deck {
 	Button jogTurnFineBackwardControl;
 	Button jogTurnCoarseForwardControl;
 	Button jogTurnCoarseBackwardControl;
+	TraktorMessage jogTurnFineForwardMessage;
+	TraktorMessage jogTurnFineBackwardMessage;
+	TraktorMessage jogTurnCoarseForwardMessage;
+	TraktorMessage jogTurnCoarseBackwardMessage;
+	
 	
 	boolean playing = false;
 	
 	DJController djc;
+	
+	Timer jogTurnFineForwardTimer;
 	
 	public TrackDeck(DJController djc) {
 		this.djc = djc;
@@ -182,8 +195,9 @@ public class TrackDeck extends Deck {
 		send(beatjumpFineForwardPressMessage);
 		setColor(beatjumpFineForwardControl, beatjumpFineForwardOn);
 	}
+	
 	/**
-	 * For fast repeat
+	 * For fast repeat; fast repeat not yet implemented
 	 */
 	void beatjumpFineForwardReleased() {
 		send(beatjumpFineForwardReleaseMessage);
@@ -388,6 +402,31 @@ public class TrackDeck extends Deck {
 		setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
 	}
 	
+	void jogTurnFineForwardPressed() {
+		jogTurnFineForwardTimer = new Timer(true);
+		jogTurnFineForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineForwardMessage), 0, 1000/jogFineRepeatSpeed);
+	}
+	
+	void jogTurnFineForwardReleased() {
+		jogTurnFineForwardTimer.cancel();
+	}
+	
+	void jogTurnFineBackwardPressed() {
+		
+	}
+	
+	void jogTurnCoarseForwardPressed() {
+		
+	}
+	
+	void jogTurnCoarseBackwardPressed() {
+		
+	}
+	
+	
+	/**
+	 * Will be executed if 'active' is true
+	 */
 	@Override
 	public void buttonPressed(Button control) {
 		if(active) {
@@ -432,6 +471,18 @@ public class TrackDeck extends Deck {
 			}
 			else if(control == hotcue8Control) {
 				hotcue8Pressed();
+			}
+			else if(control == jogTurnFineForwardControl) {
+				jogTurnFineForwardPressed();
+			}
+			else if(control == jogTurnFineBackwardControl) {
+				jogTurnFineBackwardPressed();
+			}
+			else if(control == jogTurnCoarseForwardControl) {
+				jogTurnCoarseForwardPressed();
+			}
+			else if(control == jogTurnCoarseBackwardControl) {
+				jogTurnCoarseBackwardPressed();
 			}
 			
 		}
@@ -478,6 +529,18 @@ public class TrackDeck extends Deck {
 			}
 			else if(control == hotcue8Control) {
 				hotcue8Released();
+			}
+			else if(control == jogTurnFineForwardControl) {
+				jogTurnFineForwardReleased();
+			}
+			else if(control == jogTurnFineBackwardControl) {
+//				jogTurnFineBackwardReleased();
+			}
+			else if(control == jogTurnCoarseForwardControl) {
+//				jogTurnCoarseForwardReleased();
+			}
+			else if(control == jogTurnCoarseBackwardControl) {
+//				jogTurnCoarseBackwardReleased();
 			}
 		}
 	}
@@ -554,6 +617,10 @@ public class TrackDeck extends Deck {
 		setColor(hotcue6Control, hotcueColors[hotcue6Type.ordinal()]);
 		setColor(hotcue7Control, hotcueColors[hotcue7Type.ordinal()]);
 		setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
+		setColor(jogTurnFineForwardControl, jogTurnFineOff);
+		setColor(jogTurnFineBackwardControl, jogTurnFineOff);
+		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOff);
+		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOff);
 	}
 
 	@Override
@@ -681,6 +748,12 @@ public class TrackDeck extends Deck {
 	public void setDeleteButton(Button control) {
 		control.addListener(this);
 		deleteControl = control;
+	}
+	
+	public void setJogTurnFineForwardButton(Button control, TraktorMessage message) {
+		control.addListener(this);
+		jogTurnFineForwardControl = control;
+		jogTurnFineForwardMessage = message;
 	}
 
 	public void setPlayReturnDeckAMessage(TraktorMessage message) {

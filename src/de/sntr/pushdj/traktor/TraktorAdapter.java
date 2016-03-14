@@ -90,6 +90,7 @@ public class TraktorAdapter {
 	public static TraktorMessage hotcueTypeDeckA6;
 	public static TraktorMessage hotcueTypeDeckA7;
 	public static TraktorMessage hotcueTypeDeckA8;
+	public static TraktorMessage jogTurnDeckAFineForward;
 
 	static Map<String, int[]> mappings = new HashMap<>();
 
@@ -175,6 +176,8 @@ public class TraktorAdapter {
     	hotcueTypeDeckA6 = getMessage("hotcueTypeDeckA6");
     	hotcueTypeDeckA7 = getMessage("hotcueTypeDeckA7");
     	hotcueTypeDeckA8 = getMessage("hotcueTypeDeckA8");
+    	
+    	jogTurnDeckAFineForward = getMessage("jogTurnDeckAFineForward");
     	
     	new VirtualMIDIReceiver(vMidi).start();
 	}

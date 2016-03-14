@@ -379,6 +379,7 @@ public class PushInputReceiver implements Receiver {
 				case 62: PushAdapter.matrix[26].released(); break;
 				case 63: PushAdapter.matrix[27].released(); break;
 				
+				case 68: PushAdapter.matrix[32].released(); break;
 				default:
 					break;
 				}
