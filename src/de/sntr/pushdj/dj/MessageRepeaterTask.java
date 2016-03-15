@@ -21,7 +21,6 @@ public class MessageRepeaterTask extends TimerTask {
 	@Override
 	public void run() {
 		TraktorAdapter.send(message);
-		System.out.println("sent");
 	}
 
 }

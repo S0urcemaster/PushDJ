@@ -14,7 +14,7 @@ import de.sntr.pushdj.traktor.TraktorMessage;
 public class TrackDeck extends Deck {
 	
 	static final int jogFineRepeatSpeed = 100;
-	static final int jogCoarseRepeatSpeed = 50;
+	static final int jogCoarseRepeatSpeed = 200;
 	
 	static final int playOn = MatrixButton.GREEN_BRIGHT;
 	static final int playOff = MatrixButton.RED_BRIGHT;
@@ -32,6 +32,10 @@ public class TrackDeck extends Deck {
 	static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
 	static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
 	static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
+	static final int syncOn = MatrixButton.YELLOW2;
+	static final int syncOff = MatrixButton.YELLOW_MEDIUM;
+	static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
+	static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
 
 	static final int[] hotcueColors = new int[7];
 	static final int hotcuePlay = MatrixButton.YELLOW2;
@@ -56,9 +60,6 @@ public class TrackDeck extends Deck {
 	Button cueControl;
 	TraktorMessage cuePressedMessage;
 	TraktorMessage cueReleasedMessage;
-	
-	Button syncControl;
-	TraktorMessage syncMessage;
 
 	Button beatjumpFineBackwardControl;
 	TraktorMessage beatjumpFineBackwardPressMessage;
@@ -144,12 +145,25 @@ public class TrackDeck extends Deck {
 	TraktorMessage jogTurnCoarseForwardMessage;
 	TraktorMessage jogTurnCoarseBackwardMessage;
 	
+	Button syncControl;
+	TraktorMessage phaseSyncMessage;
+	TraktorMessage syncOnMessage;
+	TraktorMessage syncOnReturnMessage;
+	
+	Button tempoMasterControl;
+	TraktorMessage tempoMasterMessage;
+	TraktorMessage tempoMasterReturnMessage;
 	
 	boolean playing = false;
+	boolean sync = false;
+	boolean tempoMaster = false;
 	
 	DJController djc;
 	
 	Timer jogTurnFineForwardTimer;
+	Timer jogTurnFineBackwardTimer;
+	Timer jogTurnCoarseForwardTimer;
+	Timer jogTurnCoarseBackwardTimer;
 	
 	public TrackDeck(DJController djc) {
 		this.djc = djc;
@@ -157,12 +171,9 @@ public class TrackDeck extends Deck {
 	
 	void playPause() {
 		if(playing) {
-			//playing = false; if sent with mouse or from other controller it has to be set on 'out' message
-			//but is it enough for synchronisity?
 			send(pauseMessage);
 		}
 		else {
-			//playing = true;
 			send(playMessage);
 		}
 	}
@@ -405,22 +416,58 @@ public class TrackDeck extends Deck {
 	void jogTurnFineForwardPressed() {
 		jogTurnFineForwardTimer = new Timer(true);
 		jogTurnFineForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineForwardMessage), 0, 1000/jogFineRepeatSpeed);
+		setColor(jogTurnFineForwardControl, jogTurnFineOn);
 	}
 	
 	void jogTurnFineForwardReleased() {
 		jogTurnFineForwardTimer.cancel();
+		setColor(jogTurnFineForwardControl, jogTurnFineOff);
 	}
 	
 	void jogTurnFineBackwardPressed() {
-		
+		jogTurnFineBackwardTimer = new Timer(true);
+		jogTurnFineBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineBackwardMessage), 0, 1000/jogFineRepeatSpeed);
+		setColor(jogTurnFineBackwardControl, jogTurnFineOn);
+	}
+	
+	void jogTurnFineBackwardReleased() {
+		jogTurnFineBackwardTimer.cancel();
+		setColor(jogTurnFineBackwardControl, jogTurnFineOff);
 	}
 	
 	void jogTurnCoarseForwardPressed() {
-		
+		jogTurnCoarseForwardTimer = new Timer(true);
+		jogTurnCoarseForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseForwardMessage), 0, 1000/jogFineRepeatSpeed);
+		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOn);
+	}
+	
+	void jogTurnCoarseForwardReleased() {
+		jogTurnCoarseForwardTimer.cancel();
+		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOff);
 	}
 	
 	void jogTurnCoarseBackwardPressed() {
-		
+		jogTurnCoarseBackwardTimer = new Timer(true);
+		jogTurnCoarseBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseBackwardMessage), 0, 1000/jogFineRepeatSpeed);
+		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOn);
+	}
+	
+	void jogTurnCoarseBackwardReleased() {
+		jogTurnCoarseBackwardTimer.cancel();
+		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOff);
+	}
+	
+	void syncPressed() {
+		if(djc.shiftGreenDown) {
+			send(syncOnMessage);
+		}
+		else {
+			send(phaseSyncMessage);
+		}
+	}
+	
+	void tempoMasterPressed() {
+		send(tempoMasterMessage);
 	}
 	
 	
@@ -484,6 +531,12 @@ public class TrackDeck extends Deck {
 			else if(control == jogTurnCoarseBackwardControl) {
 				jogTurnCoarseBackwardPressed();
 			}
+			else if(control == syncControl) {
+				syncPressed();
+			}
+			else if(control == tempoMasterControl) {
+				tempoMasterPressed();
+			}
 			
 		}
 	}
@@ -534,13 +587,13 @@ public class TrackDeck extends Deck {
 				jogTurnFineForwardReleased();
 			}
 			else if(control == jogTurnFineBackwardControl) {
-//				jogTurnFineBackwardReleased();
+				jogTurnFineBackwardReleased();
 			}
 			else if(control == jogTurnCoarseForwardControl) {
-//				jogTurnCoarseForwardReleased();
+				jogTurnCoarseForwardReleased();
 			}
 			else if(control == jogTurnCoarseBackwardControl) {
-//				jogTurnCoarseBackwardReleased();
+				jogTurnCoarseBackwardReleased();
 			}
 		}
 	}
@@ -590,6 +643,26 @@ public class TrackDeck extends Deck {
 				setColor(playControl, playOn);
 			}
 		}
+		else if(message == syncOnReturnMessage) {
+			if(message.data2 == 0) {
+				sync = false;
+				setColor(syncControl, syncOff);
+			}
+			else {
+				sync = true;
+				setColor(syncControl, syncOn);
+			}
+		}
+		else if(message == tempoMasterReturnMessage) {
+			if(message.data2 == 0) {
+				tempoMaster = false;
+				setColor(tempoMasterControl, tempoMasterOff);
+			}
+			else {
+				tempoMaster = true;
+				setColor(tempoMasterControl, tempoMasterOn);
+			}
+		}
 	}
 	
 	@Override
@@ -621,6 +694,18 @@ public class TrackDeck extends Deck {
 		setColor(jogTurnFineBackwardControl, jogTurnFineOff);
 		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOff);
 		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOff);
+		if(sync) {
+			setColor(syncControl, syncOn);
+		}
+		else {
+			setColor(syncControl, syncOff);
+		}
+		if(tempoMaster) {
+			setColor(tempoMasterControl, tempoMasterOn);
+		}
+		else {
+			setColor(tempoMasterControl, tempoMasterOff);
+		}
 	}
 
 	@Override
@@ -642,11 +727,7 @@ public class TrackDeck extends Deck {
 		this.cueReleasedMessage = cueRelease;
 		
 	}
-	public void setSyncButton(Button control) {
-		control.addListener(this);
-		syncControl = control;
-		
-	}
+
 	public void setBeatjumpCoarseBackwardButton(Button control, TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		control.addListener(this);
 		beatjumpCoarseBackwardControl = control;
@@ -756,9 +837,44 @@ public class TrackDeck extends Deck {
 		jogTurnFineForwardMessage = message;
 	}
 
+	public void setJogTurnFineBackwardButton(Button control, TraktorMessage message) {
+		control.addListener(this);
+		jogTurnFineBackwardControl = control;
+		jogTurnFineBackwardMessage = message;
+	}
+
+	public void setJogTurnCoarseForwardButton(Button control, TraktorMessage message) {
+		control.addListener(this);
+		jogTurnCoarseForwardControl = control;
+		jogTurnCoarseForwardMessage = message;
+	}
+
+	public void setJogTurnCoarseBackwardButton(Button control, TraktorMessage message) {
+		control.addListener(this);
+		jogTurnCoarseBackwardControl = control;
+		jogTurnCoarseBackwardMessage = message;
+	}
+
 	public void setPlayReturnDeckAMessage(TraktorMessage message) {
 		message.addListener(this);
 		playReturnMessage = message;
+	}
+	
+	public void setSyncButton(Button control, TraktorMessage syncOnMessage, TraktorMessage phaseSyncMessage, TraktorMessage syncReturnMessage) {
+		control.addListener(this);
+		syncControl = control;
+		this.syncOnMessage = syncOnMessage;
+		this.phaseSyncMessage = phaseSyncMessage;
+		this.syncOnReturnMessage = syncReturnMessage;
+		this.syncOnReturnMessage.addListener(this);
+	}
+	
+	public void setTempoMasterButton(Button control, TraktorMessage message, TraktorMessage returnMessage) {
+		control.addListener(this);
+		tempoMasterControl = control;
+		tempoMasterMessage = message;
+		tempoMasterReturnMessage = returnMessage;
+		tempoMasterReturnMessage.addListener(this);
 	}
 	
 	public void setHotcueType1Message(TraktorMessage message) {

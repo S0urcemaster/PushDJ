@@ -10,6 +10,7 @@ new send from Push
 - Deck oder DJController -> link methode set...Button erzeugen
 - DJController -> Push button und Traktor message verlinken; listener hinzufügen
 - für benötigtes button release -> PushInputReceiver neuen case bei NOTE_OFF oder data2 == 0 falls CC
+- DJController oder Deck.activate -> Startfarben setzen
 
 new return from Traktor
 

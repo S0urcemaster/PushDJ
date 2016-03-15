@@ -16,7 +16,7 @@ public class TraktorAdapter {
 	public static TraktorMessage loadDeckA;
 	public static TraktorMessage cueDeckAPress;
 	public static TraktorMessage cueDeckARelease;
-	public static TraktorMessage syncDeckA;
+//	public static TraktorMessage syncDeckA;
 	public static TraktorMessage tempoMasterFineIncrease;
 	public static TraktorMessage tempoMasterFineDecrease;
 	public static TraktorMessage tempoMasterCoarseIncrease;
@@ -91,6 +91,14 @@ public class TraktorAdapter {
 	public static TraktorMessage hotcueTypeDeckA7;
 	public static TraktorMessage hotcueTypeDeckA8;
 	public static TraktorMessage jogTurnDeckAFineForward;
+	public static TraktorMessage jogTurnDeckAFineBackward;
+	public static TraktorMessage jogTurnDeckACoarseForward;
+	public static TraktorMessage jogTurnDeckACoarseBackward;
+	public static TraktorMessage phaseSyncDeckA;
+	public static TraktorMessage syncOnDeckA;
+	public static TraktorMessage syncOnReturnDeckA;
+	public static TraktorMessage tempoMasterDeckA;
+	public static TraktorMessage tempoMasterDeckAReturn;
 
 	static Map<String, int[]> mappings = new HashMap<>();
 
@@ -104,7 +112,7 @@ public class TraktorAdapter {
         pauseDeckA = new TraktorMessage("pauseDeckA", mappings.get("pauseDeckA"));
         cueDeckAPress = new TraktorMessage("cueDeckAPress", mappings.get("cueDeckAPress"));
         cueDeckARelease = new TraktorMessage("cueDeckARelease", mappings.get("cueDeckARelease"));
-        syncDeckA = getMessage("syncDeckA");
+//        syncDeckA = getMessage("syncDeckA");
         tempoMasterFineIncrease = getMessage("TempoMasterFineIncrease");
         tempoMasterFineDecrease = getMessage("TempoMasterFineDecrease");
         tempoMasterCoarseIncrease = getMessage("TempoMasterCoarseIncrease");
@@ -178,6 +186,15 @@ public class TraktorAdapter {
     	hotcueTypeDeckA8 = getMessage("hotcueTypeDeckA8");
     	
     	jogTurnDeckAFineForward = getMessage("jogTurnDeckAFineForward");
+    	jogTurnDeckAFineBackward = getMessage("jogTurnDeckAFineBackward");
+    	jogTurnDeckACoarseForward = getMessage("jogTurnDeckACoarseForward");
+    	jogTurnDeckACoarseBackward = getMessage("jogTurnDeckACoarseBackward");
+    	
+    	phaseSyncDeckA = getMessage("phaseSyncDeckA");
+    	syncOnDeckA = getMessage("syncOnDeckA");
+    	syncOnReturnDeckA = getMessage("syncOnReturnDeckA");
+    	tempoMasterDeckA = getMessage("tempoMasterDeckA");
+    	tempoMasterDeckAReturn = getMessage("tempoMasterReturnDeckA");
     	
     	new VirtualMIDIReceiver(vMidi).start();
 	}

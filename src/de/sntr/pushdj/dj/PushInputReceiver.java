@@ -362,24 +362,30 @@ public class PushInputReceiver implements Receiver {
 			else if(command == ShortMessage.NOTE_OFF) {
 				int note = sm.getData1();
 				switch (note) {
-				//play
+				//row1
 				case 37:PushAdapter.matrix[1].released(); break;
-				//beatjump
+				case 38:PushAdapter.matrix[2].released(); break;
+				case 39:PushAdapter.matrix[3].released(); break;
+				//row2
 				case 44: PushAdapter.matrix[8].released(); break;
 				case 45: PushAdapter.matrix[9].released(); break;
 				case 46: PushAdapter.matrix[10].released(); break;
 				case 47: PushAdapter.matrix[11].released(); break;
-				//hotcues
+				//row3
 				case 52: PushAdapter.matrix[16].released(); break;
 				case 53: PushAdapter.matrix[17].released(); break;
 				case 54: PushAdapter.matrix[18].released(); break;
 				case 55: PushAdapter.matrix[19].released(); break;
+				//row4
 				case 60: PushAdapter.matrix[24].released(); break;
 				case 61: PushAdapter.matrix[25].released(); break;
 				case 62: PushAdapter.matrix[26].released(); break;
 				case 63: PushAdapter.matrix[27].released(); break;
-				
+				//row5
 				case 68: PushAdapter.matrix[32].released(); break;
+				case 69: PushAdapter.matrix[33].released(); break;
+				case 70: PushAdapter.matrix[34].released(); break;
+				case 71: PushAdapter.matrix[35].released(); break;
 				default:
 					break;
 				}

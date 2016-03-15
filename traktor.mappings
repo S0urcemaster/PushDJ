@@ -79,6 +79,11 @@ jogTurnDeckAFineForward,176,1,38,1
 jogTurnDeckAFineBackward,176,1,39,1
 jogTurnDeckACoarseForward,176,1,40,1
 jogTurnDeckACoarseBackward,176,1,41,1
+phaseSyncDeckA,176,1,42,1
+syncOnDeckA,176,1,43,1
+syncOnReturnDeckA,176,1,44,1
+tempoMasterDeckA,176,1,45,1
+tempoMasterReturnDeckA,176,1,46,1
 loadDeckB,176,2,0,1
 playDeckB,176,2,1,1
 pauseDeckB,176,2,2,1

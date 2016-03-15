@@ -66,8 +66,14 @@ public class DJController implements ButtonListener, EncoderListener {
 		deckA.setHotcueType7Message(TraktorAdapter.hotcueTypeDeckA7);
 		deckA.setHotcueType8Message(TraktorAdapter.hotcueTypeDeckA8);
 		
-		deckA.setJogTurnFineForwardButton(PushAdapter.matrix[32], TraktorAdapter.jogTurnDeckAFineForward);
+		deckA.setJogTurnCoarseBackwardButton(PushAdapter.matrix[32], TraktorAdapter.jogTurnDeckACoarseBackward);
+		deckA.setJogTurnFineBackwardButton(PushAdapter.matrix[33], TraktorAdapter.jogTurnDeckAFineBackward);
+		deckA.setJogTurnFineForwardButton(PushAdapter.matrix[34], TraktorAdapter.jogTurnDeckAFineForward);
+		deckA.setJogTurnCoarseForwardButton(PushAdapter.matrix[35], TraktorAdapter.jogTurnDeckACoarseForward);
 
+		deckA.setSyncButton(PushAdapter.matrix[2], TraktorAdapter.syncOnDeckA, TraktorAdapter.phaseSyncDeckA, TraktorAdapter.syncOnReturnDeckA);
+		deckA.setTempoMasterButton(PushAdapter.matrix[3], TraktorAdapter.tempoMasterDeckA, TraktorAdapter.tempoMasterDeckAReturn);
+		
 		deckA.activate();
 		// deckB.activate();
 
