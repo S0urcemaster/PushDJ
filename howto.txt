@@ -2,15 +2,16 @@ new send from Push
 
 - traktor-mappings.ods -> generate Message
 - traktor.mappings -> paste message
-- Deck oder DJController -> neue static für color on/off
+- Deck oder DJController -> neue static für color on/off (nur matrix buttons)
 - TraktorAdapter -> neuen static für message und mit wert aus config file belegen
 - Deck oder DJController -> neue Felder für Button und TraktorMessage
-- Deck oder DJController -> neue Methode für TraktorAdapter.send und setColor
+- Deck oder DJController -> neue pressed(/released)- Methode für TraktorAdapter.send und setColor
 - Deck oder DJController -> entsprechende else clauses in buttonPressed
 - Deck oder DJController -> link methode set...Button erzeugen
 - DJController -> Push button und Traktor message verlinken; listener hinzufügen
 - für benötigtes button release -> PushInputReceiver neuen case bei NOTE_OFF oder data2 == 0 falls CC
-- DJController oder Deck.activate -> Startfarben setzen
+- DJController. oder Deck.activate -> Startfarben setzen
+- Mapping in Traktor
 
 new return from Traktor
 

@@ -7,13 +7,20 @@ import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.TraktorAdapter;
+import de.sntr.pushdj.traktor.TraktorMessage;
 
 public class DJController implements ButtonListener, EncoderListener {
 
 	Button shiftGreenControl, shiftRedControl;
 	Button focusDeckAControl, focusDeckBControl, focusDeckCControl, focusDeckDControl;
 	Encoder tempoFineControl, tempoCoarseControl;
-
+	
+	Button browserUpControl, browserDownControl;
+	TraktorMessage browserUpMessage, browserDownMessage;
+	
+	Button loadDeckAControl, loadDeckBControl;
+	TraktorMessage loadDeckAMessage, loadDeckBMessage;
+	
 	private TrackDeck deckA = new TrackDeck(this);
 	private TrackDeck deckB = new TrackDeck(this);
 
@@ -23,7 +30,7 @@ public class DJController implements ButtonListener, EncoderListener {
 	Focus focus = Focus.Clock;
 
 	public DJController() {
-
+		
 		deckA.setPlay(PushAdapter.matrix[0], TraktorAdapter.playDeckA, TraktorAdapter.pauseDeckA);
 		deckA.setCueButton(PushAdapter.matrix[1], TraktorAdapter.cueDeckAPress, TraktorAdapter.cueDeckARelease);
 		deckA.setBeatjumpCoarseBackwardButton(PushAdapter.matrix[8], TraktorAdapter.beatjumpDeckA16BackwardPress,
@@ -74,9 +81,6 @@ public class DJController implements ButtonListener, EncoderListener {
 		deckA.setSyncButton(PushAdapter.matrix[2], TraktorAdapter.syncOnDeckA, TraktorAdapter.phaseSyncDeckA, TraktorAdapter.syncOnReturnDeckA);
 		deckA.setTempoMasterButton(PushAdapter.matrix[3], TraktorAdapter.tempoMasterDeckA, TraktorAdapter.tempoMasterDeckAReturn);
 		
-		deckA.activate();
-		// deckB.activate();
-
 		setFocusDeckAButton(PushAdapter.undo);
 		setFocusDeckBButton(PushAdapter.delete);
 		setFocusDeckCButton(PushAdapter.doubble);
@@ -87,6 +91,26 @@ public class DJController implements ButtonListener, EncoderListener {
 
 		setTempoCoarseEncoder(PushAdapter.encoders[0]);
 		setTempoFineEncoder(PushAdapter.encoders[1]);
+		
+		setBrowserUp(PushAdapter.up);
+		setBrowserDown(PushAdapter.down);
+		setLoadDeckA(PushAdapter.note);
+		
+		runButtons();
+	}
+	
+	private void runButtons() {
+
+		setColor(shiftGreenControl, TitleButton.MEDIUM_ON);
+		setColor(shiftRedControl, TitleButton.MEDIUM_ON);
+		
+		setColor(browserUpControl, TitleButton.MEDIUM_ON);
+		setColor(browserDownControl, TitleButton.MEDIUM_ON);
+		setColor(loadDeckAControl, TitleButton.MEDIUM_ON);
+		
+		deckA.activate();
+		// deckB.activate();
+
 	}
 
 	/**
@@ -123,6 +147,21 @@ public class DJController implements ButtonListener, EncoderListener {
 		tempoFineControl = encoder;
 		tempoFineControl.addListener(this);
 	}
+
+	public void setBrowserUp(Button button) {
+		browserUpControl = button;
+		browserUpControl.addListener(this);
+	}
+	
+	public void setBrowserDown(Button button) {
+		browserDownControl = button;
+		browserDownControl.addListener(this);
+	}
+
+	public void setLoadDeckA(Button button) {
+		loadDeckAControl = button;
+		loadDeckAControl.addListener(this);
+	}
 	
 	public void setShiftGreenControl(Button button) {
 		shiftGreenControl = button;
@@ -135,21 +174,30 @@ public class DJController implements ButtonListener, EncoderListener {
 	}
 	
 	@Override
-	public void buttonPressed(Button button) {
-		if(button == shiftGreenControl) {
+	public void buttonPressed(Button control) {
+		if(control == shiftGreenControl) {
 			shiftGreenPressed();
 		}
-		else if(button == shiftRedControl) {
+		else if(control == shiftRedControl) {
 			shiftRedPressed();
 		}
-		else if (button == focusDeckAControl) {
+		else if (control == focusDeckAControl) {
 			focusDeckAPressed();
-		} else if (button == focusDeckBControl) {
+		} else if (control == focusDeckBControl) {
 			focusDeckBPressed();
-		} else if (button == focusDeckCControl) {
+		} else if (control == focusDeckCControl) {
 			focusDeckCPressed();
-		} else if (button == focusDeckDControl) {
+		} else if (control == focusDeckDControl) {
 			focusDeckDPressed();
+		}
+		else if(control == browserUpControl) {
+			browserUpPressed();
+		}
+		else if(control == browserDownControl) {
+			browserDownPressed();
+		}
+		else if(control == loadDeckAControl) {
+			loadDeckAPressed();
 		}
 	}
 
@@ -367,6 +415,22 @@ public class DJController implements ButtonListener, EncoderListener {
 
 	void tempoDeckDCoarseDecreased() {
 		send(TraktorAdapter.tempoDeckDCoarseDecrease);
+	}
+	
+	void browserUpPressed() {
+		send(TraktorAdapter.browserUp);
+	}
+	
+	void browserDownPressed() {
+		send(TraktorAdapter.browserDown);
+	}
+	
+	void loadDeckAPressed() {
+		send(TraktorAdapter.loadDeckA);
+	}
+	
+	void loadDeckBPressed() {
+//		send(TraktorAdapter.loa)
 	}
 
 	private void focusAllOff() {

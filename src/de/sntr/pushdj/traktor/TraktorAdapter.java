@@ -38,8 +38,8 @@ public class TraktorAdapter {
 	public static TraktorMessage tempoDeckDCoarseIncrease;
 	public static TraktorMessage tempoDeckDCoarseDecrease;
 
-	public static TraktorMessage BrowserDown;
-	public static TraktorMessage BrowserUp;
+	public static TraktorMessage browserDown;
+	public static TraktorMessage browserUp;
 
 	public static TraktorMessage beatjumpDeckA1ForwardPress;
 	public static TraktorMessage beatjumpDeckA4ForwardPress;
@@ -195,6 +195,11 @@ public class TraktorAdapter {
     	syncOnReturnDeckA = getMessage("syncOnReturnDeckA");
     	tempoMasterDeckA = getMessage("tempoMasterDeckA");
     	tempoMasterDeckAReturn = getMessage("tempoMasterReturnDeckA");
+    	
+    	browserDown = getMessage("BrowserDown");
+    	browserUp = getMessage("BrowserUp");
+    	
+    	loadDeckA = getMessage("loadDeckA");
     	
     	new VirtualMIDIReceiver(vMidi).start();
 	}
