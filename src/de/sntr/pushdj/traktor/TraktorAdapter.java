@@ -38,8 +38,10 @@ public class TraktorAdapter {
 	public static TraktorMessage tempoDeckDCoarseIncrease;
 	public static TraktorMessage tempoDeckDCoarseDecrease;
 
-	public static TraktorMessage browserDown;
-	public static TraktorMessage browserUp;
+	public static TraktorMessage browserDownPress;
+	public static TraktorMessage browserUpPress;
+	public static TraktorMessage browserDownRelease;
+	public static TraktorMessage browserUpRelease;
 
 	public static TraktorMessage beatjumpDeckA1ForwardPress;
 	public static TraktorMessage beatjumpDeckA4ForwardPress;
@@ -113,26 +115,26 @@ public class TraktorAdapter {
         cueDeckAPress = new TraktorMessage("cueDeckAPress", mappings.get("cueDeckAPress"));
         cueDeckARelease = new TraktorMessage("cueDeckARelease", mappings.get("cueDeckARelease"));
 //        syncDeckA = getMessage("syncDeckA");
-        tempoMasterFineIncrease = getMessage("TempoMasterFineIncrease");
-        tempoMasterFineDecrease = getMessage("TempoMasterFineDecrease");
-        tempoMasterCoarseIncrease = getMessage("TempoMasterCoarseIncrease");
-        tempoMasterCoarseDecrease = getMessage("TempoMasterCoarseDecrease");
-        tempoDeckAFineIncrease = getMessage("TempoDeckAFineIncrease");
-        tempoDeckAFineDecrease = getMessage("TempoDeckAFineDecrease");
-        tempoDeckACoarseIncrease = getMessage("TempoDeckACoarseIncrease");
-        tempoDeckACoarseDecrease = getMessage("TempoDeckACoarseDecrease");
-        tempoDeckBFineIncrease = getMessage("TempoDeckBFineIncrease");
-        tempoDeckBFineDecrease = getMessage("TempoDeckBFineDecrease");
-        tempoDeckBCoarseIncrease = getMessage("TempoDeckBCoarseIncrease");
-        tempoDeckBCoarseDecrease = getMessage("TempoDeckBCoarseDecrease");
-        tempoDeckCFineIncrease = getMessage("TempoDeckCFineIncrease");
-        tempoDeckCFineDecrease = getMessage("TempoDeckCFineDecrease");
-        tempoDeckCCoarseIncrease = getMessage("TempoDeckCCoarseIncrease");
-        tempoDeckCCoarseDecrease = getMessage("TempoDeckCCoarseDecrease");
-        tempoDeckDFineIncrease = getMessage("TempoDeckDFineIncrease");
-        tempoDeckDFineDecrease = getMessage("TempoDeckDFineDecrease");
-        tempoDeckDCoarseIncrease = getMessage("TempoDeckDCoarseIncrease");
-        tempoDeckDCoarseDecrease = getMessage("TempoDeckDCoarseDecrease");
+        tempoMasterFineIncrease = getMessage("TempoMasterFineInc");
+        tempoMasterFineDecrease = getMessage("TempoMasterFineDec");
+        tempoMasterCoarseIncrease = getMessage("TempoMasterCoarseInc");
+        tempoMasterCoarseDecrease = getMessage("TempoMasterCoarseDec");
+        tempoDeckAFineIncrease = getMessage("TempoDeckAFineInc");
+        tempoDeckAFineDecrease = getMessage("TempoDeckAFineDec");
+        tempoDeckACoarseIncrease = getMessage("TempoDeckACoarseInc");
+        tempoDeckACoarseDecrease = getMessage("TempoDeckACoarseDec");
+        tempoDeckBFineIncrease = getMessage("TempoDeckBFineInc");
+        tempoDeckBFineDecrease = getMessage("TempoDeckBFineDec");
+        tempoDeckBCoarseIncrease = getMessage("TempoDeckBCoarseInc");
+        tempoDeckBCoarseDecrease = getMessage("TempoDeckBCoarseDec");
+        tempoDeckCFineIncrease = getMessage("TempoDeckCFineInc");
+        tempoDeckCFineDecrease = getMessage("TempoDeckCFineDec");
+        tempoDeckCCoarseIncrease = getMessage("TempoDeckCCoarseInc");
+        tempoDeckCCoarseDecrease = getMessage("TempoDeckCCoarseDec");
+        tempoDeckDFineIncrease = getMessage("TempoDeckDFineInc");
+        tempoDeckDFineDecrease = getMessage("TempoDeckDFineDec");
+        tempoDeckDCoarseIncrease = getMessage("TempoDeckDCoarseInc");
+        tempoDeckDCoarseDecrease = getMessage("TempoDeckDCoarseDec");
         
 
         beatjumpDeckA1ForwardPress = getMessage("beatjumpDeckA1ForwardPress");
@@ -196,8 +198,10 @@ public class TraktorAdapter {
     	tempoMasterDeckA = getMessage("tempoMasterDeckA");
     	tempoMasterDeckAReturn = getMessage("tempoMasterReturnDeckA");
     	
-    	browserDown = getMessage("BrowserDown");
-    	browserUp = getMessage("BrowserUp");
+    	browserDownPress = getMessage("BrowserDownPress");
+    	browserUpPress = getMessage("BrowserUpPress");
+    	browserDownRelease = getMessage("BrowserDownRelease");
+    	browserUpRelease = getMessage("BrowserUpRelease");
     	
     	loadDeckA = getMessage("loadDeckA");
     	
@@ -209,7 +213,7 @@ public class TraktorAdapter {
 //		int data[] = mappings.get(command);
 		try {
 			ShortMessage m = new ShortMessage(message.command, message.channel, message.data1, message.data2);
-System.out.println("TA> " +message.command +":"+message.channel+","+message.data1+","+message.data2);
+System.out.println("TRout> " +message.command +":"+message.channel+","+message.data1+","+message.data2);
 			vMidi.sendCommand(m.getMessage());
 		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block

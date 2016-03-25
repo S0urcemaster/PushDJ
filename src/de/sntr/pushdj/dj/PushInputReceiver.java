@@ -266,8 +266,16 @@ public class PushInputReceiver implements Receiver {
 						break;
 					}
 				}
+				// Title Buttons release
 				else if(data2 == 0) {
 					switch (cc) {
+
+					case 46:
+						PushAdapter.up.released();
+						break;
+					case 47:
+						PushAdapter.down.released();
+						break;
 					case 85:
 						PushAdapter.play.released();
 						break;

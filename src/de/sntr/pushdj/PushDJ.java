@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import de.sntr.pushdj.dj.DJController;
 import de.sntr.pushdj.dj.PushInputReceiver;
+import de.sntr.pushdj.push.Display.Graphics;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.traktor.TraktorAdapter;
 import de.sntr.pushdj.traktor.VirtualMIDIReceiver;
@@ -37,7 +38,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PushDJ {
-
+	
 	JFrame frmPushdj;
 	MidiDevice pushIn;
 	MidiDevice pushOut;
@@ -63,12 +64,22 @@ public class PushDJ {
 		}
 		Pattern p = Pattern.compile(",");
 		for (String line : lines) {
+			if(line.startsWith("#") || line.isEmpty() || line.startsWith(" ")) {
+				continue;
+			}
 			String[] split = p.split(line);
 			int command = Integer.parseInt(split[1]);
 			int channel = Integer.parseInt(split[2]);
 			int data1 = Integer.parseInt(split[3]);
 			int data2 = Integer.parseInt(split[4]);
 			mappings.put(split[0], new int[]{command, channel, data1, data2});
+		}
+		
+		for (Graphics graphics : Graphics.values()) {
+			File gf = new File("graphics/" +graphics.name() +".ascii");
+			if(!gf.exists()) {
+				throw new RuntimeException("Could not read graphics file: " +gf.getPath());
+			}
 		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -123,7 +134,9 @@ public class PushDJ {
 		PushAdapter.outReceiver = outputReceiver;
 		new PushAdapter();
 		djc = new DJController();
-		PushAdapter.sysex();
+		PushAdapter.display.setColumn(0, Graphics.BigA);
+		PushAdapter.display.writeOnLine(0, 0, "test");
+		PushAdapter.display.update();
 	}
 
 	/**

@@ -59,6 +59,8 @@ public class PushAdapter {
 
 	public static Receiver outReceiver;
 
+	public static Display display = new Display();
+	
 	public List<Button> buttonControls = new ArrayList<>();
 	
 	
@@ -149,22 +151,7 @@ public class PushAdapter {
 		}
 	}
 	
-	public static void sysex() {
-		byte[] data = new byte[77];
-		data[0] = (byte)240;
-		data[1] = 71;
-		data[2] = 127;
-		data[3] = 21;
-		data[4] = 24;
-		data[5] = 0;
-		data[6] = 69;
-		data[7] = 0;
-		data[8] = 'H';
-		data[9] = 'E';
-		data[10] = 'L';
-		data[11] = 'L';
-		data[12] = 'O';
-		data[76] = (byte)247;
+	public static void sysex(byte[] data) {
 		try {
 			SysexMessage s = new SysexMessage(data, 77);
 			outReceiver.send(s, 0);

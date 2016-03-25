@@ -197,17 +197,23 @@ public class DJController implements ButtonListener, EncoderListener {
 			browserDownPressed();
 		}
 		else if(control == loadDeckAControl) {
-			loadDeckAPressed();
+			showDeckAPressed();
 		}
 	}
 
 	@Override
-	public void buttonReleased(Button button) {
-		if (button == shiftGreenControl) {
+	public void buttonReleased(Button control) {
+		if (control == shiftGreenControl) {
 			shiftGreenReleased();
 		}
-		else if (button == shiftRedControl) {
+		else if (control == shiftRedControl) {
 			shiftRedReleased();
+		}
+		else if(control == browserDownControl) {
+			browserDownReleased();
+		}
+		else if(control == browserUpControl) {
+			browserUpReleased();
 		}
 	}
 
@@ -416,23 +422,38 @@ public class DJController implements ButtonListener, EncoderListener {
 	void tempoDeckDCoarseDecreased() {
 		send(TraktorAdapter.tempoDeckDCoarseDecrease);
 	}
-	
+
 	void browserUpPressed() {
-		send(TraktorAdapter.browserUp);
+		send(TraktorAdapter.browserUpPress);
 	}
 	
 	void browserDownPressed() {
-		send(TraktorAdapter.browserDown);
+		send(TraktorAdapter.browserDownPress);
 	}
 	
-	void loadDeckAPressed() {
-		send(TraktorAdapter.loadDeckA);
+	void browserUpReleased() {
+		send(TraktorAdapter.browserUpRelease);
 	}
 	
-	void loadDeckBPressed() {
+	void browserDownReleased() {
+		send(TraktorAdapter.browserDownRelease);
+	}
+	
+	void showDeckAPressed() {
+		if(shiftGreenDown) {
+			send(TraktorAdapter.loadDeckA);
+		}
+	}
+	
+	void showDeckBPressed() {
 //		send(TraktorAdapter.loa)
 	}
 
+	void showDeckCPressed() {
+		if(shiftGreenDown) {
+//			send(TraktorAdapter.loadDeckC);
+		}
+	}
 	private void focusAllOff() {
 		setColor(focusDeckAControl, TitleButton.OFF);
 		setColor(focusDeckBControl, TitleButton.OFF);
