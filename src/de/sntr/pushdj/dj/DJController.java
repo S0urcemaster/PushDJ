@@ -3,6 +3,7 @@ package de.sntr.pushdj.dj;
 import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
 import de.sntr.pushdj.push.Encoder;
+import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.TitleButton;
@@ -12,8 +13,11 @@ import de.sntr.pushdj.traktor.TraktorMessage;
 
 public class DJController implements ButtonListener, EncoderListener {
 
+	static final int deckActiveColor = MatrixButton.GRAY_DARK;
+	static final int deckInactiveColor = MatrixButton.GRAY_BRIGHT;
+	
 	Button shiftGreenControl, shiftRedControl;
-	Button focusDeckAControl, focusDeckBControl, focusDeckCControl, focusDeckDControl;
+	Button tempoFocusDeckAControl, tempoFocusDeckBControl, tempoFocusDeckCControl, tempoFocusDeckDControl;
 	Encoder tempoFineControl, tempoCoarseControl;
 	
 	Button browserUpControl, browserDownControl;
@@ -22,7 +26,11 @@ public class DJController implements ButtonListener, EncoderListener {
 	Button loadDeckAControl, loadDeckBControl;
 	TraktorMessage loadDeckAMessage, loadDeckBMessage;
 	
-	private TrackDeck deckA = new TrackDeck(this);
+	Button viewLeftDeckAControl, viewLeftDeckBControl, viewLeftDeckCControl, viewLeftDeckDControl;
+	Button viewRightDeckAControl, viewRightDeckBControl, viewRightDeckCControl, viewRightDeckDControl;
+	
+	private TrackDeck deckALeft = new TrackDeck(this);
+	private TrackDeck deckARight = new TrackDeck(this);
 	private TrackDeck deckB = new TrackDeck(this);
 
 	public boolean shiftGreenDown = false;
@@ -36,55 +44,8 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.setColumn(3, Graphics.BigB);
 		PushAdapter.display.update();
 		
-		deckA.setPlay(PushAdapter.matrix[0], TraktorAdapter.playDeckA, TraktorAdapter.pauseDeckA);
-		deckA.setCueButton(PushAdapter.matrix[1], TraktorAdapter.cueDeckAPress, TraktorAdapter.cueDeckARelease);
-		deckA.setBeatjumpCoarseBackwardButton(PushAdapter.matrix[8], TraktorAdapter.beatjumpDeckA16BackwardPress,
-				TraktorAdapter.beatjumpDeckA16BackwardRelease, TraktorAdapter.beatjumpDeckA32BackwardPress,
-				TraktorAdapter.beatjumpDeckA32BackwardRelease);
-		deckA.setBeatjumpFineBackwardButton(PushAdapter.matrix[9], TraktorAdapter.beatjumpDeckA1BackwardPress,
-				TraktorAdapter.beatjumpDeckA1BackwardRelease, TraktorAdapter.beatjumpDeckA4BackwardPress,
-				TraktorAdapter.beatjumpDeckA4BackwardRelease);
-		deckA.setBeatjumpFineForwardButton(PushAdapter.matrix[10], TraktorAdapter.beatjumpDeckA1ForwardPress,
-				TraktorAdapter.beatjumpDeckA1ForwardRelease, TraktorAdapter.beatjumpDeckA4ForwardPress,
-				TraktorAdapter.beatjumpDeckA4ForwardRelease);
-		deckA.setBeatjumpCoarseForwardButton(PushAdapter.matrix[11], TraktorAdapter.beatjumpDeckA16ForwardPress,
-				TraktorAdapter.beatjumpDeckA16ForwardRelease, TraktorAdapter.beatjumpDeckA32ForwardPress,
-				TraktorAdapter.beatjumpDeckA32ForwardRelease);
-		deckA.setCue1Button(PushAdapter.matrix[16], TraktorAdapter.selectSetHotcueDeckA1Press,
-				TraktorAdapter.selectSetHotcueDeckA1Release, TraktorAdapter.deleteHotcueDeckA1);
-		deckA.setCue2Button(PushAdapter.matrix[17], TraktorAdapter.selectSetHotcueDeckA2Press,
-				TraktorAdapter.selectSetHotcueDeckA2Release, TraktorAdapter.deleteHotcueDeckA2);
-		deckA.setCue3Button(PushAdapter.matrix[18], TraktorAdapter.selectSetHotcueDeckA3Press,
-				TraktorAdapter.selectSetHotcueDeckA3Release, TraktorAdapter.deleteHotcueDeckA3);
-		deckA.setCue4Button(PushAdapter.matrix[19], TraktorAdapter.selectSetHotcueDeckA4Press,
-				TraktorAdapter.selectSetHotcueDeckA4Release, TraktorAdapter.deleteHotcueDeckA4);
-		deckA.setCue5Button(PushAdapter.matrix[24], TraktorAdapter.selectSetHotcueDeckA5Press,
-				TraktorAdapter.selectSetHotcueDeckA5Release, TraktorAdapter.deleteHotcueDeckA5);
-		deckA.setCue6Button(PushAdapter.matrix[25], TraktorAdapter.selectSetHotcueDeckA6Press,
-				TraktorAdapter.selectSetHotcueDeckA6Release, TraktorAdapter.deleteHotcueDeckA6);
-		deckA.setCue7Button(PushAdapter.matrix[26], TraktorAdapter.selectSetHotcueDeckA7Press,
-				TraktorAdapter.selectSetHotcueDeckA7Release, TraktorAdapter.deleteHotcueDeckA7);
-		deckA.setCue8Button(PushAdapter.matrix[27], TraktorAdapter.selectSetHotcueDeckA8Press,
-				TraktorAdapter.selectSetHotcueDeckA8Release, TraktorAdapter.deleteHotcueDeckA8);
-		deckA.setShiftButton(PushAdapter.play);
-
-		deckA.setPlayReturnDeckAMessage(TraktorAdapter.playReturnDeckA);
-		deckA.setHotcueType1Message(TraktorAdapter.hotcueTypeDeckA1);
-		deckA.setHotcueType2Message(TraktorAdapter.hotcueTypeDeckA2);
-		deckA.setHotcueType3Message(TraktorAdapter.hotcueTypeDeckA3);
-		deckA.setHotcueType4Message(TraktorAdapter.hotcueTypeDeckA4);
-		deckA.setHotcueType5Message(TraktorAdapter.hotcueTypeDeckA5);
-		deckA.setHotcueType6Message(TraktorAdapter.hotcueTypeDeckA6);
-		deckA.setHotcueType7Message(TraktorAdapter.hotcueTypeDeckA7);
-		deckA.setHotcueType8Message(TraktorAdapter.hotcueTypeDeckA8);
-		
-		deckA.setJogTurnCoarseBackwardButton(PushAdapter.matrix[32], TraktorAdapter.jogTurnDeckACoarseBackward);
-		deckA.setJogTurnFineBackwardButton(PushAdapter.matrix[33], TraktorAdapter.jogTurnDeckAFineBackward);
-		deckA.setJogTurnFineForwardButton(PushAdapter.matrix[34], TraktorAdapter.jogTurnDeckAFineForward);
-		deckA.setJogTurnCoarseForwardButton(PushAdapter.matrix[35], TraktorAdapter.jogTurnDeckACoarseForward);
-
-		deckA.setSyncButton(PushAdapter.matrix[2], TraktorAdapter.syncOnDeckA, TraktorAdapter.phaseSyncDeckA, TraktorAdapter.syncOnReturnDeckA);
-		deckA.setTempoMasterButton(PushAdapter.matrix[3], TraktorAdapter.tempoMasterDeckA, TraktorAdapter.tempoMasterDeckAReturn);
+		DeckInit.initTrackDeckALeft(deckALeft);
+		DeckInit.initTrackDeckARight(deckARight);
 		
 		setFocusDeckAButton(PushAdapter.undo);
 		setFocusDeckBButton(PushAdapter.delete);
@@ -113,8 +74,8 @@ public class DJController implements ButtonListener, EncoderListener {
 		setColor(browserDownControl, TitleButton.MEDIUM_ON);
 		setColor(loadDeckAControl, TitleButton.MEDIUM_ON);
 		
-		deckA.activate();
-		// deckB.activate();
+		deckALeft.activate();
+		deckARight.activate();
 
 	}
 
@@ -124,22 +85,22 @@ public class DJController implements ButtonListener, EncoderListener {
 	 * @param button
 	 */
 	public void setFocusDeckAButton(Button button) {
-		focusDeckAControl = button;
+		tempoFocusDeckAControl = button;
 		button.addListener(this);
 	}
 
 	public void setFocusDeckBButton(Button button) {
-		focusDeckBControl = button;
+		tempoFocusDeckBControl = button;
 		button.addListener(this);
 	}
 
 	public void setFocusDeckCButton(Button button) {
-		focusDeckCControl = button;
+		tempoFocusDeckCControl = button;
 		button.addListener(this);
 	}
 	
 	public void setFocusDeckDButton(Button button) {
-		focusDeckDControl = button;
+		tempoFocusDeckDControl = button;
 		button.addListener(this);
 	}
 
@@ -186,13 +147,13 @@ public class DJController implements ButtonListener, EncoderListener {
 		else if(control == shiftRedControl) {
 			shiftRedPressed();
 		}
-		else if (control == focusDeckAControl) {
+		else if (control == tempoFocusDeckAControl) {
 			focusDeckAPressed();
-		} else if (control == focusDeckBControl) {
+		} else if (control == tempoFocusDeckBControl) {
 			focusDeckBPressed();
-		} else if (control == focusDeckCControl) {
+		} else if (control == tempoFocusDeckCControl) {
 			focusDeckCPressed();
-		} else if (control == focusDeckDControl) {
+		} else if (control == tempoFocusDeckDControl) {
 			focusDeckDPressed();
 		}
 		else if(control == browserUpControl) {
@@ -202,7 +163,7 @@ public class DJController implements ButtonListener, EncoderListener {
 			browserDownPressed();
 		}
 		else if(control == loadDeckAControl) {
-			showDeckAPressed();
+			loadDeckAPressed();
 		}
 	}
 
@@ -307,44 +268,44 @@ public class DJController implements ButtonListener, EncoderListener {
 	void focusDeckAPressed() {
 		if (focus == Focus.DeckA) {
 			focus = Focus.Clock;
-			setColor(focusDeckAControl, TitleButton.OFF);
+			setColor(tempoFocusDeckAControl, TitleButton.OFF);
 		} else {
 			focus = Focus.DeckA;
-			focusAllOff();
-			setColor(focusDeckAControl, TitleButton.BRIGHT_ON);
+			tempoFocusAllOff();
+			setColor(tempoFocusDeckAControl, TitleButton.BRIGHT_ON);
 		}
 	}
 
 	void focusDeckBPressed() {
 		if (focus == Focus.DeckB) {
 			focus = Focus.Clock;
-			setColor(focusDeckBControl, TitleButton.OFF);
+			setColor(tempoFocusDeckBControl, TitleButton.OFF);
 		} else {
 			focus = Focus.DeckB;
-			focusAllOff();
-			setColor(focusDeckBControl, TitleButton.BRIGHT_ON);
+			tempoFocusAllOff();
+			setColor(tempoFocusDeckBControl, TitleButton.BRIGHT_ON);
 		}
 	}
 
 	void focusDeckCPressed() {
 		if (focus == Focus.DeckC) {
 			focus = Focus.Clock;
-			setColor(focusDeckCControl, TitleButton.OFF);
+			setColor(tempoFocusDeckCControl, TitleButton.OFF);
 		} else {
 			focus = Focus.DeckC;
-			focusAllOff();
-			setColor(focusDeckCControl, TitleButton.BRIGHT_ON);
+			tempoFocusAllOff();
+			setColor(tempoFocusDeckCControl, TitleButton.BRIGHT_ON);
 		}
 	}
 
 	void focusDeckDPressed() {
 		if (focus == Focus.DeckD) {
 			focus = Focus.Clock;
-			setColor(focusDeckDControl, TitleButton.OFF);
+			setColor(tempoFocusDeckDControl, TitleButton.OFF);
 		} else {
 			focus = Focus.DeckD;
-			focusAllOff();
-			setColor(focusDeckDControl, TitleButton.BRIGHT_ON);
+			tempoFocusAllOff();
+			setColor(tempoFocusDeckDControl, TitleButton.BRIGHT_ON);
 		}
 	}
 
@@ -427,6 +388,13 @@ public class DJController implements ButtonListener, EncoderListener {
 	void tempoDeckDCoarseDecreased() {
 		send(TraktorAdapter.tempoDeckDCoarseDecrease);
 	}
+	
+	private void tempoFocusAllOff() {
+		setColor(tempoFocusDeckAControl, TitleButton.OFF);
+		setColor(tempoFocusDeckBControl, TitleButton.OFF);
+		setColor(tempoFocusDeckCControl, TitleButton.OFF);
+		setColor(tempoFocusDeckDControl, TitleButton.OFF);
+	}
 
 	void browserUpPressed() {
 		send(TraktorAdapter.browserUpPress);
@@ -444,27 +412,31 @@ public class DJController implements ButtonListener, EncoderListener {
 		send(TraktorAdapter.browserDownRelease);
 	}
 	
-	void showDeckAPressed() {
-		if(shiftGreenDown) {
-			send(TraktorAdapter.loadDeckA);
-		}
+	void loadDeckAPressed() {
+		send(TraktorAdapter.loadDeckA);
 	}
 	
-	void showDeckBPressed() {
+	void loadDeckBPressed() {
 //		send(TraktorAdapter.loa)
 	}
 
-	void showDeckCPressed() {
-		if(shiftGreenDown) {
-//			send(TraktorAdapter.loadDeckC);
-		}
+	void loadDeckCPressed() {
+		
 	}
-	private void focusAllOff() {
-		setColor(focusDeckAControl, TitleButton.OFF);
-		setColor(focusDeckBControl, TitleButton.OFF);
-		setColor(focusDeckCControl, TitleButton.OFF);
-		setColor(focusDeckDControl, TitleButton.OFF);
+	
+	void loadDeckDPressed() {
+		
 	}
+
+	void viewLeftDeckAPressed() {
+		
+	}
+	
+	void viewLeftDeckBPressed() {
+		
+	}
+	
+	
 
 
 

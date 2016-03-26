@@ -1,10 +1,8 @@
-package de.sntr.pushdj.dj;
+package de.sntr.pushdj.push;
 
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
-
-import de.sntr.pushdj.push.PushAdapter;
 
 public class PushInputReceiver implements Receiver {
 	
@@ -374,26 +372,46 @@ public class PushInputReceiver implements Receiver {
 				case 37:PushAdapter.matrix[1].released(); break;
 				case 38:PushAdapter.matrix[2].released(); break;
 				case 39:PushAdapter.matrix[3].released(); break;
+				
+				case 41:PushAdapter.matrix[5].released(); break;
+				case 42:PushAdapter.matrix[6].released(); break;
+				case 43:PushAdapter.matrix[7].released(); break;
 				//row2
 				case 44: PushAdapter.matrix[8].released(); break;
 				case 45: PushAdapter.matrix[9].released(); break;
 				case 46: PushAdapter.matrix[10].released(); break;
 				case 47: PushAdapter.matrix[11].released(); break;
+				case 48: PushAdapter.matrix[12].released(); break;
+				case 49: PushAdapter.matrix[13].released(); break;
+				case 50: PushAdapter.matrix[14].released(); break;
+				case 51: PushAdapter.matrix[15].released(); break;
 				//row3
 				case 52: PushAdapter.matrix[16].released(); break;
 				case 53: PushAdapter.matrix[17].released(); break;
 				case 54: PushAdapter.matrix[18].released(); break;
 				case 55: PushAdapter.matrix[19].released(); break;
+				case 56: PushAdapter.matrix[20].released(); break;
+				case 57: PushAdapter.matrix[21].released(); break;
+				case 58: PushAdapter.matrix[22].released(); break;
+				case 59: PushAdapter.matrix[23].released(); break;
 				//row4
 				case 60: PushAdapter.matrix[24].released(); break;
 				case 61: PushAdapter.matrix[25].released(); break;
 				case 62: PushAdapter.matrix[26].released(); break;
 				case 63: PushAdapter.matrix[27].released(); break;
+				case 64: PushAdapter.matrix[28].released(); break;
+				case 65: PushAdapter.matrix[29].released(); break;
+				case 66: PushAdapter.matrix[30].released(); break;
+				case 67: PushAdapter.matrix[31].released(); break;
 				//row5
 				case 68: PushAdapter.matrix[32].released(); break;
 				case 69: PushAdapter.matrix[33].released(); break;
 				case 70: PushAdapter.matrix[34].released(); break;
 				case 71: PushAdapter.matrix[35].released(); break;
+				case 72: PushAdapter.matrix[36].released(); break;
+				case 73: PushAdapter.matrix[37].released(); break;
+				case 74: PushAdapter.matrix[38].released(); break;
+				case 75: PushAdapter.matrix[39].released(); break;
 				default:
 					break;
 				}

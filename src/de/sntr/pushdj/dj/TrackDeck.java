@@ -713,165 +713,223 @@ public class TrackDeck extends Deck {
 		active = false;
 	}
 
-	public void setPlay(Button control, TraktorMessage playMessage, TraktorMessage pauseMessage) {
+	public void setPlayButton(Button control) {
 		control.addListener(this);
 		playControl = control;
+		
+	}
+	public void setPlayMessage(TraktorMessage playMessage, TraktorMessage pauseMessage) {
 		this.playMessage = playMessage;
 		this.pauseMessage = pauseMessage;
 		
 	}
-	public void setCueButton(Button control, TraktorMessage cuePress, TraktorMessage cueRelease) {
+	public void setCueButton(Button control) {
 		control.addListener(this);
 		cueControl = control;
+	}
+
+	public void setCueMessage(TraktorMessage cuePress, TraktorMessage cueRelease) {
 		this.cuePressedMessage = cuePress;
 		this.cueReleasedMessage = cueRelease;
 		
 	}
 
-	public void setBeatjumpCoarseBackwardButton(Button control, TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
+	public void setBeatjumpCoarseBackwardButton(Button control) {
 		control.addListener(this);
-		beatjumpCoarseBackwardControl = control;
+		beatjumpCoarseBackwardControl = control;		
+	}
+	
+	public void setBeatjumpCoarseBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpCoarseBackwardPressMessage = pressMessage;
 		beatjumpCoarseBackwardShiftPressMessage = shiftPressMessage;
 		beatjumpCoarseBackwardReleaseMessage = releaseMessage;
-		beatjumpCoarseBackwardShiftReleaseMessage = shiftReleaseMessage;
-		
+		beatjumpCoarseBackwardShiftReleaseMessage = shiftReleaseMessage;	
 	}
-	public void setBeatjumpCoarseForwardButton(Button control, TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
+	
+	public void setBeatjumpCoarseForwardButton(Button control) {
 		control.addListener(this);
-		beatjumpCoarseForwardControl = control;
+		beatjumpCoarseForwardControl = control;		
+	}
+	
+	public void setBeatjumpCoarseForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpCoarseForwardPressMessage = pressMessage;
 		beatjumpCoarseForwardShiftPressMessage = shiftPressMessage;
 		beatjumpCoarseForwardReleaseMessage = releaseMessage;
-		beatjumpCoarseForwardShiftReleaseMessage = shiftReleaseMessage;
-		
+		beatjumpCoarseForwardShiftReleaseMessage = shiftReleaseMessage;		
 	}
-	public void setBeatjumpFineBackwardButton(Button control, TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
+	
+	public void setBeatjumpFineBackwardButton(Button control) {
 		control.addListener(this);
-		beatjumpFineBackwardControl = control;
+		beatjumpFineBackwardControl = control;		
+	}
+	
+	public void setBeatjumpFineBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpFineBackwardPressMessage = pressMessage;
 		beatjumpFineBackwardShiftPressMessage = shiftPressMessage;
 		beatjumpFineBackwardReleaseMessage = releaseMessage;
 		beatjumpFineBackwardShiftReleaseMessage = shiftReleaseMessage;
 		
 	}
-	public void setBeatjumpFineForwardButton(Button control, TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
+	public void setBeatjumpFineForwardButton(Button control) {
 		control.addListener(this);
 		beatjumpFineForwardControl = control;
+	}
+
+	public void setBeatjumpFineForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpFineForwardPressMessage = pressMessage;
 		beatjumpFineForwardShiftPressMessage = shiftPressMessage;
 		beatjumpFineForwardReleaseMessage = releaseMessage;
 		beatjumpFineForwardShiftReleaseMessage = shiftReleaseMessage;
 		
 	}
-	public void setCue1Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	
+	public void setCue1Button(Button control) {
 		control.addListener(this);
 		hotcue1Control = control;
+	}
+
+	public void setCue1Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue1PressedMessage = press;
 		hotcue1ReleasedMessage = release;
 		hotcue1DeleteMessage = delete;
 	}
-	public void setCue2Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue2Button(Button control) {
 		control.addListener(this);
 		hotcue2Control = control;
+	}
+
+	public void setCue2Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue2PressedMessage = press;
 		hotcue2ReleasedMessage = release;
 		hotcue2DeleteMessage = delete;
 	}
-	public void setCue3Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue3Button(Button control) {
 		control.addListener(this);
 		hotcue3Control = control;
+	}
+
+	public void setCue3Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue3PressedMessage = press;
 		hotcue3ReleasedMessage = release;
 		hotcue3DeleteMessage = delete;
 	}
-	public void setCue4Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue4Button(Button control) {
 		control.addListener(this);
 		hotcue4Control = control;
+	}
+
+	public void setCue4Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue4PressedMessage = press;
 		hotcue4ReleasedMessage = release;
 		hotcue4DeleteMessage = delete;
 	}
-	public void setCue5Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue5Button(Button control) {
 		control.addListener(this);
 		hotcue5Control = control;
+	}
+
+	public void setCue5Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue5PressedMessage = press;
 		hotcue5ReleasedMessage = release;
 		hotcue5DeleteMessage = delete;
 	}
-	public void setCue6Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue6Button(Button control) {
 		control.addListener(this);
 		hotcue6Control = control;
+	}
+
+	public void setCue6Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue6PressedMessage = press;
 		hotcue6ReleasedMessage = release;
 		hotcue6DeleteMessage = delete;
 	}
-	public void setCue7Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue7Button(Button control) {
 		control.addListener(this);
 		hotcue7Control = control;
+	}
+
+	public void setCue7Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue7PressedMessage = press;
 		hotcue7ReleasedMessage = release;
 		hotcue7DeleteMessage = delete;
 	}
-	public void setCue8Button(Button control, TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+
+	public void setCue8Button(Button control) {
 		control.addListener(this);
 		hotcue8Control = control;
+	}
+
+	public void setCue8Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
 		hotcue8PressedMessage = press;
 		hotcue8ReleasedMessage = release;
 		hotcue8DeleteMessage = delete;
 	}
-
-	public void setShiftButton(Button control) {
-		control.addListener(this);
-		shiftControl = control;
-	}
-
-	public void setDeleteButton(Button control) {
-		control.addListener(this);
-		deleteControl = control;
-	}
 	
-	public void setJogTurnFineForwardButton(Button control, TraktorMessage message) {
+	public void setJogTurnFineForwardButton(Button control) {
 		control.addListener(this);
 		jogTurnFineForwardControl = control;
+	}
+
+	public void setJogTurnFineForwardMessage(TraktorMessage message) {
 		jogTurnFineForwardMessage = message;
 	}
 
-	public void setJogTurnFineBackwardButton(Button control, TraktorMessage message) {
+	public void setJogTurnFineBackwardButton(Button control) {
 		control.addListener(this);
 		jogTurnFineBackwardControl = control;
+	}
+
+	public void setJogTurnFineBackwardMessage(TraktorMessage message) {
 		jogTurnFineBackwardMessage = message;
 	}
 
-	public void setJogTurnCoarseForwardButton(Button control, TraktorMessage message) {
+	public void setJogTurnCoarseForwardButton(Button control) {
 		control.addListener(this);
 		jogTurnCoarseForwardControl = control;
+	}
+
+	public void setJogTurnCoarseForwardMessage(TraktorMessage message) {
 		jogTurnCoarseForwardMessage = message;
 	}
 
-	public void setJogTurnCoarseBackwardButton(Button control, TraktorMessage message) {
+	public void setJogTurnCoarseBackwardButton(Button control) {
 		control.addListener(this);
 		jogTurnCoarseBackwardControl = control;
+	}
+
+	public void setJogTurnCoarseBackwardMessage(TraktorMessage message) {
 		jogTurnCoarseBackwardMessage = message;
 	}
 
-	public void setPlayReturnDeckAMessage(TraktorMessage message) {
+	public void setPlayReturnMessage(TraktorMessage message) {
 		message.addListener(this);
 		playReturnMessage = message;
 	}
 	
-	public void setSyncButton(Button control, TraktorMessage syncOnMessage, TraktorMessage phaseSyncMessage, TraktorMessage syncReturnMessage) {
+	public void setSyncButton(Button control) {
 		control.addListener(this);
 		syncControl = control;
+	}
+	
+	public void setSyncMessage(TraktorMessage syncOnMessage, TraktorMessage phaseSyncMessage, TraktorMessage syncReturnMessage) {
 		this.syncOnMessage = syncOnMessage;
 		this.phaseSyncMessage = phaseSyncMessage;
 		this.syncOnReturnMessage = syncReturnMessage;
 		this.syncOnReturnMessage.addListener(this);
 	}
 	
-	public void setTempoMasterButton(Button control, TraktorMessage message, TraktorMessage returnMessage) {
+	public void setTempoMasterButton(Button control) {
 		control.addListener(this);
 		tempoMasterControl = control;
+	}
+	
+	public void setTempoMasterMessage(TraktorMessage message, TraktorMessage returnMessage) {
 		tempoMasterMessage = message;
 		tempoMasterReturnMessage = returnMessage;
 		tempoMasterReturnMessage.addListener(this);

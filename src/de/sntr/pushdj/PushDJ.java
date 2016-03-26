@@ -13,9 +13,9 @@ import javax.swing.JFrame;
 import org.apache.commons.io.FileUtils;
 
 import de.sntr.pushdj.dj.DJController;
-import de.sntr.pushdj.dj.PushInputReceiver;
 import de.sntr.pushdj.push.Display.Graphics;
 import de.sntr.pushdj.push.PushAdapter;
+import de.sntr.pushdj.push.PushInputReceiver;
 import de.sntr.pushdj.traktor.TraktorAdapter;
 import de.sntr.pushdj.traktor.VirtualMIDIReceiver;
 
