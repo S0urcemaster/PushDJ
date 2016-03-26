@@ -6,6 +6,7 @@ import de.sntr.pushdj.push.Encoder;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.TitleButton;
+import de.sntr.pushdj.push.Display.Graphics;
 import de.sntr.pushdj.traktor.TraktorAdapter;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
@@ -30,6 +31,10 @@ public class DJController implements ButtonListener, EncoderListener {
 	Focus focus = Focus.Clock;
 
 	public DJController() {
+
+		PushAdapter.display.setColumn(0, Graphics.BigA);
+		PushAdapter.display.setColumn(3, Graphics.BigB);
+		PushAdapter.display.update();
 		
 		deckA.setPlay(PushAdapter.matrix[0], TraktorAdapter.playDeckA, TraktorAdapter.pauseDeckA);
 		deckA.setCueButton(PushAdapter.matrix[1], TraktorAdapter.cueDeckAPress, TraktorAdapter.cueDeckARelease);

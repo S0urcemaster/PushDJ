@@ -2,6 +2,7 @@ package de.sntr.pushdj.push;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Display {
@@ -34,8 +35,8 @@ public class Display {
 		;
 		
 		byte code;
-		SpecialChars(int pos) {
-			this.code = (byte)pos;
+		SpecialChars(int code) {
+			this.code = (byte)code;
 		}
 	};
 	
@@ -49,6 +50,7 @@ public class Display {
 				characters[j][i] = SpecialChars.space.code;
 			}
 		}
+		int r = 1;
 	}
 	
 	public void writeOnLine(int line, int col, String s) {
@@ -60,17 +62,22 @@ public class Display {
 		}
 	}
 	
-	public void setColumn(int no, Graphics l) {
-		
-	}
-	
-	public void setColumn(int no, byte[][] rows) {
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 17; j++) {
-				lines[i][j+no*17] = rows[i][j];
-			}
+	public void setColumn(int col, Graphics l) {
+		for (int i = 0; i < 4; i++) {			
+			System.arraycopy(graphics.get(l)[i], 0, characters[i], col*17, 17);
 		}
 	}
+	
+//	public void setColumn(int no, byte[][] rows) {
+//		for (int i = 0; i < 4; i++) {
+//			for (int j = 0; j < 17; j++) {
+//				lines[i][j+no*17] = rows[i][j];
+//				if(rows[i][j] == 35) {
+//					lines[i][j+no*17] = SpecialChars.thickBar.code;
+//				}
+//			}
+//		}
+//	}
 	
 	public void update() {
 		makeLines();
@@ -98,6 +105,20 @@ public class Display {
 	
 	public void putGraphics(Graphics g, byte[][] data) {
 		graphics.put(g, data);
+	}
+	
+	public void putGraphics(Graphics g, List<String> lines) {
+		byte[][] ls = new byte[4][17];
+		for (int i = 0; i < 4; i++) {
+			char[] line = lines.get(i).toCharArray();
+			for (int j = 0; j < 17; j++) {
+				ls[i][j] = (byte)line[j];
+				if(line[j] == '#') {
+					ls[i][j] = SpecialChars.thickBar.code;
+				}
+			}
+		}
+		putGraphics(g, ls);
 	}
 	
 	

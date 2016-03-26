@@ -80,6 +80,14 @@ public class PushDJ {
 			if(!gf.exists()) {
 				throw new RuntimeException("Could not read graphics file: " +gf.getPath());
 			}
+			try {
+				lines = FileUtils.readLines(gf);
+			} catch (IOException e) {
+				throw new RuntimeException("Could not read graphics file: " +gf.getPath());
+			}
+			
+			PushAdapter.display.putGraphics(graphics, lines);
+			
 		}
 		EventQueue.invokeLater(new Runnable() {
 			@Override
@@ -134,9 +142,6 @@ public class PushDJ {
 		PushAdapter.outReceiver = outputReceiver;
 		new PushAdapter();
 		djc = new DJController();
-		PushAdapter.display.setColumn(0, Graphics.BigA);
-		PushAdapter.display.writeOnLine(0, 0, "test");
-		PushAdapter.display.update();
 	}
 
 	/**
