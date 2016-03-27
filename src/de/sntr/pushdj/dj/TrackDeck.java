@@ -606,9 +606,7 @@ public class TrackDeck extends Deck {
 
 	@Override
 	public void outSent(TraktorMessage message) {
-System.out.println("out: " +message.name +" : " +hotcue1TypeReturnMessage.name);
 		if (message == hotcue1TypeReturnMessage) {
-System.out.println("hc1: " +HotcueType.values()[message.data2]);
 			hotcue1Type = HotcueType.values()[message.data2];
 			setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
 		}

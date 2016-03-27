@@ -197,6 +197,9 @@ public class DJController implements ButtonListener, EncoderListener {
 		else if(control == loadDeckAControl) {
 			loadDeckAPressed();
 		}
+		else if(control == loadDeckBControl) {
+			loadDeckBPressed();
+		}
 	}
 
 	@Override
@@ -449,15 +452,15 @@ public class DJController implements ButtonListener, EncoderListener {
 	}
 	
 	void loadDeckBPressed() {
-//		send(TraktorAdapter.loa)
+		send(TraktorAdapter.loadDeckB);
 	}
 
 	void loadDeckCPressed() {
-		
+//		send(TraktorAdapter.loadDeckC);
 	}
 	
 	void loadDeckDPressed() {
-		
+//		send(TraktorAdapter.loadDeckD);
 	}
 
 	void viewLeftDeckAPressed() {
