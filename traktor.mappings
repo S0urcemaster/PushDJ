@@ -25,7 +25,7 @@ BrowserDownRelease,176,0,9,0
 BrowserUpPress,176,0,10,1
 BrowserUpRelease,176,0,10,0
 
-###   DECKA   ###
+###   DECK A   ###
 
 loadDeckA,176,1,0,1
 playDeckA,176,1,1,1
@@ -49,6 +49,7 @@ beatjumpDeckA16BackwardPress,176,1,11,1
 beatjumpDeckA16BackwardRelease,176,1,11,0
 beatjumpDeckA32BackwardPress,176,1,12,1
 beatjumpDeckA32BackwardRelease,176,1,12,0
+
 selectSetHotcueDeckA1Press,176,1,13,1
 selectSetHotcueDeckA1Release,176,1,13,0
 selectSetHotcueDeckA2Press,176,1,14,1
@@ -65,6 +66,7 @@ selectSetHotcueDeckA7Press,176,1,19,1
 selectSetHotcueDeckA7Release,176,1,19,0
 selectSetHotcueDeckA8Press,176,1,20,1
 selectSetHotcueDeckA8Release,176,1,20,0
+
 deleteHotcueDeckA1,176,1,21,1
 deleteHotcueDeckA2,176,1,22,1
 deleteHotcueDeckA3,176,1,23,1
@@ -73,6 +75,7 @@ deleteHotcueDeckA5,176,1,25,1
 deleteHotcueDeckA6,176,1,26,1
 deleteHotcueDeckA7,176,1,27,1
 deleteHotcueDeckA8,176,1,28,1
+
 hotcueTypeDeckA1,176,1,29,1
 hotcueTypeDeckA2,176,1,30,1
 hotcueTypeDeckA3,176,1,31,1
@@ -81,33 +84,44 @@ hotcueTypeDeckA5,176,1,33,1
 hotcueTypeDeckA6,176,1,34,1
 hotcueTypeDeckA7,176,1,35,1
 hotcueTypeDeckA8,176,1,36,1
+
 playReturnDeckA,176,1,37,1
+
 jogTurnDeckAFineForward,176,1,38,1
 jogTurnDeckAFineBackward,176,1,39,1
 jogTurnDeckACoarseForward,176,1,40,1
 jogTurnDeckACoarseBackward,176,1,41,1
+
 phaseSyncDeckA,176,1,42,1
 syncOnDeckA,176,1,43,1
 syncOnReturnDeckA,176,1,44,1
 tempoMasterDeckA,176,1,45,1
 tempoMasterReturnDeckA,176,1,46,1
 
-###   DECKB   ###
+###   DECK B   ###
 
 loadDeckB,176,2,0,1
 playDeckB,176,2,1,1
 pauseDeckB,176,2,2,1
 cueDeckBPress,176,2,3,1
 cueDeckBRelease,176,2,3,0
-syncDeckB,176,2,4,1
-beatjumpDeckB1Forward,176,2,5,1
-beatjumpDeckB4Forward,176,2,6,1
-beatjumpDeckB16Forward,176,2,7,1
-beatjumpDeckB32Forward,176,2,8,1
-beatjumpDeckB1Backward,176,2,9,1
-beatjumpDeckB4Backward,176,2,10,1
-beatjumpDeckB16Backward,176,2,11,1
-beatjumpDeckB32Backward,176,2,12,1
+UnusedDeckB,176,2,4,1
+beatjumpDeckB1ForwardPress,176,2,5,1
+beatjumpDeckB1ForwardRelease,176,2,5,0
+beatjumpDeckB4ForwardPress,176,2,6,1
+beatjumpDeckB4ForwardRelease,176,2,6,0
+beatjumpDeckB16ForwardPress,176,2,7,1
+beatjumpDeckB16ForwardRelease,176,2,7,0
+beatjumpDeckB32ForwardPress,176,2,8,1
+beatjumpDeckB32ForwardRelease,176,2,8,0
+beatjumpDeckB1BackwardPress,176,2,9,1
+beatjumpDeckB1BackwardRelease,176,2,9,0
+beatjumpDeckB4BackwardPress,176,2,10,1
+beatjumpDeckB4BackwardRelease,176,2,10,0
+beatjumpDeckB16BackwardPress,176,2,11,1
+beatjumpDeckB16BackwardRelease,176,2,11,0
+beatjumpDeckB32BackwardPress,176,2,12,1
+beatjumpDeckB32BackwardRelease,176,2,12,0
 selectSetHotcueDeckB1Press,176,2,13,1
 selectSetHotcueDeckB1Release,176,2,13,0
 selectSetHotcueDeckB2Press,176,2,14,1
@@ -132,8 +146,28 @@ deleteHotcueDeckB5,176,2,25,1
 deleteHotcueDeckB6,176,2,26,1
 deleteHotcueDeckB7,176,2,27,1
 deleteHotcueDeckB8,176,2,28,1
+hotcueTypeDeckB1,176,2,29,1
+hotcueTypeDeckB2,176,2,30,1
+hotcueTypeDeckB3,176,2,31,1
+hotcueTypeDeckB4,176,2,32,1
+hotcueTypeDeckB5,176,2,33,1
+hotcueTypeDeckB6,176,2,34,1
+hotcueTypeDeckB7,176,2,35,1
+hotcueTypeDeckB8,176,2,36,1
+playReturnDeckB,176,2,37,1
+jogTurnDeckBFineForward,176,2,38,1
+jogTurnDeckBFineBackward,176,2,39,1
+jogTurnDeckBCoarseForward,176,2,40,1
+jogTurnDeckBCoarseBackward,176,2,41,1
+phaseSyncDeckB,176,2,42,1
+syncOnDeckB,176,2,43,1
+syncOnReturnDeckB,176,2,44,1
+tempoMasterDeckB,176,2,45,1
+tempoMasterReturnDeckB,176,2,46,1
 
-###   DECKC   ###
+
+
+###   DECK C   ###
 
 loadDeckC,176,3,0,1
 playDeckC,176,3,1,1
@@ -208,6 +242,6 @@ syncOnReturnDeckC,176,3,44,1
 tempoMasterDeckC,176,3,45,1
 tempoMasterReturnDeckC,176,3,46,1
 
-###   DECKD   ###
+###   DECK D   ###
 
 

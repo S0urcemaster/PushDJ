@@ -33,4 +33,20 @@ System.out.println("TR in> " +command +":"+channel+","+data1+","+data2);
 			l.outSent(this);
 		}
 	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj == null || !(obj instanceof TraktorMessage)) {
+//			return false;
+//		}
+//		TraktorMessage m = (TraktorMessage)obj;
+////		if(this.command == m.command && this.channel == m.channel && this.data1 == m.data1 && this.data2 == m.data2) {
+////			return true;
+////		}
+//		if(this.name.equals(m.name)) {
+//			return true;
+//		}
+//		return false;
+//		
+//	}
 }

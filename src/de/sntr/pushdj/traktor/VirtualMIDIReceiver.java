@@ -91,8 +91,59 @@ public class VirtualMIDIReceiver extends Thread {
 						}
 							
 					}
+					else if(sm.getChannel() == 2) { //deckB
+						switch (sm.getData1()) {
+						case 29:
+							TraktorAdapter.hotcueTypeDeckB1.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB1.sent();
+							break;
+						case 30:
+							TraktorAdapter.hotcueTypeDeckB2.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB2.sent();
+							break;
+						case 31:
+							TraktorAdapter.hotcueTypeDeckB3.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB3.sent();
+							break;
+						case 32:
+							TraktorAdapter.hotcueTypeDeckB4.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB4.sent();
+							break;
+						case 33:
+							TraktorAdapter.hotcueTypeDeckB5.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB5.sent();
+							break;
+						case 34:
+							TraktorAdapter.hotcueTypeDeckB6.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB6.sent();
+							break;
+						case 35:
+							TraktorAdapter.hotcueTypeDeckB7.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB7.sent();
+							break;
+						case 36:
+							TraktorAdapter.hotcueTypeDeckB8.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckB8.sent();
+							break;
+						case 37:
+							TraktorAdapter.playReturnDeckB.data2 = sm.getData2();
+							TraktorAdapter.playReturnDeckB.sent();
+							break;
+						case 44:
+							TraktorAdapter.syncOnReturnDeckB.data2 = sm.getData2();
+							TraktorAdapter.syncOnReturnDeckB.sent();
+							break;
+						case 46:
+							TraktorAdapter.tempoMasterDeckBReturn.data2 = sm.getData2();
+							TraktorAdapter.tempoMasterDeckBReturn.sent();
+							break;
+						default:
+							break;
+						}
+							
+					}
 				}
-				System.out.println("C> " +TeVirtualMIDITest.byteArrayToString(message));
+				System.out.println("VMR> " +TeVirtualMIDITest.byteArrayToString(message));
 			}
 		}
 		

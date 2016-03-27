@@ -64,68 +64,74 @@ public class TrackDeck extends Deck {
 	Button beatjumpFineBackwardControl;
 	TraktorMessage beatjumpFineBackwardPressMessage;
 	TraktorMessage beatjumpFineBackwardReleaseMessage;
-	TraktorMessage beatjumpFineBackwardShiftPressMessage;
-	TraktorMessage beatjumpFineBackwardShiftReleaseMessage;
+	TraktorMessage beatjumpFineShiftedBackwardPressMessage;
+	TraktorMessage beatjumpFineShiftedBackwardReleaseMessage;
+	
 	Button beatjumpFineForwardControl;
 	TraktorMessage beatjumpFineForwardPressMessage;
-	TraktorMessage beatjumpFineForwardShiftPressMessage;
+	TraktorMessage beatjumpFineShiftedForwardPressMessage;
 	TraktorMessage beatjumpFineForwardReleaseMessage;
-	TraktorMessage beatjumpFineForwardShiftReleaseMessage;
+	TraktorMessage beatjumpFineShiftedForwardReleaseMessage;
+	
 	Button beatjumpCoarseBackwardControl;
 	TraktorMessage beatjumpCoarseBackwardPressMessage;
-	TraktorMessage beatjumpCoarseBackwardShiftPressMessage;
+	TraktorMessage beatjumpCoarseShiftedBackwardPressMessage;
 	TraktorMessage beatjumpCoarseBackwardReleaseMessage;
-	TraktorMessage beatjumpCoarseBackwardShiftReleaseMessage;
+	TraktorMessage beatjumpCoarseShiftedBackwardReleaseMessage;
+	
 	Button beatjumpCoarseForwardControl;
 	TraktorMessage beatjumpCoarseForwardPressMessage;
-	TraktorMessage beatjumpCoarseForwardShiftPressMessage;
+	TraktorMessage beatjumpCoarseShiftedForwardPressMessage;
 	TraktorMessage beatjumpCoarseForwardReleaseMessage;
-	TraktorMessage beatjumpCoarseForwardShiftReleaseMessage;
+	TraktorMessage beatjumpCoarseShiftedForwardReleaseMessage;
 	
 	Button hotcue1Control;
 	TraktorMessage hotcue1PressedMessage;
 	TraktorMessage hotcue1ReleasedMessage;
 	TraktorMessage hotcue1DeleteMessage;
+	TraktorMessage hotcue1TypeReturnMessage;
+
 	Button hotcue2Control;
 	TraktorMessage hotcue2PressedMessage;
 	TraktorMessage hotcue2ReleasedMessage;
 	TraktorMessage hotcue2DeleteMessage;
+	TraktorMessage hotcue2TypeReturnMessage;
+
 	Button hotcue3Control;
 	TraktorMessage hotcue3PressedMessage;
 	TraktorMessage hotcue3ReleasedMessage;
 	TraktorMessage hotcue3DeleteMessage;
+	TraktorMessage hotcue3TypeReturnMessage;
+
 	Button hotcue4Control;
 	TraktorMessage hotcue4PressedMessage;
 	TraktorMessage hotcue4ReleasedMessage;
 	TraktorMessage hotcue4DeleteMessage;
+	TraktorMessage hotcue4TypeReturnMessage;
+
 	Button hotcue5Control;
 	TraktorMessage hotcue5PressedMessage;
 	TraktorMessage hotcue5ReleasedMessage;
 	TraktorMessage hotcue5DeleteMessage;
+	TraktorMessage hotcue5TypeReturnMessage;
+
 	Button hotcue6Control;
 	TraktorMessage hotcue6PressedMessage;
 	TraktorMessage hotcue6ReleasedMessage;
 	TraktorMessage hotcue6DeleteMessage;
+	TraktorMessage hotcue6TypeReturnMessage;
+
 	Button hotcue7Control;
 	TraktorMessage hotcue7PressedMessage;
 	TraktorMessage hotcue7ReleasedMessage;
 	TraktorMessage hotcue7DeleteMessage;
+	TraktorMessage hotcue7TypeReturnMessage;
+
 	Button hotcue8Control;
 	TraktorMessage hotcue8PressedMessage;
 	TraktorMessage hotcue8ReleasedMessage;
 	TraktorMessage hotcue8DeleteMessage;
-	
-	Button shiftControl;
-	Button deleteControl;
-	
-	TraktorMessage hotcue1TypeMessage;
-	TraktorMessage hotcue2TypeMessage;
-	TraktorMessage hotcue3TypeMessage;
-	TraktorMessage hotcue4TypeMessage;
-	TraktorMessage hotcue5TypeMessage;
-	TraktorMessage hotcue6TypeMessage;
-	TraktorMessage hotcue7TypeMessage;
-	TraktorMessage hotcue8TypeMessage;
+	TraktorMessage hotcue8TypeReturnMessage;
 	
 	HotcueType hotcue1Type = HotcueType.None;
 	HotcueType hotcue2Type = HotcueType.None;
@@ -600,36 +606,37 @@ public class TrackDeck extends Deck {
 
 	@Override
 	public void outSent(TraktorMessage message) {
-		if (message == hotcue1TypeMessage) {
+System.out.println("out: " +message.name +" : " +hotcue1TypeReturnMessage.name);
+		if (message == hotcue1TypeReturnMessage) {
+System.out.println("hc1: " +HotcueType.values()[message.data2]);
 			hotcue1Type = HotcueType.values()[message.data2];
 			setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
-			System.out.println(hotcue1Type.name());
 		}
-		else if(message == hotcue2TypeMessage) {
+		else if(message == hotcue2TypeReturnMessage) {
 			hotcue2Type = HotcueType.values()[message.data2];
 			setColor(hotcue2Control, hotcueColors[hotcue2Type.ordinal()]);
 		}
-		else if(message == hotcue3TypeMessage) {
+		else if(message == hotcue3TypeReturnMessage) {
 			hotcue3Type = HotcueType.values()[message.data2];
 			setColor(hotcue3Control, hotcueColors[hotcue3Type.ordinal()]);
 		}
-		else if(message == hotcue4TypeMessage) {
+		else if(message == hotcue4TypeReturnMessage) {
 			hotcue4Type = HotcueType.values()[message.data2];
 			setColor(hotcue4Control, hotcueColors[hotcue4Type.ordinal()]);
 		}
-		else if(message == hotcue5TypeMessage) {
+		else if(message == hotcue5TypeReturnMessage) {
 			hotcue5Type = HotcueType.values()[message.data2];
 			setColor(hotcue5Control, hotcueColors[hotcue5Type.ordinal()]);
 		}
-		else if(message == hotcue6TypeMessage) {
+		else if(message == hotcue6TypeReturnMessage) {
 			hotcue6Type = HotcueType.values()[message.data2];
 			setColor(hotcue6Control, hotcueColors[hotcue6Type.ordinal()]);
 		}
-		else if(message == hotcue7TypeMessage) {
+		else if(message == hotcue7TypeReturnMessage) {
 			hotcue7Type = HotcueType.values()[message.data2];
 			setColor(hotcue7Control, hotcueColors[hotcue7Type.ordinal()]);
 		}
-		else if(message == hotcue8TypeMessage) {
+		else if(message == hotcue8TypeReturnMessage) {
 			hotcue8Type = HotcueType.values()[message.data2];
 			setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
 		}
@@ -718,9 +725,11 @@ public class TrackDeck extends Deck {
 		playControl = control;
 		
 	}
-	public void setPlayMessage(TraktorMessage playMessage, TraktorMessage pauseMessage) {
+	public void setPlayMessage(TraktorMessage playMessage, TraktorMessage pauseMessage, TraktorMessage playReturn) {
 		this.playMessage = playMessage;
 		this.pauseMessage = pauseMessage;
+		playReturn.addListener(this);
+		playReturnMessage = playReturn;
 		
 	}
 	public void setCueButton(Button control) {
@@ -741,9 +750,9 @@ public class TrackDeck extends Deck {
 	
 	public void setBeatjumpCoarseBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpCoarseBackwardPressMessage = pressMessage;
-		beatjumpCoarseBackwardShiftPressMessage = shiftPressMessage;
+		beatjumpCoarseShiftedBackwardPressMessage = shiftPressMessage;
 		beatjumpCoarseBackwardReleaseMessage = releaseMessage;
-		beatjumpCoarseBackwardShiftReleaseMessage = shiftReleaseMessage;	
+		beatjumpCoarseShiftedBackwardReleaseMessage = shiftReleaseMessage;	
 	}
 	
 	public void setBeatjumpCoarseForwardButton(Button control) {
@@ -753,9 +762,9 @@ public class TrackDeck extends Deck {
 	
 	public void setBeatjumpCoarseForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpCoarseForwardPressMessage = pressMessage;
-		beatjumpCoarseForwardShiftPressMessage = shiftPressMessage;
+		beatjumpCoarseShiftedForwardPressMessage = shiftPressMessage;
 		beatjumpCoarseForwardReleaseMessage = releaseMessage;
-		beatjumpCoarseForwardShiftReleaseMessage = shiftReleaseMessage;		
+		beatjumpCoarseShiftedForwardReleaseMessage = shiftReleaseMessage;		
 	}
 	
 	public void setBeatjumpFineBackwardButton(Button control) {
@@ -765,9 +774,9 @@ public class TrackDeck extends Deck {
 	
 	public void setBeatjumpFineBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpFineBackwardPressMessage = pressMessage;
-		beatjumpFineBackwardShiftPressMessage = shiftPressMessage;
+		beatjumpFineShiftedBackwardPressMessage = shiftPressMessage;
 		beatjumpFineBackwardReleaseMessage = releaseMessage;
-		beatjumpFineBackwardShiftReleaseMessage = shiftReleaseMessage;
+		beatjumpFineShiftedBackwardReleaseMessage = shiftReleaseMessage;
 		
 	}
 	public void setBeatjumpFineForwardButton(Button control) {
@@ -777,98 +786,114 @@ public class TrackDeck extends Deck {
 
 	public void setBeatjumpFineForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
 		beatjumpFineForwardPressMessage = pressMessage;
-		beatjumpFineForwardShiftPressMessage = shiftPressMessage;
+		beatjumpFineShiftedForwardPressMessage = shiftPressMessage;
 		beatjumpFineForwardReleaseMessage = releaseMessage;
-		beatjumpFineForwardShiftReleaseMessage = shiftReleaseMessage;
+		beatjumpFineShiftedForwardReleaseMessage = shiftReleaseMessage;
 		
 	}
 	
-	public void setCue1Button(Button control) {
+	public void setHotcue1Button(Button control) {
 		control.addListener(this);
 		hotcue1Control = control;
 	}
 
-	public void setCue1Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue1Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue1PressedMessage = press;
 		hotcue1ReleasedMessage = release;
 		hotcue1DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue1TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue2Button(Button control) {
+	public void setHotcue2Button(Button control) {
 		control.addListener(this);
 		hotcue2Control = control;
 	}
 
-	public void setCue2Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue2Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue2PressedMessage = press;
 		hotcue2ReleasedMessage = release;
 		hotcue2DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue2TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue3Button(Button control) {
+	public void setHotcue3Button(Button control) {
 		control.addListener(this);
 		hotcue3Control = control;
 	}
 
-	public void setCue3Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue3Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue3PressedMessage = press;
 		hotcue3ReleasedMessage = release;
 		hotcue3DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue3TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue4Button(Button control) {
+	public void setHotcue4Button(Button control) {
 		control.addListener(this);
 		hotcue4Control = control;
 	}
 
-	public void setCue4Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue4Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue4PressedMessage = press;
 		hotcue4ReleasedMessage = release;
 		hotcue4DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue4TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue5Button(Button control) {
+	public void setHotcue5Button(Button control) {
 		control.addListener(this);
 		hotcue5Control = control;
 	}
 
-	public void setCue5Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue5Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue5PressedMessage = press;
 		hotcue5ReleasedMessage = release;
 		hotcue5DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue5TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue6Button(Button control) {
+	public void setHotcue6Button(Button control) {
 		control.addListener(this);
 		hotcue6Control = control;
 	}
 
-	public void setCue6Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue6Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue6PressedMessage = press;
 		hotcue6ReleasedMessage = release;
 		hotcue6DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue6TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue7Button(Button control) {
+	public void setHotcue7Button(Button control) {
 		control.addListener(this);
 		hotcue7Control = control;
 	}
 
-	public void setCue7Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue7Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue7PressedMessage = press;
 		hotcue7ReleasedMessage = release;
 		hotcue7DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue7TypeReturnMessage = typeReturn;
 	}
 
-	public void setCue8Button(Button control) {
+	public void setHotcue8Button(Button control) {
 		control.addListener(this);
 		hotcue8Control = control;
 	}
 
-	public void setCue8Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete) {
+	public void setHotcue8Message(TraktorMessage press, TraktorMessage release, TraktorMessage delete, TraktorMessage typeReturn) {
 		hotcue8PressedMessage = press;
 		hotcue8ReleasedMessage = release;
 		hotcue8DeleteMessage = delete;
+		typeReturn.addListener(this);
+		hotcue8TypeReturnMessage = typeReturn;
 	}
 	
 	public void setJogTurnFineForwardButton(Button control) {
@@ -906,11 +931,6 @@ public class TrackDeck extends Deck {
 	public void setJogTurnCoarseBackwardMessage(TraktorMessage message) {
 		jogTurnCoarseBackwardMessage = message;
 	}
-
-	public void setPlayReturnMessage(TraktorMessage message) {
-		message.addListener(this);
-		playReturnMessage = message;
-	}
 	
 	public void setSyncButton(Button control) {
 		control.addListener(this);
@@ -934,39 +954,5 @@ public class TrackDeck extends Deck {
 		tempoMasterReturnMessage = returnMessage;
 		tempoMasterReturnMessage.addListener(this);
 	}
-	
-	public void setHotcueType1Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue1TypeMessage = message;
-	}
-	public void setHotcueType2Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue2TypeMessage = message;
-	}
-	public void setHotcueType3Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue3TypeMessage = message;
-	}
-	public void setHotcueType4Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue4TypeMessage = message;
-	}
-	public void setHotcueType5Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue5TypeMessage = message;
-	}
-	public void setHotcueType6Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue6TypeMessage = message;
-	}
-	public void setHotcueType7Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue7TypeMessage = message;
-	}
-	public void setHotcueType8Message(TraktorMessage message) {
-		message.addListener(this);
-		hotcue8TypeMessage = message;
-	}
-
 	
 }

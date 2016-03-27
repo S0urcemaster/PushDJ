@@ -23,15 +23,20 @@ public class DJController implements ButtonListener, EncoderListener {
 	Button browserUpControl, browserDownControl;
 	TraktorMessage browserUpMessage, browserDownMessage;
 	
-	Button loadDeckAControl, loadDeckBControl;
-	TraktorMessage loadDeckAMessage, loadDeckBMessage;
+	Button loadDeckAControl, loadDeckBControl, loadDeckCControl, loadDeckDControl;
+	TraktorMessage loadDeckAMessage, loadDeckBMessage, loadDeckCMessage, loadDeckDMessage;
 	
 	Button viewLeftDeckAControl, viewLeftDeckBControl, viewLeftDeckCControl, viewLeftDeckDControl;
 	Button viewRightDeckAControl, viewRightDeckBControl, viewRightDeckCControl, viewRightDeckDControl;
 	
 	private TrackDeck deckALeft = new TrackDeck(this);
 	private TrackDeck deckARight = new TrackDeck(this);
-	private TrackDeck deckB = new TrackDeck(this);
+	private TrackDeck deckBLeft = new TrackDeck(this);
+	private TrackDeck deckBRight = new TrackDeck(this);
+	private TrackDeck deckCLeft = new TrackDeck(this);
+	private TrackDeck deckCRight = new TrackDeck(this);
+	private TrackDeck deckDLeft = new TrackDeck(this);
+	private TrackDeck deckDRight = new TrackDeck(this);
 
 	public boolean shiftGreenDown = false;
 	public boolean shiftRedDown = false;
@@ -43,9 +48,15 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.setColumn(0, Graphics.BigA);
 		PushAdapter.display.setColumn(3, Graphics.BigB);
 		PushAdapter.display.update();
-		
+
 		DeckInit.initTrackDeckALeft(deckALeft);
-		DeckInit.initTrackDeckARight(deckARight);
+//		DeckInit.initTrackDeckARight(deckARight);
+//		DeckInit.initTrackDeckBLeft(deckBLeft);
+		DeckInit.initTrackDeckBRight(deckBRight);
+//		DeckInit.initTrackDeckCLeft(deckCLeft);
+//		DeckInit.initTrackDeckCRight(deckCRight);
+//		DeckInit.initTrackDeckDLeft(deckDLeft);
+//		DeckInit.initTrackDeckDRight(deckDRight);
 		
 		setFocusDeckAButton(PushAdapter.undo);
 		setFocusDeckBButton(PushAdapter.delete);
@@ -61,6 +72,9 @@ public class DJController implements ButtonListener, EncoderListener {
 		setBrowserUp(PushAdapter.up);
 		setBrowserDown(PushAdapter.down);
 		setLoadDeckA(PushAdapter.note);
+		setLoadDeckB(PushAdapter.session);
+		setLoadDeckC(PushAdapter.select);
+		setLoadDeckD(PushAdapter.shift);
 		
 		runButtons();
 	}
@@ -73,9 +87,12 @@ public class DJController implements ButtonListener, EncoderListener {
 		setColor(browserUpControl, TitleButton.MEDIUM_ON);
 		setColor(browserDownControl, TitleButton.MEDIUM_ON);
 		setColor(loadDeckAControl, TitleButton.MEDIUM_ON);
+		setColor(loadDeckBControl, TitleButton.MEDIUM_ON);
+		setColor(loadDeckCControl, TitleButton.MEDIUM_ON);
+		setColor(loadDeckDControl, TitleButton.MEDIUM_ON);
 		
 		deckALeft.activate();
-		deckARight.activate();
+		deckBRight.activate();
 
 	}
 
@@ -127,6 +144,21 @@ public class DJController implements ButtonListener, EncoderListener {
 	public void setLoadDeckA(Button button) {
 		loadDeckAControl = button;
 		loadDeckAControl.addListener(this);
+	}
+
+	public void setLoadDeckB(Button button) {
+		loadDeckBControl = button;
+		loadDeckBControl.addListener(this);
+	}
+
+	public void setLoadDeckC(Button button) {
+		loadDeckCControl = button;
+		loadDeckCControl.addListener(this);
+	}
+
+	public void setLoadDeckD(Button button) {
+		loadDeckDControl = button;
+		loadDeckDControl.addListener(this);
 	}
 	
 	public void setShiftGreenControl(Button button) {

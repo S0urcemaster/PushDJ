@@ -427,7 +427,7 @@ printMessage(message);
 
 	public static void printMessage(MidiMessage message) {
 		ShortMessage sm = ((ShortMessage)message);
-		System.out.println("PI> Command:" +Integer.toHexString(sm.getCommand()) +" Channel:"+ Integer.toHexString(sm.getChannel()) +" Status:" +Integer.toHexString(sm.getStatus()) +" Data1:" +sm.getData1() +"("+Integer.toHexString(sm.getData1())+ ")" +" Data2:" +sm.getData2() +"("+Integer.toHexString(sm.getData2()) +")");
+		System.out.println("Push In> Command:" +Integer.toHexString(sm.getCommand()) +" Channel:"+ Integer.toHexString(sm.getChannel()) +" Status:" +Integer.toHexString(sm.getStatus()) +" Data1:" +sm.getData1() +"("+Integer.toHexString(sm.getData1())+ ")" +" Data2:" +sm.getData2() +"("+Integer.toHexString(sm.getData2()) +")");
 	}
 	
 }
