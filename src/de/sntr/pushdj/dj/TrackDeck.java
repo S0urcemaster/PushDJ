@@ -606,6 +606,9 @@ public class TrackDeck extends Deck {
 
 	@Override
 	public void outSent(TraktorMessage message) {
+		if(!active) {
+			return;
+		}
 		if (message == hotcue1TypeReturnMessage) {
 			hotcue1Type = HotcueType.values()[message.data2];
 			setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
@@ -673,7 +676,7 @@ public class TrackDeck extends Deck {
 	@Override
 	public void activate() {
 		if(active) {
-			throw new RuntimeException("Deck already active");
+System.out.println("Deck already active");
 		}
 		active = true;
 		if(playing) {

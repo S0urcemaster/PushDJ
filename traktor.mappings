@@ -1,5 +1,9 @@
 ###   GLOBAL   ###
 
+BrowserDownPress,176,0,9,1
+BrowserDownRelease,176,0,9,0
+BrowserUpPress,176,0,10,1
+BrowserUpRelease,176,0,10,0
 TempoMasterFineInc,176,0,11,1
 TempoMasterFineDec,176,0,12,1
 TempoMasterCoarseInc,176,0,13,1
@@ -20,10 +24,8 @@ TempoDeckDFineInc,176,0,27,1
 TempoDeckDFineDec,176,0,28,1
 TempoDeckDCoarseInc,176,0,29,1
 TempoDeckDCoarseDec,176,0,30,1
-BrowserDownPress,176,0,9,1
-BrowserDownRelease,176,0,9,0
-BrowserUpPress,176,0,10,1
-BrowserUpRelease,176,0,10,0
+SendMonitorState,176,0,31,1
+
 
 ###   DECK A   ###
 

@@ -6,6 +6,7 @@ import de.sntr.pushdj.push.Encoder;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.Button;
+import de.sntr.pushdj.push.ResolutionButton;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.push.Display.Graphics;
 import de.sntr.pushdj.traktor.TraktorAdapter;
@@ -15,6 +16,10 @@ public class DJController implements ButtonListener, EncoderListener {
 
 	static final int deckActiveColor = MatrixButton.GRAY_DARK;
 	static final int deckInactiveColor = MatrixButton.GRAY_BRIGHT;
+	static final int viewDeckUpperOff = ResolutionButton.GREEN_MEDIUM_ON;
+	static final int viewDeckLowerOff = MatrixButton.GREEN1_MEDIUM;
+	static final int viewDeckUpperOn = ResolutionButton.GREEN_BRIGHT_ON;
+	static final int viewDeckLowerOn = MatrixButton.GREEN1_BRIGHT;
 	
 	Button shiftGreenControl, shiftRedControl;
 	Button tempoFocusDeckAControl, tempoFocusDeckBControl, tempoFocusDeckCControl, tempoFocusDeckDControl;
@@ -28,6 +33,8 @@ public class DJController implements ButtonListener, EncoderListener {
 	
 	Button viewLeftDeckAControl, viewLeftDeckBControl, viewLeftDeckCControl, viewLeftDeckDControl;
 	Button viewRightDeckAControl, viewRightDeckBControl, viewRightDeckCControl, viewRightDeckDControl;
+	
+	TraktorMessage sendMonitorState;
 	
 	private TrackDeck deckALeft = new TrackDeck(this);
 	private TrackDeck deckARight = new TrackDeck(this);
@@ -45,13 +52,13 @@ public class DJController implements ButtonListener, EncoderListener {
 
 	public DJController() {
 
-		PushAdapter.display.setColumn(0, Graphics.BigA);
-		PushAdapter.display.setColumn(3, Graphics.BigB);
+		PushAdapter.display.writeColumn(0, Graphics.BigA);
+		PushAdapter.display.writeColumn(3, Graphics.BigB);
 		PushAdapter.display.update();
 
 		DeckInit.initTrackDeckALeft(deckALeft);
-//		DeckInit.initTrackDeckARight(deckARight);
-//		DeckInit.initTrackDeckBLeft(deckBLeft);
+		DeckInit.initTrackDeckARight(deckARight);
+		DeckInit.initTrackDeckBLeft(deckBLeft);
 		DeckInit.initTrackDeckBRight(deckBRight);
 //		DeckInit.initTrackDeckCLeft(deckCLeft);
 //		DeckInit.initTrackDeckCRight(deckCRight);
@@ -75,6 +82,16 @@ public class DJController implements ButtonListener, EncoderListener {
 		setLoadDeckB(PushAdapter.session);
 		setLoadDeckC(PushAdapter.select);
 		setLoadDeckD(PushAdapter.shift);
+
+		setViewLeftDeckAControl(PushAdapter.trackTop[0]);
+		setViewLeftDeckBControl(PushAdapter.trackBottom[0]);
+		setViewLeftDeckCControl(PushAdapter.trackTop[1]);
+		setViewLeftDeckDControl(PushAdapter.trackBottom[1]);
+
+		setViewRightDeckAControl(PushAdapter.trackTop[6]);
+		setViewRightDeckBControl(PushAdapter.trackBottom[6]);
+		setViewRightDeckCControl(PushAdapter.trackTop[7]);
+		setViewRightDeckDControl(PushAdapter.trackBottom[7]);
 		
 		runButtons();
 	}
@@ -90,6 +107,16 @@ public class DJController implements ButtonListener, EncoderListener {
 		setColor(loadDeckBControl, TitleButton.MEDIUM_ON);
 		setColor(loadDeckCControl, TitleButton.MEDIUM_ON);
 		setColor(loadDeckDControl, TitleButton.MEDIUM_ON);
+
+		setColor(viewLeftDeckAControl, viewDeckUpperOn);
+		setColor(viewLeftDeckBControl, viewDeckLowerOff);
+		setColor(viewLeftDeckCControl, viewDeckUpperOff);
+		setColor(viewLeftDeckDControl, viewDeckLowerOff);
+
+		setColor(viewRightDeckAControl, viewDeckUpperOff);
+		setColor(viewRightDeckBControl, viewDeckLowerOn);
+		setColor(viewRightDeckCControl, viewDeckUpperOff);
+		setColor(viewRightDeckDControl, viewDeckLowerOff);
 		
 		deckALeft.activate();
 		deckBRight.activate();
@@ -170,6 +197,46 @@ public class DJController implements ButtonListener, EncoderListener {
 		shiftRedControl = button;
 		button.addListener(this);
 	}
+
+	public void setViewLeftDeckAControl(Button button) {
+		viewLeftDeckAControl = button;
+		button.addListener(this);
+	}
+	
+	public void setViewLeftDeckBControl(Button button) {
+		viewLeftDeckBControl = button;
+		button.addListener(this);
+	}
+
+	public void setViewLeftDeckCControl(Button button) {
+		viewLeftDeckCControl = button;
+		button.addListener(this);
+	}
+	
+	public void setViewLeftDeckDControl(Button button) {
+		viewLeftDeckDControl = button;
+		button.addListener(this);
+	}
+
+	public void setViewRightDeckAControl(Button button) {
+		viewRightDeckAControl = button;
+		button.addListener(this);
+	}
+	
+	public void setViewRightDeckBControl(Button button) {
+		viewRightDeckBControl = button;
+		button.addListener(this);
+	}
+	
+	public void setViewRightDeckCControl(Button button) {
+		viewRightDeckCControl = button;
+		button.addListener(this);
+	}
+	
+	public void setViewRightDeckDControl(Button button) {
+		viewRightDeckDControl = button;
+		button.addListener(this);
+	}
 	
 	@Override
 	public void buttonPressed(Button control) {
@@ -199,6 +266,18 @@ public class DJController implements ButtonListener, EncoderListener {
 		}
 		else if(control == loadDeckBControl) {
 			loadDeckBPressed();
+		}
+		else if(control == viewLeftDeckAControl) {
+			viewLeftDeckAPressed();;
+		}
+		else if(control == viewLeftDeckBControl) {
+			viewLeftDeckBPressed();;
+		}
+		else if(control == viewRightDeckAControl) {
+			viewRightDeckAPressed();;
+		}
+		else if(control == viewRightDeckBControl) {
+			viewRightDeckBPressed();;
 		}
 	}
 
@@ -464,11 +543,81 @@ public class DJController implements ButtonListener, EncoderListener {
 	}
 
 	void viewLeftDeckAPressed() {
-		
+		if(deckALeft.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckBLeft.deactivate();
+		deckCLeft.deactivate();
+		deckDLeft.deactivate();
+		deckALeft.activate();
+		PushAdapter.display.writeColumn(0, Graphics.BigA);
+		PushAdapter.display.update();
+		leftViewButtonsOff();
+		setColor(viewLeftDeckAControl, viewDeckUpperOn);
+		send(TraktorAdapter.sendMonitorState);
 	}
 	
 	void viewLeftDeckBPressed() {
-		
+		if(deckBLeft.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckALeft.deactivate();
+		deckCLeft.deactivate();
+		deckDLeft.deactivate();
+		deckBLeft.activate();
+		PushAdapter.display.writeColumn(0, Graphics.BigB);
+		PushAdapter.display.update();
+		leftViewButtonsOff();
+		setColor(viewLeftDeckBControl, viewDeckLowerOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+
+	void viewRightDeckAPressed() {
+		if(deckARight.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckBRight.deactivate();
+		deckCRight.deactivate();
+		deckDRight.deactivate();
+		deckARight.activate();
+		PushAdapter.display.writeColumn(3, Graphics.BigA);
+		PushAdapter.display.update();
+		rightViewButtonsOff();
+		setColor(viewRightDeckAControl, viewDeckUpperOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+	
+	void viewRightDeckBPressed() {
+		if(deckBRight.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckARight.deactivate();
+		deckCRight.deactivate();
+		deckDRight.deactivate();
+		deckBRight.activate();
+		PushAdapter.display.writeColumn(3, Graphics.BigB);
+		PushAdapter.display.update();
+		rightViewButtonsOff();
+		setColor(viewRightDeckBControl, viewDeckLowerOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+
+	private void leftViewButtonsOff() {
+		setColor(viewLeftDeckAControl, viewDeckUpperOff);
+		setColor(viewLeftDeckBControl, viewDeckLowerOff);
+		setColor(viewLeftDeckCControl, viewDeckUpperOff);
+		setColor(viewLeftDeckDControl, viewDeckLowerOff);
+	}
+	
+	private void rightViewButtonsOff() {
+		setColor(viewRightDeckAControl, viewDeckUpperOff);
+		setColor(viewRightDeckBControl, viewDeckLowerOff);
+		setColor(viewRightDeckCControl, viewDeckUpperOff);
+		setColor(viewRightDeckDControl, viewDeckLowerOff);
 	}
 	
 	

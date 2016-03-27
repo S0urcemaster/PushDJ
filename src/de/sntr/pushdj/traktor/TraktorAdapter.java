@@ -11,6 +11,10 @@ import de.tobiaserichsen.tevm.TeVirtualMIDI;
 public class TraktorAdapter {
 
 	// global, channel 0
+	public static TraktorMessage browserDownPress;
+	public static TraktorMessage browserUpPress;
+	public static TraktorMessage browserDownRelease;
+	public static TraktorMessage browserUpRelease;
 	public static TraktorMessage tempoMasterFineIncrease;
 	public static TraktorMessage tempoMasterFineDecrease;
 	public static TraktorMessage tempoMasterCoarseIncrease;
@@ -31,11 +35,7 @@ public class TraktorAdapter {
 	public static TraktorMessage tempoDeckDFineDecrease;
 	public static TraktorMessage tempoDeckDCoarseIncrease;
 	public static TraktorMessage tempoDeckDCoarseDecrease;
-
-	public static TraktorMessage browserDownPress;
-	public static TraktorMessage browserUpPress;
-	public static TraktorMessage browserDownRelease;
-	public static TraktorMessage browserUpRelease;
+	public static TraktorMessage sendMonitorState; //internal, no button. get all returns (hotcue states...)
 
 	// DeckA, channel 1
 	public static TraktorMessage playDeckA;
@@ -184,7 +184,6 @@ public class TraktorAdapter {
     	browserUpPress = getMessage("BrowserUpPress");
     	browserDownRelease = getMessage("BrowserDownRelease");
     	browserUpRelease = getMessage("BrowserUpRelease");
-    	
         tempoMasterFineIncrease = getMessage("TempoMasterFineInc");
         tempoMasterFineDecrease = getMessage("TempoMasterFineDec");
         tempoMasterCoarseIncrease = getMessage("TempoMasterCoarseInc");
@@ -205,6 +204,7 @@ public class TraktorAdapter {
         tempoDeckDFineDecrease = getMessage("TempoDeckDFineDec");
         tempoDeckDCoarseIncrease = getMessage("TempoDeckDCoarseInc");
         tempoDeckDCoarseDecrease = getMessage("TempoDeckDCoarseDec");
+        sendMonitorState = getMessage("SendMonitorState");
 
         // A
     	loadDeckA = getMessage("loadDeckA");

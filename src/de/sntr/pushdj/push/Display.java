@@ -41,7 +41,7 @@ public class Display {
 	};
 	
 	public enum Graphics {
-		BigA, BigB, BigC, BigD
+		Empty, BigA, BigB, BigC, BigD
 	}
 	
 	public Display() {
@@ -62,7 +62,10 @@ public class Display {
 		}
 	}
 	
-	public void setColumn(int col, Graphics l) {
+	public void writeColumn(int col, Graphics l) {
+		for (int i = 0; i < 4; i++) {			
+			System.arraycopy(graphics.get(Graphics.Empty)[i], 0, characters[i], col*17, 17);
+		}
 		for (int i = 0; i < 4; i++) {			
 			System.arraycopy(graphics.get(l)[i], 0, characters[i], col*17, 17);
 		}
