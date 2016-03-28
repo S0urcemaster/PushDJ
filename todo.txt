@@ -6,3 +6,10 @@
 - Beatjump korrigieren, shift fehlt
 - Was besser AutoRepeat oder Thread? -> Thread wiederholt instant
 - sync mit tap-hold für toggle und turn on?
+- Loop on/off
+
+Display Info
+- Move: BeatJump, Loop, Loop In, Loop Out
+- Size: xFne, Fine, 1/32 - 32, Loop
+- Loop Size 1/32 - 32
+- In/ Out

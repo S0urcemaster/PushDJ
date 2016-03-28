@@ -58,7 +58,7 @@ public class Display {
 			throw new RuntimeException("Text exceeds line");
 		}
 		for (int i = 0; i < s.length(); i++) {
-			characters[line][i+col] = (byte)s.charAt(i);
+			characters[line][col*17+i] = (byte)s.charAt(i);
 		}
 	}
 	
@@ -70,17 +70,6 @@ public class Display {
 			System.arraycopy(graphics.get(l)[i], 0, characters[i], col*17, 17);
 		}
 	}
-	
-//	public void setColumn(int no, byte[][] rows) {
-//		for (int i = 0; i < 4; i++) {
-//			for (int j = 0; j < 17; j++) {
-//				lines[i][j+no*17] = rows[i][j];
-//				if(rows[i][j] == 35) {
-//					lines[i][j+no*17] = SpecialChars.thickBar.code;
-//				}
-//			}
-//		}
-//	}
 	
 	public void update() {
 		makeLines();

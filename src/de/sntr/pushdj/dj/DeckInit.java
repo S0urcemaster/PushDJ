@@ -116,22 +116,22 @@ public class DeckInit {
 		deck.setCueButton(b12);
 		deck.setSyncButton(b13);
 		deck.setTempoMasterButton(b14);
-		deck.setBeatjumpCoarseBackwardButton(b21);
-		deck.setBeatjumpFineBackwardButton(b22);
-		deck.setBeatjumpFineForwardButton(b23);
-		deck.setBeatjumpCoarseForwardButton(b24);
-		deck.setHotcue1Button(b31);
-		deck.setHotcue2Button(b32);
-		deck.setHotcue3Button(b33);
-		deck.setHotcue4Button(b34);
-		deck.setHotcue5Button(b41);
-		deck.setHotcue6Button(b42);
-		deck.setHotcue7Button(b43);
-		deck.setHotcue8Button(b44);
-		deck.setJogTurnCoarseBackwardButton(b51);
-		deck.setJogTurnFineBackwardButton(b52);
-		deck.setJogTurnFineForwardButton(b53);
-		deck.setJogTurnCoarseForwardButton(b54);
+		deck.setHotcue1Button(b21);
+		deck.setHotcue2Button(b22);
+		deck.setHotcue3Button(b23);
+		deck.setHotcue4Button(b24);
+		deck.setHotcue5Button(b31);
+		deck.setHotcue6Button(b32);
+		deck.setHotcue7Button(b33);
+		deck.setHotcue8Button(b34);
+		deck.setJogTurnCoarseBackwardButton(b41);
+		deck.setJogTurnFineBackwardButton(b42);
+		deck.setJogTurnFineForwardButton(b43);
+		deck.setJogTurnCoarseForwardButton(b44);
+		deck.setBeatjumpCoarseBackwardButton(b51);
+		deck.setBeatjumpFineBackwardButton(b52);
+		deck.setBeatjumpFineForwardButton(b53);
+		deck.setBeatjumpCoarseForwardButton(b54);
 	}
 	
 	private static void initTrackDeckButtonsRight(TrackDeck deck) {
@@ -139,22 +139,22 @@ public class DeckInit {
 		deck.setCueButton(b16);
 		deck.setSyncButton(b17);
 		deck.setTempoMasterButton(b18);
-		deck.setBeatjumpCoarseBackwardButton(b25);
-		deck.setBeatjumpFineBackwardButton(b26);
-		deck.setBeatjumpFineForwardButton(b27);
-		deck.setBeatjumpCoarseForwardButton(b28);
-		deck.setHotcue1Button(b35);
-		deck.setHotcue2Button(b36);
-		deck.setHotcue3Button(b37);
-		deck.setHotcue4Button(b38);
-		deck.setHotcue5Button(b45);
-		deck.setHotcue6Button(b46);
-		deck.setHotcue7Button(b47);
-		deck.setHotcue8Button(b48);
-		deck.setJogTurnCoarseBackwardButton(b55);
-		deck.setJogTurnFineBackwardButton(b56);
-		deck.setJogTurnFineForwardButton(b57);
-		deck.setJogTurnCoarseForwardButton(b58);
+		deck.setHotcue1Button(b25);
+		deck.setHotcue2Button(b26);
+		deck.setHotcue3Button(b27);
+		deck.setHotcue4Button(b28);
+		deck.setHotcue5Button(b35);
+		deck.setHotcue6Button(b36);
+		deck.setHotcue7Button(b37);
+		deck.setHotcue8Button(b38);
+		deck.setJogTurnCoarseBackwardButton(b45);
+		deck.setJogTurnFineBackwardButton(b46);
+		deck.setJogTurnFineForwardButton(b47);
+		deck.setJogTurnCoarseForwardButton(b48);
+		deck.setBeatjumpCoarseBackwardButton(b55);
+		deck.setBeatjumpFineBackwardButton(b56);
+		deck.setBeatjumpFineForwardButton(b57);
+		deck.setBeatjumpCoarseForwardButton(b58);
 	}
 	
 	private static void initTrackDeckAMessages(TrackDeck deck) {

@@ -83,14 +83,14 @@ public class DJController implements ButtonListener, EncoderListener {
 		setLoadDeckC(PushAdapter.select);
 		setLoadDeckD(PushAdapter.shift);
 
-		setViewLeftDeckAControl(PushAdapter.trackTop[0]);
-		setViewLeftDeckBControl(PushAdapter.trackBottom[0]);
-		setViewLeftDeckCControl(PushAdapter.trackTop[1]);
-		setViewLeftDeckDControl(PushAdapter.trackBottom[1]);
+		setViewLeftDeckAControl(PushAdapter.trackBottom[0]);
+		setViewLeftDeckBControl(PushAdapter.trackBottom[1]);
+		setViewLeftDeckCControl(PushAdapter.trackBottom[2]);
+		setViewLeftDeckDControl(PushAdapter.trackBottom[3]);
 
-		setViewRightDeckAControl(PushAdapter.trackTop[6]);
-		setViewRightDeckBControl(PushAdapter.trackBottom[6]);
-		setViewRightDeckCControl(PushAdapter.trackTop[7]);
+		setViewRightDeckAControl(PushAdapter.trackBottom[4]);
+		setViewRightDeckBControl(PushAdapter.trackBottom[5]);
+		setViewRightDeckCControl(PushAdapter.trackBottom[6]);
 		setViewRightDeckDControl(PushAdapter.trackBottom[7]);
 		
 		runButtons();
@@ -108,14 +108,14 @@ public class DJController implements ButtonListener, EncoderListener {
 		setColor(loadDeckCControl, TitleButton.MEDIUM_ON);
 		setColor(loadDeckDControl, TitleButton.MEDIUM_ON);
 
-		setColor(viewLeftDeckAControl, viewDeckUpperOn);
+		setColor(viewLeftDeckAControl, viewDeckLowerOn);
 		setColor(viewLeftDeckBControl, viewDeckLowerOff);
-		setColor(viewLeftDeckCControl, viewDeckUpperOff);
+		setColor(viewLeftDeckCControl, viewDeckLowerOff);
 		setColor(viewLeftDeckDControl, viewDeckLowerOff);
 
-		setColor(viewRightDeckAControl, viewDeckUpperOff);
+		setColor(viewRightDeckAControl, viewDeckLowerOff);
 		setColor(viewRightDeckBControl, viewDeckLowerOn);
-		setColor(viewRightDeckCControl, viewDeckUpperOff);
+		setColor(viewRightDeckCControl, viewDeckLowerOff);
 		setColor(viewRightDeckDControl, viewDeckLowerOff);
 		
 		deckALeft.activate();
@@ -554,7 +554,7 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.writeColumn(0, Graphics.BigA);
 		PushAdapter.display.update();
 		leftViewButtonsOff();
-		setColor(viewLeftDeckAControl, viewDeckUpperOn);
+		setColor(viewLeftDeckAControl, viewDeckLowerOn);
 		send(TraktorAdapter.sendMonitorState);
 	}
 	
@@ -586,7 +586,7 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.writeColumn(3, Graphics.BigA);
 		PushAdapter.display.update();
 		rightViewButtonsOff();
-		setColor(viewRightDeckAControl, viewDeckUpperOn);
+		setColor(viewRightDeckAControl, viewDeckLowerOn);
 		send(TraktorAdapter.sendMonitorState);
 	}
 	
@@ -607,16 +607,16 @@ public class DJController implements ButtonListener, EncoderListener {
 	}
 
 	private void leftViewButtonsOff() {
-		setColor(viewLeftDeckAControl, viewDeckUpperOff);
+		setColor(viewLeftDeckAControl, viewDeckLowerOff);
 		setColor(viewLeftDeckBControl, viewDeckLowerOff);
-		setColor(viewLeftDeckCControl, viewDeckUpperOff);
+		setColor(viewLeftDeckCControl, viewDeckLowerOff);
 		setColor(viewLeftDeckDControl, viewDeckLowerOff);
 	}
 	
 	private void rightViewButtonsOff() {
-		setColor(viewRightDeckAControl, viewDeckUpperOff);
+		setColor(viewRightDeckAControl, viewDeckLowerOff);
 		setColor(viewRightDeckBControl, viewDeckLowerOff);
-		setColor(viewRightDeckCControl, viewDeckUpperOff);
+		setColor(viewRightDeckCControl, viewDeckLowerOff);
 		setColor(viewRightDeckDControl, viewDeckLowerOff);
 	}
 	

@@ -7,6 +7,7 @@ import java.util.Timer;
 
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
+import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
 import de.sntr.pushdj.traktor.TraktorMessage;
@@ -714,6 +715,10 @@ System.out.println("Deck already active");
 		else {
 			setColor(tempoMasterControl, tempoMasterOff);
 		}
+		PushAdapter.display.writeOnLine(0, 1, "Move BeatJump");
+		PushAdapter.display.writeOnLine(1, 1, "Size 32");
+		PushAdapter.display.writeOnLine(2, 1, "Loop Loop");
+		PushAdapter.display.update();
 	}
 
 	@Override
