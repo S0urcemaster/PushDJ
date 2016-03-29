@@ -10,6 +10,7 @@ import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
+import de.sntr.pushdj.traktor.MoveMode;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
 public class TrackDeck extends Deck {
@@ -17,41 +18,41 @@ public class TrackDeck extends Deck {
 	static final int jogFineRepeatSpeed = 100;
 	static final int jogCoarseRepeatSpeed = 200;
 	
-	static final int playOn = MatrixButton.GREEN_BRIGHT;
-	static final int playOff = MatrixButton.RED_BRIGHT;
-	static final int cueOn = MatrixButton.BLUE2_BRIGHT;
-	static final int cueOff = MatrixButton.BLUE2_MEDIUM;
-	static final int beatjumpFineBackwardOn = MatrixButton.BLUEGREEN_BRIGHT;
-	static final int beatjumpFineBackwardOff = MatrixButton.BLUEGREEN_PALE;
-	static final int beatjumpFineForwardOn = MatrixButton.BLUEGREEN_BRIGHT;
-	static final int beatjumpFineForwardOff = MatrixButton.BLUEGREEN_PALE;
-	static final int beatjumpCoarseBackwardOn = MatrixButton.BLUEGREEN_BRIGHT;
-	static final int beatjumpCoarseBackwardOff = MatrixButton.BLUEGREEN_DARKPALE;
-	static final int beatjumpCoarseForwardOn = MatrixButton.BLUEGREEN_BRIGHT;
-	static final int beatjumpCoarseForwardOff = MatrixButton.BLUEGREEN_DARKPALE;
-	static final int jogTurnFineOn = MatrixButton.ORANGE1_BRIGHT;
-	static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
-	static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
-	static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
-	static final int syncOn = MatrixButton.YELLOW2;
-	static final int syncOff = MatrixButton.YELLOW_MEDIUM;
-	static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
-	static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
-
-	static final int[] hotcueColors = new int[7];
-	static final int hotcuePlay = MatrixButton.YELLOW2;
+	static class Colors {
+		static final int playOn = MatrixButton.GREEN_BRIGHT;
+		static final int playOff = MatrixButton.RED_BRIGHT;
+		static final int cueOn = MatrixButton.BLUE2_BRIGHT;
+		static final int cueOff = MatrixButton.BLUE2_MEDIUM;
+		static final int moveMode = TitleButton.BRIGHT_ON;
+		static final int moveSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
+		static final int moveSizeOff = MatrixButton.BLUEGREEN_PALE;
+		static final int moveOn = MatrixButton.BLUEGREEN_BRIGHT;
+		static final int moveOff = MatrixButton.BLUEGREEN_DARKPALE;
+		static final int jogTurnFineOn = MatrixButton.ORANGE1_BRIGHT;
+		static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
+		static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
+		static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
+		static final int syncOn = MatrixButton.YELLOW2;
+		static final int syncOff = MatrixButton.YELLOW_MEDIUM;
+		static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
+		static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
+	
+		static final int[] hotcueColors = new int[7];
+		static final int hotcuePlay = MatrixButton.YELLOW2;
+	}
 	
 	static {
-		hotcueColors[HotcueType.None.ordinal()] = MatrixButton.YELLOW_DARK;
-		hotcueColors[HotcueType.Cue.ordinal()] = MatrixButton.CYAN_MEDIUM;
-		hotcueColors[HotcueType.FadeIn.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
-		hotcueColors[HotcueType.FadeOut.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
-		hotcueColors[HotcueType.Load.ordinal()] = MatrixButton.YELLOW_BRIGHT;
-		hotcueColors[HotcueType.Grid.ordinal()] = MatrixButton.BLUE1_PALE;
-		hotcueColors[HotcueType.Loop.ordinal()] = MatrixButton.GREEN_MEDIUM;
+		Colors.hotcueColors[HotcueType.None.ordinal()] = MatrixButton.YELLOW_DARK;
+		Colors.hotcueColors[HotcueType.Cue.ordinal()] = MatrixButton.CYAN_MEDIUM;
+		Colors.hotcueColors[HotcueType.FadeIn.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
+		Colors.hotcueColors[HotcueType.FadeOut.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
+		Colors.hotcueColors[HotcueType.Load.ordinal()] = MatrixButton.YELLOW_BRIGHT;
+		Colors.hotcueColors[HotcueType.Grid.ordinal()] = MatrixButton.BLUE1_PALE;
+		Colors.hotcueColors[HotcueType.Loop.ordinal()] = MatrixButton.GREEN_MEDIUM;
 	}
 	
 	boolean active = false;
+	int displayColumn = -1;
 
 	Button playControl;
 	TraktorMessage playMessage;
@@ -62,29 +63,28 @@ public class TrackDeck extends Deck {
 	TraktorMessage cuePressedMessage;
 	TraktorMessage cueReleasedMessage;
 
-	Button beatjumpFineBackwardControl;
-	TraktorMessage beatjumpFineBackwardPressMessage;
-	TraktorMessage beatjumpFineBackwardReleaseMessage;
-	TraktorMessage beatjumpFineShiftedBackwardPressMessage;
-	TraktorMessage beatjumpFineShiftedBackwardReleaseMessage;
+	Button moveModeControl;
+	TraktorMessage moveModeMessage;
+
+	TraktorMessage moveModeReturnMessage;
+	TraktorMessage moveSizeReturnMessage;
+	TraktorMessage moveReturnMessage;
+
+	Button moveSizeBackwardControl;
+	TraktorMessage moveSizeBackwardPressMessage;
+	TraktorMessage moveSizeBackwardReleaseMessage;
 	
-	Button beatjumpFineForwardControl;
-	TraktorMessage beatjumpFineForwardPressMessage;
-	TraktorMessage beatjumpFineShiftedForwardPressMessage;
-	TraktorMessage beatjumpFineForwardReleaseMessage;
-	TraktorMessage beatjumpFineShiftedForwardReleaseMessage;
+	Button moveSizeForwardControl;
+	TraktorMessage moveSizeForwardPressMessage;
+	TraktorMessage moveSizeForwardReleaseMessage;
 	
-	Button beatjumpCoarseBackwardControl;
-	TraktorMessage beatjumpCoarseBackwardPressMessage;
-	TraktorMessage beatjumpCoarseShiftedBackwardPressMessage;
-	TraktorMessage beatjumpCoarseBackwardReleaseMessage;
-	TraktorMessage beatjumpCoarseShiftedBackwardReleaseMessage;
+	Button moveBackwardControl;
+	TraktorMessage moveBackwardPressMessage;
+	TraktorMessage moveBackwardReleaseMessage;
 	
-	Button beatjumpCoarseForwardControl;
-	TraktorMessage beatjumpCoarseForwardPressMessage;
-	TraktorMessage beatjumpCoarseShiftedForwardPressMessage;
-	TraktorMessage beatjumpCoarseForwardReleaseMessage;
-	TraktorMessage beatjumpCoarseShiftedForwardReleaseMessage;
+	Button moveForwardControl;
+	TraktorMessage moveForwardPressMessage;
+	TraktorMessage moveForwardReleaseMessage;
 	
 	Button hotcue1Control;
 	TraktorMessage hotcue1PressedMessage;
@@ -193,63 +193,67 @@ public class TrackDeck extends Deck {
 		send(cuePressedMessage);
 		if(playing) {
 			playing = false;
-			setColor(cueControl, cueOff);
-			setColor(playControl, playOff);
+			setColor(cueControl, Colors.cueOff);
+			setColor(playControl, Colors.playOff);
 		} else {
-			setColor(cueControl, cueOn);
-			setColor(playControl, playOn);
+			setColor(cueControl, Colors.cueOn);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	
 	void cueReleased() {
 		send(cueReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(cueControl, cueOff);
+		setColor(cueControl, Colors.cueOff);
 	}
 	
-	void beatjumpFineForwardPressed() {
-		send(beatjumpFineForwardPressMessage);
-		setColor(beatjumpFineForwardControl, beatjumpFineForwardOn);
+	void moveModePressed() {
+		send(moveModeMessage);
+	}
+	
+	void moveSizeForwardPressed() {
+		send(moveSizeForwardPressMessage);
+		setColor(moveSizeForwardControl, Colors.moveSizeOn);
 	}
 	
 	/**
 	 * For fast repeat; fast repeat not yet implemented
 	 */
-	void beatjumpFineForwardReleased() {
-		send(beatjumpFineForwardReleaseMessage);
-		setColor(beatjumpFineForwardControl, beatjumpFineForwardOff);
+	void moveSizeForwardReleased() {
+		send(moveSizeForwardReleaseMessage);
+		setColor(moveSizeForwardControl, Colors.moveSizeOff);
 	}
 	
-	void beatjumpFineBackwardPressed() {
-		send(beatjumpFineBackwardPressMessage);
-		setColor(beatjumpFineBackwardControl, beatjumpFineBackwardOn);
+	void moveSizeBackwardPressed() {
+		send(moveSizeBackwardPressMessage);
+		setColor(moveSizeBackwardControl, Colors.moveSizeOn);
 	}
 	
-	void beatjumpFineBackwardReleased() {
-		send(beatjumpFineBackwardReleaseMessage);
-		setColor(beatjumpFineBackwardControl, beatjumpFineBackwardOff);
+	void moveSizeBackwardReleased() {
+		send(moveSizeBackwardReleaseMessage);
+		setColor(moveSizeBackwardControl, Colors.moveSizeOff);
 	}
 	
-	void beatjumpCoarseForwardPressed() {
-		send(beatjumpCoarseForwardPressMessage);
-		setColor(beatjumpCoarseForwardControl, beatjumpCoarseForwardOn);
+	void moveForwardPressed() {
+		send(moveForwardPressMessage);
+		setColor(moveForwardControl, Colors.moveOn);
 	}
 	
-	void beatjumpCoarseForwardReleased() {
-		send(beatjumpCoarseForwardReleaseMessage);
-		setColor(beatjumpCoarseForwardControl, beatjumpCoarseForwardOff);
+	void moveForwardReleased() {
+		send(moveForwardReleaseMessage);
+		setColor(moveForwardControl, Colors.moveOff);
 	}
 	
-	void beatjumpCoarseBackwardPressed() {
-		send(beatjumpCoarseBackwardPressMessage);
-		setColor(beatjumpCoarseBackwardControl, beatjumpCoarseBackwardOn);
+	void moveBackwardPressed() {
+		send(moveBackwardPressMessage);
+		setColor(moveBackwardControl, Colors.moveOn);
 	}
 	
-	void beatjumpCoarseBackwardReleased() {
-		send(beatjumpCoarseBackwardReleaseMessage);
-		setColor(beatjumpCoarseBackwardControl, beatjumpCoarseBackwardOff);
+	void moveBackwardReleased() {
+		send(moveBackwardReleaseMessage);
+		setColor(moveBackwardControl, Colors.moveOff);
 	}
 
 	void hotcue1Pressed() {
@@ -259,18 +263,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue1PressedMessage);
 		if(playing) {
-			setColor(hotcue1Control, hotcuePlay);
+			setColor(hotcue1Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue1Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue1Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue1Released() {
 		send(hotcue1ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
+		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 	}
 
 	void hotcue2Pressed() {
@@ -280,18 +284,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue2PressedMessage);
 		if(playing) {
-			setColor(hotcue2Control, hotcuePlay);
+			setColor(hotcue2Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue2Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue2Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue2Released() {
 		send(hotcue2ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue2Control, hotcueColors[hotcue2Type.ordinal()]);
+		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
 	}
 
 	void hotcue3Pressed() {
@@ -301,18 +305,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue3PressedMessage);
 		if(playing) {
-			setColor(hotcue3Control, hotcuePlay);
+			setColor(hotcue3Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue3Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue3Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue3Released() {
 		send(hotcue3ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue3Control, hotcueColors[hotcue3Type.ordinal()]);
+		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
 	}
 
 	void hotcue4Pressed() {
@@ -322,18 +326,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue4PressedMessage);
 		if(playing) {
-			setColor(hotcue4Control, hotcuePlay);
+			setColor(hotcue4Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue4Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue4Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue4Released() {
 		send(hotcue4ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue4Control, hotcueColors[hotcue4Type.ordinal()]);
+		setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
 	}
 
 	void hotcue5Pressed() {
@@ -343,18 +347,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue5PressedMessage);
 		if(playing) {
-			setColor(hotcue5Control, hotcuePlay);
+			setColor(hotcue5Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue5Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue5Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue5Released() {
 		send(hotcue5ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue5Control, hotcueColors[hotcue5Type.ordinal()]);
+		setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
 	}
 
 	void hotcue6Pressed() {
@@ -364,18 +368,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue6PressedMessage);
 		if(playing) {
-			setColor(hotcue6Control, hotcuePlay);
+			setColor(hotcue6Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue6Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue6Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue6Released() {
 		send(hotcue6ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue6Control, hotcueColors[hotcue6Type.ordinal()]);
+		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
 	}
 
 	void hotcue7Pressed() {
@@ -385,18 +389,18 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue7PressedMessage);
 		if(playing) {
-			setColor(hotcue7Control, hotcuePlay);
+			setColor(hotcue7Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue7Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue7Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue7Released() {
 		send(hotcue7ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue7Control, hotcueColors[hotcue7Type.ordinal()]);
+		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
 	}
 
 	void hotcue8Pressed() {
@@ -406,62 +410,62 @@ public class TrackDeck extends Deck {
 		}
 		send(hotcue8PressedMessage);
 		if(playing) {
-			setColor(hotcue8Control, hotcuePlay);
+			setColor(hotcue8Control, Colors.hotcuePlay);
 		} else {
-			setColor(hotcue8Control, hotcuePlay);
-			setColor(playControl, playOn);
+			setColor(hotcue8Control, Colors.hotcuePlay);
+			setColor(playControl, Colors.playOn);
 		}
 	}
 	void hotcue8Released() {
 		send(hotcue8ReleasedMessage);
 		if (!playing) {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
+		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
 	}
 	
 	void jogTurnFineForwardPressed() {
 		jogTurnFineForwardTimer = new Timer(true);
 		jogTurnFineForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineForwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnFineForwardControl, jogTurnFineOn);
+		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOn);
 	}
 	
 	void jogTurnFineForwardReleased() {
 		jogTurnFineForwardTimer.cancel();
-		setColor(jogTurnFineForwardControl, jogTurnFineOff);
+		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
 	}
 	
 	void jogTurnFineBackwardPressed() {
 		jogTurnFineBackwardTimer = new Timer(true);
 		jogTurnFineBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineBackwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnFineBackwardControl, jogTurnFineOn);
+		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOn);
 	}
 	
 	void jogTurnFineBackwardReleased() {
 		jogTurnFineBackwardTimer.cancel();
-		setColor(jogTurnFineBackwardControl, jogTurnFineOff);
+		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
 	}
 	
 	void jogTurnCoarseForwardPressed() {
 		jogTurnCoarseForwardTimer = new Timer(true);
 		jogTurnCoarseForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseForwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOn);
+		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOn);
 	}
 	
 	void jogTurnCoarseForwardReleased() {
 		jogTurnCoarseForwardTimer.cancel();
-		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOff);
+		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
 	}
 	
 	void jogTurnCoarseBackwardPressed() {
 		jogTurnCoarseBackwardTimer = new Timer(true);
 		jogTurnCoarseBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseBackwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOn);
+		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOn);
 	}
 	
 	void jogTurnCoarseBackwardReleased() {
 		jogTurnCoarseBackwardTimer.cancel();
-		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOff);
+		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
 	}
 	
 	void syncPressed() {
@@ -490,17 +494,20 @@ public class TrackDeck extends Deck {
 			else if(control == cueControl) {
 				cuePressed();
 			}
-			else if(control == beatjumpCoarseBackwardControl) {
-				beatjumpCoarseBackwardPressed();
+			else if(control == moveModeControl) {
+				moveModePressed();
 			}
-			else if(control == beatjumpCoarseForwardControl) {
-				beatjumpCoarseForwardPressed();
+			else if(control == moveSizeBackwardControl) {
+				moveSizeBackwardPressed();
 			}
-			else if(control == beatjumpFineBackwardControl) {
-				beatjumpFineBackwardPressed();
+			else if(control == moveSizeForwardControl) {
+				moveSizeForwardPressed();
 			}
-			else if(control == beatjumpFineForwardControl) {
-				beatjumpFineForwardPressed();
+			else if(control == moveBackwardControl) {
+				moveBackwardPressed();
+			}
+			else if(control == moveForwardControl) {
+				moveForwardPressed();
 			}
 			else if(control == hotcue1Control) {
 				hotcue1Pressed();
@@ -554,17 +561,17 @@ public class TrackDeck extends Deck {
 			if (control == cueControl) {
 				cueReleased();
 			}
-			else if(control == beatjumpCoarseBackwardControl) {
-				beatjumpCoarseBackwardReleased();
+			else if(control == moveSizeBackwardControl) {
+				moveSizeBackwardReleased();
 			}
-			else if(control == beatjumpCoarseForwardControl) {
-				beatjumpCoarseForwardReleased();
+			else if(control == moveSizeForwardControl) {
+				moveSizeForwardReleased();
 			}
-			else if(control == beatjumpFineBackwardControl) {
-				beatjumpFineBackwardReleased();
+			else if(control == moveBackwardControl) {
+				moveBackwardReleased();
 			}
-			else if(control == beatjumpFineForwardControl) {
-				beatjumpFineForwardReleased();
+			else if(control == moveForwardControl) {
+				moveForwardReleased();
 			}
 			else if(control == hotcue1Control) {
 				hotcue1Released();
@@ -612,65 +619,69 @@ public class TrackDeck extends Deck {
 		}
 		if (message == hotcue1TypeReturnMessage) {
 			hotcue1Type = HotcueType.values()[message.data2];
-			setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
+			setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 		}
 		else if(message == hotcue2TypeReturnMessage) {
 			hotcue2Type = HotcueType.values()[message.data2];
-			setColor(hotcue2Control, hotcueColors[hotcue2Type.ordinal()]);
+			setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
 		}
 		else if(message == hotcue3TypeReturnMessage) {
 			hotcue3Type = HotcueType.values()[message.data2];
-			setColor(hotcue3Control, hotcueColors[hotcue3Type.ordinal()]);
+			setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
 		}
 		else if(message == hotcue4TypeReturnMessage) {
 			hotcue4Type = HotcueType.values()[message.data2];
-			setColor(hotcue4Control, hotcueColors[hotcue4Type.ordinal()]);
+			setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
 		}
 		else if(message == hotcue5TypeReturnMessage) {
 			hotcue5Type = HotcueType.values()[message.data2];
-			setColor(hotcue5Control, hotcueColors[hotcue5Type.ordinal()]);
+			setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
 		}
 		else if(message == hotcue6TypeReturnMessage) {
 			hotcue6Type = HotcueType.values()[message.data2];
-			setColor(hotcue6Control, hotcueColors[hotcue6Type.ordinal()]);
+			setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
 		}
 		else if(message == hotcue7TypeReturnMessage) {
 			hotcue7Type = HotcueType.values()[message.data2];
-			setColor(hotcue7Control, hotcueColors[hotcue7Type.ordinal()]);
+			setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
 		}
 		else if(message == hotcue8TypeReturnMessage) {
 			hotcue8Type = HotcueType.values()[message.data2];
-			setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
+			setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
 		}
 		else if(message == playReturnMessage) {
 			if(message.data2 == 0) {
 				playing = false;
-				setColor(playControl, playOff);
+				setColor(playControl, Colors.playOff);
 			}
 			else {
 				playing = true;
-				setColor(playControl, playOn);
+				setColor(playControl, Colors.playOn);
 			}
 		}
 		else if(message == syncOnReturnMessage) {
 			if(message.data2 == 0) {
 				sync = false;
-				setColor(syncControl, syncOff);
+				setColor(syncControl, Colors.syncOff);
 			}
 			else {
 				sync = true;
-				setColor(syncControl, syncOn);
+				setColor(syncControl, Colors.syncOn);
 			}
 		}
 		else if(message == tempoMasterReturnMessage) {
 			if(message.data2 == 0) {
 				tempoMaster = false;
-				setColor(tempoMasterControl, tempoMasterOff);
+				setColor(tempoMasterControl, Colors.tempoMasterOff);
 			}
 			else {
 				tempoMaster = true;
-				setColor(tempoMasterControl, tempoMasterOn);
+				setColor(tempoMasterControl, Colors.tempoMasterOn);
 			}
+		}
+		else if(message == moveModeReturnMessage) {
+			PushAdapter.display.writeOnLine(0, displayColumn, "Move " +MoveMode.values()[message.data2].getName());
+			PushAdapter.display.update();
 		}
 	}
 	
@@ -681,39 +692,40 @@ System.out.println("Deck already active");
 		}
 		active = true;
 		if(playing) {
-			setColor(playControl, playOn);
+			setColor(playControl, Colors.playOn);
 		}
 		else {
-			setColor(playControl, playOff);
+			setColor(playControl, Colors.playOff);
 		}
-		setColor(cueControl, cueOff);
-		setColor(beatjumpFineBackwardControl, beatjumpFineBackwardOff);
-		setColor(beatjumpFineForwardControl, beatjumpFineForwardOff);
-		setColor(beatjumpCoarseBackwardControl, beatjumpCoarseBackwardOff);
-		setColor(beatjumpCoarseForwardControl, beatjumpCoarseForwardOff);
-		setColor(hotcue1Control, hotcueColors[hotcue1Type.ordinal()]);
-		setColor(hotcue2Control, hotcueColors[hotcue2Type.ordinal()]);
-		setColor(hotcue3Control, hotcueColors[hotcue3Type.ordinal()]);
-		setColor(hotcue4Control, hotcueColors[hotcue4Type.ordinal()]);
-		setColor(hotcue5Control, hotcueColors[hotcue5Type.ordinal()]);
-		setColor(hotcue6Control, hotcueColors[hotcue6Type.ordinal()]);
-		setColor(hotcue7Control, hotcueColors[hotcue7Type.ordinal()]);
-		setColor(hotcue8Control, hotcueColors[hotcue8Type.ordinal()]);
-		setColor(jogTurnFineForwardControl, jogTurnFineOff);
-		setColor(jogTurnFineBackwardControl, jogTurnFineOff);
-		setColor(jogTurnCoarseForwardControl, jogTurnCoarseOff);
-		setColor(jogTurnCoarseBackwardControl, jogTurnCoarseOff);
+		setColor(cueControl, Colors.cueOff);
+		setColor(moveModeControl, Colors.moveMode);
+		setColor(moveSizeBackwardControl, Colors.moveSizeOff);
+		setColor(moveSizeForwardControl, Colors.moveSizeOff);
+		setColor(moveBackwardControl, Colors.moveOff);
+		setColor(moveForwardControl, Colors.moveOff);
+		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
+		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
+		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
+		setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
+		setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
+		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
+		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
+		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
+		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
+		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
+		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
+		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
 		if(sync) {
-			setColor(syncControl, syncOn);
+			setColor(syncControl, Colors.syncOn);
 		}
 		else {
-			setColor(syncControl, syncOff);
+			setColor(syncControl, Colors.syncOff);
 		}
 		if(tempoMaster) {
-			setColor(tempoMasterControl, tempoMasterOn);
+			setColor(tempoMasterControl, Colors.tempoMasterOn);
 		}
 		else {
-			setColor(tempoMasterControl, tempoMasterOff);
+			setColor(tempoMasterControl, Colors.tempoMasterOff);
 		}
 		PushAdapter.display.writeOnLine(0, 1, "Move BeatJump");
 		PushAdapter.display.writeOnLine(1, 1, "Size 32");
@@ -749,53 +761,65 @@ System.out.println("Deck already active");
 		
 	}
 
-	public void setBeatjumpCoarseBackwardButton(Button control) {
+	public void setMoveModeButton(Button control) {
 		control.addListener(this);
-		beatjumpCoarseBackwardControl = control;		
+		moveModeControl = control;		
 	}
 	
-	public void setBeatjumpCoarseBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
-		beatjumpCoarseBackwardPressMessage = pressMessage;
-		beatjumpCoarseShiftedBackwardPressMessage = shiftPressMessage;
-		beatjumpCoarseBackwardReleaseMessage = releaseMessage;
-		beatjumpCoarseShiftedBackwardReleaseMessage = shiftReleaseMessage;	
-	}
-	
-	public void setBeatjumpCoarseForwardButton(Button control) {
-		control.addListener(this);
-		beatjumpCoarseForwardControl = control;		
-	}
-	
-	public void setBeatjumpCoarseForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
-		beatjumpCoarseForwardPressMessage = pressMessage;
-		beatjumpCoarseShiftedForwardPressMessage = shiftPressMessage;
-		beatjumpCoarseForwardReleaseMessage = releaseMessage;
-		beatjumpCoarseShiftedForwardReleaseMessage = shiftReleaseMessage;		
-	}
-	
-	public void setBeatjumpFineBackwardButton(Button control) {
-		control.addListener(this);
-		beatjumpFineBackwardControl = control;		
-	}
-	
-	public void setBeatjumpFineBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
-		beatjumpFineBackwardPressMessage = pressMessage;
-		beatjumpFineShiftedBackwardPressMessage = shiftPressMessage;
-		beatjumpFineBackwardReleaseMessage = releaseMessage;
-		beatjumpFineShiftedBackwardReleaseMessage = shiftReleaseMessage;
-		
-	}
-	public void setBeatjumpFineForwardButton(Button control) {
-		control.addListener(this);
-		beatjumpFineForwardControl = control;
+	public void setMoveModeMessage(TraktorMessage pressMessage, TraktorMessage returnMessage) {
+		moveModeMessage = pressMessage;
+		moveModeReturnMessage = returnMessage;
+		moveModeReturnMessage.addListener(this);
 	}
 
-	public void setBeatjumpFineForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage shiftPressMessage, TraktorMessage shiftReleaseMessage) {
-		beatjumpFineForwardPressMessage = pressMessage;
-		beatjumpFineShiftedForwardPressMessage = shiftPressMessage;
-		beatjumpFineForwardReleaseMessage = releaseMessage;
-		beatjumpFineShiftedForwardReleaseMessage = shiftReleaseMessage;
-		
+	public void setMoveSizeBackwardButton(Button control) {
+		control.addListener(this);
+		moveSizeBackwardControl = control;		
+	}
+	
+	public void setMoveSizeBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+		moveSizeBackwardPressMessage = pressMessage;
+		moveSizeBackwardReleaseMessage = releaseMessage;
+	}
+	
+	public void setMoveSizeForwardButton(Button control) {
+		control.addListener(this);
+		moveSizeForwardControl = control;		
+	}
+	
+	public void setMoveSizeForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+		moveSizeForwardPressMessage = pressMessage;
+		moveSizeForwardReleaseMessage = releaseMessage;
+	}
+	
+	public void setMoveBackwardButton(Button control) {
+		control.addListener(this);
+		moveBackwardControl = control;		
+	}
+	
+	public void setMoveBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+		moveBackwardPressMessage = pressMessage;
+		moveBackwardReleaseMessage = releaseMessage;
+	}
+
+	public void setMoveForwardButton(Button control) {
+		control.addListener(this);
+		moveForwardControl = control;
+	}
+
+	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+		moveForwardPressMessage = pressMessage;
+		moveForwardReleaseMessage = releaseMessage;
+	}
+	
+	public void setMoveSizeReturnMessage(TraktorMessage message) {
+		moveSizeReturnMessage = message;
+		moveSizeReturnMessage.addListener(this);
+	}
+	
+	public void setMoveReturnMessage(TraktorMessage message) {
+		moveReturnMessage = message;
+		moveReturnMessage.addListener(this);
 	}
 	
 	public void setHotcue1Button(Button control) {

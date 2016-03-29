@@ -86,6 +86,18 @@ public class VirtualMIDIReceiver extends Thread {
 							TraktorAdapter.tempoMasterDeckAReturn.data2 = sm.getData2();
 							TraktorAdapter.tempoMasterDeckAReturn.sent();
 							break;
+						case 47:
+							TraktorAdapter.moveModeDeckAReturn.data2 = sm.getData2();
+							TraktorAdapter.moveModeDeckAReturn.sent();
+							break;
+						case 48:
+							TraktorAdapter.moveSizeDeckAReturn.data2 = sm.getData2();
+							TraktorAdapter.moveSizeDeckAReturn.sent();
+							break;
+						case 49:
+							TraktorAdapter.moveDeckAReturn.data2 = sm.getData2();
+							TraktorAdapter.moveDeckAReturn.sent();
+							break;
 						default:
 							break;
 						}

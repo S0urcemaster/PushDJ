@@ -60,6 +60,9 @@ public class Display {
 		for (int i = 0; i < s.length(); i++) {
 			characters[line][col*17+i] = (byte)s.charAt(i);
 		}
+		for (int i = s.length(); i<17; i++) {
+			characters[line][col*17 +i] = SpecialChars.space.code;
+		}
 	}
 	
 	public void writeColumn(int col, Graphics l) {
@@ -74,13 +77,6 @@ public class Display {
 	public void update() {
 		makeLines();
 		for (int i = 0; i < 4; i++) {
-			try {
-				System.out.write(lines[i]);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println();
 			PushAdapter.sysex(lines[i]);
 		}
 	}
