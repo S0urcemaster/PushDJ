@@ -26,6 +26,7 @@ TempoDeckDCoarseInc,176,0,29,1
 TempoDeckDCoarseDec,176,0,30,1
 SendMonitorState,176,0,31,1
 
+TempoDeckAReturn,176,0,32,1
 
 ###   DECK A   ###
 

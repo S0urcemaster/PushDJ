@@ -40,6 +40,16 @@ public class VirtualMIDIReceiver extends Thread {
 				}
 				int command = sm.getCommand();
 				if(command == 0xb0) {
+					if(sm.getChannel() == 0) { //Global
+						switch (sm.getData1()) {
+						case 32:
+							System.out.println(sm.getData2());
+							break;
+
+						default:
+							break;
+						}
+					}
 					if(sm.getChannel() == 1) { //deckA
 						switch (sm.getData1()) {
 						case 29:
