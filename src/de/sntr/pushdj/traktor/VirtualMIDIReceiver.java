@@ -43,14 +43,14 @@ public class VirtualMIDIReceiver extends Thread {
 					if(sm.getChannel() == 0) { //Global
 						switch (sm.getData1()) {
 						case 32:
-							System.out.println(sm.getData2());
+							
 							break;
 
 						default:
 							break;
 						}
 					}
-					if(sm.getChannel() == 1) { //deckA
+					else if(sm.getChannel() == 1) { //deckA
 						switch (sm.getData1()) {
 						case 29:
 							TraktorAdapter.hotcueTypeDeckA1.data2 = sm.getData2();
@@ -104,10 +104,6 @@ public class VirtualMIDIReceiver extends Thread {
 							TraktorAdapter.moveSizeDeckAReturn.data2 = sm.getData2();
 							TraktorAdapter.moveSizeDeckAReturn.sent();
 							break;
-						case 49:
-							TraktorAdapter.moveDeckAReturn.data2 = sm.getData2();
-							TraktorAdapter.moveDeckAReturn.sent();
-							break;
 						default:
 							break;
 						}
@@ -158,6 +154,14 @@ public class VirtualMIDIReceiver extends Thread {
 						case 46:
 							TraktorAdapter.tempoMasterDeckBReturn.data2 = sm.getData2();
 							TraktorAdapter.tempoMasterDeckBReturn.sent();
+							break;
+						case 47:
+							TraktorAdapter.moveModeDeckBReturn.data2 = sm.getData2();
+							TraktorAdapter.moveModeDeckBReturn.sent();
+							break;
+						case 48:
+							TraktorAdapter.moveSizeDeckBReturn.data2 = sm.getData2();
+							TraktorAdapter.moveSizeDeckBReturn.sent();
 							break;
 						default:
 							break;

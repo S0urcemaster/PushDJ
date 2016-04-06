@@ -3,7 +3,7 @@
 	<classpathentry excluding="de/sntr/pushdj/Mapper.java|de/sntr/pushdj/PushDJDevice.java|de/sntr/pushdj/PushDJState.java|de/sntr/pushdj/dj/MasterClock.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/Tobias Erichsen/teVirtualMIDISDK/Java-Binding/lib/tevirtualmidi.jar"/>
-	<classpathentry kind="lib" path="lib/java-getopt-1.0.13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sntrAdmin/Downloads/commons-io-2.4-bin/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="E:/c_downloads/java-getopt-1.0.13.jar"/>
+	<classpathentry kind="lib" path="E:/c_downloads/commons-io-2.4-bin/commons-io-2.4/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

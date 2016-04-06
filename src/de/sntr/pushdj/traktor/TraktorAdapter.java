@@ -47,7 +47,6 @@ public class TraktorAdapter {
 	
 	public static TraktorMessage moveModeDeckA;
 	public static TraktorMessage moveModeDeckAReturn;
-	public static TraktorMessage moveDeckAReturn;
 	public static TraktorMessage moveSizeDeckAReturn;
 	public static TraktorMessage moveSizeDeckAForwardPress;
 	public static TraktorMessage moveDeckAForwardPress;
@@ -109,6 +108,8 @@ public class TraktorAdapter {
 	public static TraktorMessage cueDeckBRelease;
 
 	public static TraktorMessage moveModeDeckB;
+	public static TraktorMessage moveModeDeckBReturn;
+	public static TraktorMessage moveSizeDeckBReturn;
 	public static TraktorMessage moveSizeDeckBForwardPress;
 	public static TraktorMessage moveDeckBForwardPress;
 	public static TraktorMessage moveSizeDeckBBackwardPress;
@@ -205,7 +206,6 @@ public class TraktorAdapter {
         moveModeDeckA = getMessage("moveModeDeckA");
         moveModeDeckAReturn = getMessage("moveModeDeckAReturn");
         moveSizeDeckAReturn = getMessage("moveSizeDeckAReturn");
-        moveDeckAReturn = getMessage("moveDeckAReturn");
         moveDeckAForwardPress = getMessage("moveDeckAForwardPress");
         moveDeckABackwardPress = getMessage("moveDeckABackwardPress");
         moveSizeDeckAForwardPress = getMessage("moveSizeDeckAForwardPress");
@@ -264,6 +264,8 @@ public class TraktorAdapter {
         cueDeckBPress = getMessage("cueDeckBPress");
         cueDeckBRelease = getMessage("cueDeckBRelease");
         moveModeDeckB = getMessage("moveModeDeckB");
+        moveModeDeckBReturn = getMessage("moveModeDeckBReturn");
+        moveSizeDeckBReturn = getMessage("moveSizeDeckBReturn");
         moveDeckBForwardPress = getMessage("moveDeckBForwardPress");
         moveDeckBBackwardPress = getMessage("moveDeckBBackwardPress");
         moveSizeDeckBForwardPress = getMessage("moveSizeDeckBForwardPress");

@@ -104,6 +104,9 @@ public class PushInputReceiver implements Receiver {
 					case 44:
 						PushAdapter.left.pressed();
 						break;
+					case 40:
+						PushAdapter.resolution[4].pressed();
+						break;
 					case 45:
 						PushAdapter.right.pressed();
 						break;

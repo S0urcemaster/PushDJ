@@ -11,6 +11,7 @@ import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
 import de.sntr.pushdj.traktor.MoveMode;
+import de.sntr.pushdj.traktor.MoveSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
 public class TrackDeck extends Deck {
@@ -683,6 +684,10 @@ public class TrackDeck extends Deck {
 			PushAdapter.display.writeOnLine(0, displayColumn, "Move " +MoveMode.values()[message.data2].getName());
 			PushAdapter.display.update();
 		}
+		else if(message == moveSizeReturnMessage) {
+			PushAdapter.display.writeOnLine(1, displayColumn, "Size " +MoveSize.values()[message.data2].getName());
+			PushAdapter.display.update();
+		}
 	}
 	
 	@Override
@@ -777,9 +782,11 @@ System.out.println("Deck already active");
 		moveSizeBackwardControl = control;		
 	}
 	
-	public void setMoveSizeBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+	public void setMoveSizeBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage returnMessage) {
 		moveSizeBackwardPressMessage = pressMessage;
 		moveSizeBackwardReleaseMessage = releaseMessage;
+		moveSizeReturnMessage = returnMessage;
+		moveSizeReturnMessage.addListener(this);
 	}
 	
 	public void setMoveSizeForwardButton(Button control) {
@@ -790,8 +797,9 @@ System.out.println("Deck already active");
 	public void setMoveSizeForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
 		moveSizeForwardPressMessage = pressMessage;
 		moveSizeForwardReleaseMessage = releaseMessage;
+		//return see Backward
 	}
-	
+
 	public void setMoveBackwardButton(Button control) {
 		control.addListener(this);
 		moveBackwardControl = control;		
@@ -810,16 +818,6 @@ System.out.println("Deck already active");
 	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
 		moveForwardPressMessage = pressMessage;
 		moveForwardReleaseMessage = releaseMessage;
-	}
-	
-	public void setMoveSizeReturnMessage(TraktorMessage message) {
-		moveSizeReturnMessage = message;
-		moveSizeReturnMessage.addListener(this);
-	}
-	
-	public void setMoveReturnMessage(TraktorMessage message) {
-		moveReturnMessage = message;
-		moveReturnMessage.addListener(this);
 	}
 	
 	public void setHotcue1Button(Button control) {

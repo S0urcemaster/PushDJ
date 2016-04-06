@@ -114,6 +114,7 @@ public class DeckInit {
 	}
 
 	private static void initTrackDeckButtonsLeft(TrackDeck deck) {
+		deck.displayColumn = 1;
 		deck.setPlayButton(b11);
 		deck.setCueButton(b12);
 		deck.setSyncButton(b13);
@@ -138,6 +139,7 @@ public class DeckInit {
 	}
 	
 	private static void initTrackDeckButtonsRight(TrackDeck deck) {
+		deck.displayColumn = 2;
 		deck.setPlayButton(b15);
 		deck.setCueButton(b16);
 		deck.setSyncButton(b17);
@@ -171,12 +173,10 @@ public class DeckInit {
 		deck.setTempoMasterMessage(TraktorAdapter.tempoMasterDeckA,
 				TraktorAdapter.tempoMasterDeckAReturn);
 		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckA, TraktorAdapter.moveModeDeckAReturn);
-		deck.setMoveSizeReturnMessage(TraktorAdapter.moveSizeDeckAReturn);
-		deck.setMoveReturnMessage(TraktorAdapter.moveDeckAReturn);
-		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckA, TraktorAdapter.moveModeDeckAReturn);
 		deck.setMoveSizeBackwardMessage(
 				TraktorAdapter.moveSizeDeckABackwardPress,
-				TraktorAdapter.moveSizeDeckABackwardRelease);
+				TraktorAdapter.moveSizeDeckABackwardRelease,
+				TraktorAdapter.moveSizeDeckAReturn);
 		deck.setMoveBackwardMessage(
 				TraktorAdapter.moveDeckABackwardPress,
 				TraktorAdapter.moveDeckABackwardRelease);
@@ -235,11 +235,11 @@ public class DeckInit {
 				TraktorAdapter.phaseSyncDeckB, TraktorAdapter.syncOnReturnDeckB);
 		deck.setTempoMasterMessage(TraktorAdapter.tempoMasterDeckB,
 				TraktorAdapter.tempoMasterDeckBReturn);
-//		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckB);
-//		deck.setMoveSizeReturnMessage(TraktorAdapter.movesi);
+		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckB, TraktorAdapter.moveModeDeckBReturn);
 		deck.setMoveSizeBackwardMessage(
 				TraktorAdapter.moveSizeDeckBBackwardPress,
-				TraktorAdapter.moveSizeDeckBBackwardRelease);
+				TraktorAdapter.moveSizeDeckBBackwardRelease,
+				TraktorAdapter.moveSizeDeckBReturn);
 		deck.setMoveBackwardMessage(
 				TraktorAdapter.moveDeckBBackwardPress,
 				TraktorAdapter.moveDeckBBackwardRelease);
