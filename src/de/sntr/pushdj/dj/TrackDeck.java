@@ -10,6 +10,7 @@ import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
+import de.sntr.pushdj.traktor.LoopSize;
 import de.sntr.pushdj.traktor.MoveMode;
 import de.sntr.pushdj.traktor.MoveSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
@@ -25,10 +26,16 @@ public class TrackDeck extends Deck {
 		static final int cueOn = MatrixButton.BLUE2_BRIGHT;
 		static final int cueOff = MatrixButton.BLUE2_MEDIUM;
 		static final int moveMode = TitleButton.BRIGHT_ON;
-		static final int moveSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int moveSizeOff = MatrixButton.BLUEGREEN_PALE;
-		static final int moveOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int moveOff = MatrixButton.BLUEGREEN_DARKPALE;
+		static final int moveOn = MatrixButton.BLUE2_BRIGHT;
+		static final int moveOff = MatrixButton.BLUE2_PALE;
+		static final int moveSizeOn = MatrixButton.BLUE3_BRIGHT;
+		static final int moveSizeOff = MatrixButton.BLUE3_PALE;
+		static final int loopActiveOn = TitleButton.BRIGHT_BLINK_FAST;
+		static final int loopActiveOff = TitleButton.BRIGHT_ON;
+		static final int loopSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
+		static final int loopSizeOff = MatrixButton.BLUEGREEN_MEDIUM;
+		static final int loopInOutOn = MatrixButton.BLUEGREEN_BRIGHT;
+		static final int loopInOutOff = MatrixButton.BLUEGREEN_PALE;
 		static final int jogTurnFineOn = MatrixButton.ORANGE1_BRIGHT;
 		static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
 		static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
@@ -86,6 +93,25 @@ public class TrackDeck extends Deck {
 	Button moveForwardControl;
 	TraktorMessage moveForwardPressMessage;
 	TraktorMessage moveForwardReleaseMessage;
+	
+	Button loopActiveControl;
+	TraktorMessage loopActiveMessage;
+	TraktorMessage loopActiveReturnMessage;
+	
+	Button loopInControl;
+	TraktorMessage loopInPressMessage;
+	
+	Button loopOutControl;
+	TraktorMessage loopOutPressMessage;
+	
+	Button loopSizeIncControl;
+	TraktorMessage loopSizeIncPressMessage;
+	TraktorMessage loopSizeIncReleaseMessage;
+	TraktorMessage loopSizeReturnMessage;
+	
+	Button loopSizeDecControl;
+	TraktorMessage loopSizeDecPressMessage;
+	TraktorMessage loopSizeDecReleaseMessage;
 	
 	Button hotcue1Control;
 	TraktorMessage hotcue1PressedMessage;
@@ -165,6 +191,7 @@ public class TrackDeck extends Deck {
 	boolean playing = false;
 	boolean sync = false;
 	boolean tempoMaster = false;
+	boolean loopActive = false;
 	
 	DJController djc;
 	
@@ -219,9 +246,6 @@ public class TrackDeck extends Deck {
 		setColor(moveSizeForwardControl, Colors.moveSizeOn);
 	}
 	
-	/**
-	 * For fast repeat; fast repeat not yet implemented
-	 */
 	void moveSizeForwardReleased() {
 		send(moveSizeForwardReleaseMessage);
 		setColor(moveSizeForwardControl, Colors.moveSizeOff);
@@ -255,6 +279,48 @@ public class TrackDeck extends Deck {
 	void moveBackwardReleased() {
 		send(moveBackwardReleaseMessage);
 		setColor(moveBackwardControl, Colors.moveOff);
+	}
+
+	void loopActivated() {
+		send(loopActiveMessage);
+	}
+
+	void loopInPressed() {
+		send(loopInPressMessage);
+		setColor(loopInControl, Colors.loopInOutOn);
+	}
+	
+	void loopInReleased() {
+		setColor(loopInControl, Colors.loopInOutOff);
+	}
+	
+	void loopOutPressed() {
+		send(loopOutPressMessage);
+		setColor(loopOutControl, Colors.loopInOutOn);
+	}
+
+	void loopOutReleased() {
+		setColor(loopOutControl, Colors.loopInOutOff);
+	}
+	
+	void loopSizeIncPressed() {
+		send(loopSizeIncPressMessage);
+		setColor(loopSizeIncControl, Colors.loopSizeOn);
+	}
+	
+	void loopSizeIncReleased() {
+		send(loopSizeIncReleaseMessage);
+		setColor(loopSizeIncControl, Colors.loopSizeOff);
+	}
+	
+	void loopSizeDecPressed() {
+		send(loopSizeDecPressMessage);
+		setColor(loopSizeDecControl, Colors.loopSizeOn);
+	}
+	
+	void loopSizeDecReleased() {
+		send(loopSizeDecReleaseMessage);
+		setColor(loopSizeDecControl, Colors.loopSizeOff);
 	}
 
 	void hotcue1Pressed() {
@@ -312,6 +378,7 @@ public class TrackDeck extends Deck {
 			setColor(playControl, Colors.playOn);
 		}
 	}
+	
 	void hotcue3Released() {
 		send(hotcue3ReleasedMessage);
 		if (!playing) {
@@ -510,6 +577,21 @@ public class TrackDeck extends Deck {
 			else if(control == moveForwardControl) {
 				moveForwardPressed();
 			}
+			else if(control == loopActiveControl) {
+				loopActivated();
+			}
+			else if(control == loopInControl) {
+				loopInPressed();
+			}
+			else if(control == loopOutControl) {
+				loopOutPressed();
+			}
+			else if(control == loopSizeIncControl) {
+				loopSizeIncPressed();
+			}
+			else if(control == loopSizeDecControl) {
+				loopSizeDecPressed();
+			}
 			else if(control == hotcue1Control) {
 				hotcue1Pressed();
 			}
@@ -573,6 +655,18 @@ public class TrackDeck extends Deck {
 			}
 			else if(control == moveForwardControl) {
 				moveForwardReleased();
+			}
+			else if(control == loopInControl) {
+				loopInReleased();
+			}
+			else if(control == loopOutControl) {
+				loopOutReleased();
+			}
+			else if(control == loopSizeIncControl) {
+				loopSizeIncReleased();
+			}
+			else if(control == loopSizeDecControl) {
+				loopSizeDecReleased();
 			}
 			else if(control == hotcue1Control) {
 				hotcue1Released();
@@ -688,6 +782,22 @@ public class TrackDeck extends Deck {
 			PushAdapter.display.writeOnLine(1, displayColumn, "Size " +MoveSize.values()[message.data2].getName());
 			PushAdapter.display.update();
 		}
+		else if(message == loopActiveReturnMessage) {
+			if(message.data2 == 0) {
+				loopActive = false;
+				setColor(loopActiveControl, Colors.loopActiveOff);
+System.out.println("off");
+			}
+			else {
+				loopActive = true;
+				setColor(loopActiveControl, Colors.loopActiveOn);
+System.out.println("on");
+			}
+		}
+		else if(message == loopSizeReturnMessage) {
+			PushAdapter.display.writeOnLine(2, displayColumn, "Loop " +LoopSize.values()[message.data2].getName());
+			PushAdapter.display.update();
+		}
 	}
 	
 	@Override
@@ -708,6 +818,11 @@ System.out.println("Deck already active");
 		setColor(moveSizeForwardControl, Colors.moveSizeOff);
 		setColor(moveBackwardControl, Colors.moveOff);
 		setColor(moveForwardControl, Colors.moveOff);
+		setColor(loopActiveControl, Colors.loopActiveOff);
+		setColor(loopInControl, Colors.loopInOutOff);
+		setColor(loopOutControl, Colors.loopInOutOff);
+		setColor(loopSizeIncControl, Colors.loopSizeOff);
+		setColor(loopSizeDecControl, Colors.loopSizeOff);
 		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
 		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
@@ -732,10 +847,6 @@ System.out.println("Deck already active");
 		else {
 			setColor(tempoMasterControl, Colors.tempoMasterOff);
 		}
-		PushAdapter.display.writeOnLine(0, 1, "Move BeatJump");
-		PushAdapter.display.writeOnLine(1, 1, "Size 32");
-		PushAdapter.display.writeOnLine(2, 1, "Loop Loop");
-		PushAdapter.display.update();
 	}
 
 	@Override
@@ -818,6 +929,57 @@ System.out.println("Deck already active");
 	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
 		moveForwardPressMessage = pressMessage;
 		moveForwardReleaseMessage = releaseMessage;
+	}
+	
+	public void setLoopActiveButton(Button control) {
+		control.addListener(this);
+		loopActiveControl = control;
+	}
+	
+	public void setLoopActiveMessage(TraktorMessage message, TraktorMessage returnMessage) {
+		loopActiveMessage = message;
+		returnMessage.addListener(this);
+		loopActiveReturnMessage = returnMessage;
+	}
+	
+	public void setLoopInButton(Button control) {
+		control.addListener(this);
+		loopInControl = control;
+	}
+	
+	public void setLoopInMessage(TraktorMessage message) {
+		loopInPressMessage = message;
+	}
+	
+	public void setLoopOutButton(Button control) {
+		control.addListener(this);
+		loopOutControl = control;
+	}
+	
+	public void setLoopOutMessage(TraktorMessage message) {
+		loopOutPressMessage = message;
+	}
+	
+	public void setLoopSizeIncButton(Button control) {
+		control.addListener(this);
+		loopSizeIncControl = control;
+	}
+	
+	public void setLoopSizeIncMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage returnMessage) {
+		loopSizeIncPressMessage = pressMessage;
+		loopSizeIncReleaseMessage = releaseMessage;
+		returnMessage.addListener(this);
+		loopSizeReturnMessage = returnMessage;
+	}
+	
+	public void setLoopSizeDecButton(Button control) {
+		control.addListener(this);
+		loopSizeDecControl = control;
+	}
+	
+	public void setLoopSizeDecMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+		loopSizeDecPressMessage = pressMessage;
+		loopSizeDecReleaseMessage = releaseMessage;
 	}
 	
 	public void setHotcue1Button(Button control) {

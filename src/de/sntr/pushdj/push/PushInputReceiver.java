@@ -101,11 +101,32 @@ public class PushInputReceiver implements Receiver {
 					case 29:
 						PushAdapter.stop.pressed();
 						break;
-					case 44:
-						PushAdapter.left.pressed();
+					case 36:
+						PushAdapter.resolution[0].pressed();
+						break;
+					case 37:
+						PushAdapter.resolution[1].pressed();
+						break;
+					case 38:
+						PushAdapter.resolution[2].pressed();
+						break;
+					case 39:
+						PushAdapter.resolution[3].pressed();
 						break;
 					case 40:
 						PushAdapter.resolution[4].pressed();
+						break;
+					case 41:
+						PushAdapter.resolution[5].pressed();
+						break;
+					case 42:
+						PushAdapter.resolution[6].pressed();
+						break;
+					case 43:
+						PushAdapter.resolution[7].pressed();
+						break;
+					case 44:
+						PushAdapter.left.pressed();
 						break;
 					case 45:
 						PushAdapter.right.pressed();
@@ -271,6 +292,9 @@ public class PushInputReceiver implements Receiver {
 				else if(data2 == 0) {
 					switch (cc) {
 
+					case 41:
+						PushAdapter.resolution[5].released();
+						break;
 					case 46:
 						PushAdapter.up.released();
 						break;
@@ -282,6 +306,9 @@ public class PushInputReceiver implements Receiver {
 						break;
 					case 86:
 						PushAdapter.record.released();
+						break;
+					case 116:
+						PushAdapter.quantize.released();
 						break;
 	
 					default:
@@ -415,6 +442,15 @@ public class PushInputReceiver implements Receiver {
 				case 73: PushAdapter.matrix[37].released(); break;
 				case 74: PushAdapter.matrix[38].released(); break;
 				case 75: PushAdapter.matrix[39].released(); break;
+				//row6
+				case 76: PushAdapter.matrix[40].released(); break;
+				case 77: PushAdapter.matrix[41].released(); break;
+				case 78: PushAdapter.matrix[42].released(); break;
+				case 79: PushAdapter.matrix[43].released(); break;
+				case 80: PushAdapter.matrix[44].released(); break;
+				case 81: PushAdapter.matrix[45].released(); break;
+				case 82: PushAdapter.matrix[46].released(); break;
+				case 83: PushAdapter.matrix[47].released(); break;
 				default:
 					break;
 				}

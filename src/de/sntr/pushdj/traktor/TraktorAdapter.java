@@ -57,6 +57,16 @@ public class TraktorAdapter {
 	public static TraktorMessage moveSizeDeckABackwardRelease;
 	public static TraktorMessage moveDeckABackwardRelease;
 
+	public static TraktorMessage loopActiveDeckA;
+	public static TraktorMessage loopSizeIncDeckAPress;
+	public static TraktorMessage loopSizeDecDeckAPress;
+	public static TraktorMessage loopSizeIncDeckARelease;
+	public static TraktorMessage loopSizeDecDeckARelease;
+	public static TraktorMessage loopInDeckA;
+	public static TraktorMessage loopOutDeckA;
+	public static TraktorMessage loopActiveReturnDeckA;
+	public static TraktorMessage loopSizeReturnDeckA;
+
 	public static TraktorMessage selectSetHotcueDeckA1Press;
 	public static TraktorMessage selectSetHotcueDeckA1Release;
 	public static TraktorMessage selectSetHotcueDeckA2Press;
@@ -119,6 +129,16 @@ public class TraktorAdapter {
 	public static TraktorMessage moveSizeDeckBBackwardRelease;
 	public static TraktorMessage moveDeckBBackwardRelease;
 
+	public static TraktorMessage loopActiveDeckB;
+	public static TraktorMessage loopSizeIncDeckBPress;
+	public static TraktorMessage loopSizeDecDeckBPress;
+	public static TraktorMessage loopSizeIncDeckBRelease;
+	public static TraktorMessage loopSizeDecDeckBRelease;
+	public static TraktorMessage loopInDeckB;
+	public static TraktorMessage loopOutDeckB;
+	public static TraktorMessage loopActiveReturnDeckB;
+	public static TraktorMessage loopSizeReturnDeckB;
+	
 	public static TraktorMessage selectSetHotcueDeckB1Press;
 	public static TraktorMessage selectSetHotcueDeckB1Release;
 	public static TraktorMessage selectSetHotcueDeckB2Press;
@@ -214,6 +234,15 @@ public class TraktorAdapter {
         moveDeckABackwardRelease = getMessage("moveDeckABackwardRelease");
         moveSizeDeckAForwardRelease = getMessage("moveSizeDeckAForwardRelease");
         moveSizeDeckABackwardRelease = getMessage("moveSizeDeckABackwardRelease");
+    	loopActiveDeckA = getMessage("loopActiveDeckA");
+    	loopSizeIncDeckAPress = getMessage("loopSizeIncDeckAPress");
+    	loopSizeDecDeckAPress = getMessage("loopSizeDecDeckAPress");
+    	loopSizeIncDeckARelease = getMessage("loopSizeIncDeckARelease");
+    	loopSizeDecDeckARelease = getMessage("loopSizeDecDeckARelease");
+    	loopInDeckA = getMessage("loopInDeckA");
+    	loopOutDeckA = getMessage("loopOutDeckA");
+    	loopActiveReturnDeckA = getMessage("loopActiveReturnDeckA");
+    	loopSizeReturnDeckA = getMessage("loopSizeReturnDeckA");
         selectSetHotcueDeckA1Press = getMessage("selectSetHotcueDeckA1Press");
     	selectSetHotcueDeckA1Release = getMessage("selectSetHotcueDeckA1Release");
     	selectSetHotcueDeckA2Press = getMessage("selectSetHotcueDeckA2Press");
@@ -274,6 +303,15 @@ public class TraktorAdapter {
         moveDeckBBackwardRelease = getMessage("moveDeckBBackwardRelease");
         moveSizeDeckBForwardRelease = getMessage("moveSizeDeckBForwardRelease");
         moveSizeDeckBBackwardRelease = getMessage("moveSizeDeckBBackwardRelease");
+    	loopActiveDeckB = getMessage("loopActiveDeckB");
+    	loopSizeIncDeckBPress = getMessage("loopSizeIncDeckBPress");
+    	loopSizeDecDeckBPress = getMessage("loopSizeDecDeckBPress");
+    	loopSizeIncDeckBRelease = getMessage("loopSizeIncDeckBRelease");
+    	loopSizeDecDeckBRelease = getMessage("loopSizeDecDeckBRelease");
+    	loopInDeckB = getMessage("loopInDeckB");
+    	loopOutDeckB = getMessage("loopOutDeckB");
+    	loopActiveReturnDeckB = getMessage("loopActiveReturnDeckB");
+    	loopSizeReturnDeckB = getMessage("loopSizeReturnDeckB");
         selectSetHotcueDeckB1Press = getMessage("selectSetHotcueDeckB1Press");
     	selectSetHotcueDeckB1Release = getMessage("selectSetHotcueDeckB1Release");
     	selectSetHotcueDeckB2Press = getMessage("selectSetHotcueDeckB2Press");
@@ -323,7 +361,6 @@ public class TraktorAdapter {
 	
 
 	public static void send(TraktorMessage message) {
-//		int data[] = mappings.get(command);
 		try {
 			ShortMessage m = new ShortMessage(message.command, message.channel, message.data1, message.data2);
 System.out.println("TRout> " +message.command +":"+message.channel+","+message.data1+","+message.data2);

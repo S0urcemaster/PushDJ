@@ -143,7 +143,7 @@ public class PushDJ {
 		new PushAdapter();
 		djc = new DJController();
 	}
-
+	int f = 0;
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -167,8 +167,8 @@ public class PushDJ {
 		JButton button = new JButton("-");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField_1.setText(Integer.toString((Integer.parseInt(textField_1.getText()) -1)));
-				
+				PushAdapter.setColor(PushAdapter.quantize, f++);
+				textField.setText((new Integer(f)).toString());
 			}
 		});
 		frmPushdj.getContentPane().add(button, BorderLayout.CENTER);

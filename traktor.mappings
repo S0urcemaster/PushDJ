@@ -96,6 +96,16 @@ syncOnReturnDeckA,176,1,44,1
 tempoMasterDeckA,176,1,45,1
 tempoMasterReturnDeckA,176,1,46,1
 
+loopActiveDeckA,176,1,49,1
+loopSizeIncDeckAPress,176,1,50,1
+loopSizeDecDeckAPress,176,1,51,1
+loopSizeIncDeckARelease,176,1,50,0
+loopSizeDecDeckARelease,176,1,51,0
+loopInDeckA,176,1,54,1
+loopOutDeckA,176,1,55,1
+loopActiveReturnDeckA,176,1,56,1
+loopSizeReturnDeckA,176,1,57,1
+
 ###   DECK B   ###
 
 loadDeckB,176,2,0,1
@@ -159,6 +169,15 @@ syncOnReturnDeckB,176,2,44,1
 tempoMasterDeckB,176,2,45,1
 tempoMasterReturnDeckB,176,2,46,1
 
+loopActiveDeckB,176,2,49,1
+loopSizeIncDeckBPress,176,2,50,1
+loopSizeDecDeckBPress,176,2,51,1
+loopSizeIncDeckBRelease,176,2,50,0
+loopSizeDecDeckBRelease,176,2,51,0
+loopInDeckB,176,2,54,1
+loopOutDeckB,176,2,55,1
+loopActiveReturnDeckB,176,2,56,1
+loopSizeReturnDeckB,176,2,57,1
 
 
 ###   DECK C   ###

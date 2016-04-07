@@ -74,13 +74,11 @@ public class DeckInit {
 	public static void initTrackDeckALeft(TrackDeck deck) {
 		initTrackDeckButtonsLeft(deck);
 		initTrackDeckAMessages(deck);
-		deck.displayColumn = 1;
 	}
 
 	public static void initTrackDeckARight(TrackDeck deck) {
 		initTrackDeckButtonsRight(deck);
 		initTrackDeckAMessages(deck);
-		deck.displayColumn = 2;
 	}
 	
 	public static void initTrackDeckBLeft(TrackDeck deck) {
@@ -136,6 +134,11 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b52);
 		deck.setMoveBackwardButton(b53);
 		deck.setMoveForwardButton(b54);
+		deck.setLoopActiveButton(PushAdapter.quantize);
+		deck.setLoopSizeDecButton(b61);
+		deck.setLoopSizeIncButton(b62);
+		deck.setLoopInButton(b63);
+		deck.setLoopOutButton(b64);
 	}
 	
 	private static void initTrackDeckButtonsRight(TrackDeck deck) {
@@ -161,6 +164,11 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b56);
 		deck.setMoveBackwardButton(b57);
 		deck.setMoveForwardButton(b58);
+		deck.setLoopActiveButton(PushAdapter.resolution[5]);
+		deck.setLoopSizeDecButton(b65);
+		deck.setLoopSizeIncButton(b66);
+		deck.setLoopInButton(b67);
+		deck.setLoopOutButton(b68);
 	}
 	
 	private static void initTrackDeckAMessages(TrackDeck deck) {
@@ -186,6 +194,11 @@ public class DeckInit {
 		deck.setMoveForwardMessage(
 				TraktorAdapter.moveDeckAForwardPress,
 				TraktorAdapter.moveDeckAForwardRelease);
+		deck.setLoopActiveMessage(TraktorAdapter.loopActiveDeckA, TraktorAdapter.loopActiveReturnDeckA);
+		deck.setLoopInMessage(TraktorAdapter.loopInDeckA);
+		deck.setLoopOutMessage(TraktorAdapter.loopOutDeckA);
+		deck.setLoopSizeIncMessage(TraktorAdapter.loopSizeIncDeckAPress, TraktorAdapter.loopSizeIncDeckARelease, TraktorAdapter.loopSizeReturnDeckA);
+		deck.setLoopSizeDecMessage(TraktorAdapter.loopSizeDecDeckAPress, TraktorAdapter.loopSizeDecDeckARelease);
 		deck.setHotcue1Message(TraktorAdapter.selectSetHotcueDeckA1Press,
 				TraktorAdapter.selectSetHotcueDeckA1Release,
 				TraktorAdapter.deleteHotcueDeckA1,
@@ -249,6 +262,11 @@ public class DeckInit {
 		deck.setMoveForwardMessage(
 				TraktorAdapter.moveDeckBForwardPress,
 				TraktorAdapter.moveDeckBForwardRelease);
+		deck.setLoopActiveMessage(TraktorAdapter.loopActiveDeckB, TraktorAdapter.loopActiveReturnDeckB);
+		deck.setLoopInMessage(TraktorAdapter.loopInDeckB);
+		deck.setLoopOutMessage(TraktorAdapter.loopOutDeckB);
+		deck.setLoopSizeIncMessage(TraktorAdapter.loopSizeIncDeckBPress, TraktorAdapter.loopSizeIncDeckBRelease, TraktorAdapter.loopSizeReturnDeckB);
+		deck.setLoopSizeDecMessage(TraktorAdapter.loopSizeDecDeckBPress, TraktorAdapter.loopSizeDecDeckBRelease);
 		deck.setHotcue1Message(TraktorAdapter.selectSetHotcueDeckB1Press,
 				TraktorAdapter.selectSetHotcueDeckB1Release,
 				TraktorAdapter.deleteHotcueDeckB1,
