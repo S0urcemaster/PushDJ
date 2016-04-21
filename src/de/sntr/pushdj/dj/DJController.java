@@ -268,16 +268,16 @@ public class DJController implements ButtonListener, EncoderListener {
 			loadDeckBPressed();
 		}
 		else if(control == viewLeftDeckAControl) {
-			viewLeftDeckAPressed();;
+			viewLeftDeckAPressed();
 		}
 		else if(control == viewLeftDeckBControl) {
-			viewLeftDeckBPressed();;
+			viewLeftDeckBPressed();
 		}
 		else if(control == viewRightDeckAControl) {
-			viewRightDeckAPressed();;
+			viewRightDeckAPressed();
 		}
 		else if(control == viewRightDeckBControl) {
-			viewRightDeckBPressed();;
+			viewRightDeckBPressed();
 		}
 	}
 

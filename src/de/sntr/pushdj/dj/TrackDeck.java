@@ -786,7 +786,6 @@ public class TrackDeck extends Deck {
 			if(message.data2 == 0) {
 				loopActive = false;
 				setColor(loopActiveControl, Colors.loopActiveOff);
-System.out.println("off");
 			}
 			else {
 				loopActive = true;
