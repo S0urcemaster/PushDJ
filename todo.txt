@@ -8,3 +8,15 @@
 
 - Append to Preparation List
 - Loop handling
+
+- Size Buttons Helligkeit entsprechend Size
+- Browser move Track up
+- 4 Decks Layout
+- Fine Jog
+- Cue Volume mit 2 Reglern links und rechts
+- Linker Loop schalter leuchtet nicht
+- EQ/Filter gruppieren und mit einem Regler Werte ändern
+- Que points (zuerst 1 dann 2) reagieren schlecht/ zu druckintensiv, reagieren nur mit starkem Druck, geht dann wieder
+- Geschwindigkeit von 2 Tracks gleichzeitig ändern (z.B. um bei einem Übergang auf eine langsamere Geschwindigkeit zu wechseln)
+- Tempo über Tasten einstellen (+/-, Range) mit Anzeige, vielleicht letzte Reihe oben
+- Macro Auto Speed Up

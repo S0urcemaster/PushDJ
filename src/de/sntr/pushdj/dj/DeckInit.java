@@ -134,7 +134,7 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b52);
 		deck.setMoveBackwardButton(b53);
 		deck.setMoveForwardButton(b54);
-		deck.setLoopActiveButton(PushAdapter.quantize);
+		deck.setLoopActiveButton(b71);
 		deck.setLoopSizeDecButton(b61);
 		deck.setLoopSizeIncButton(b62);
 		deck.setLoopInButton(b63);
@@ -164,7 +164,7 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b56);
 		deck.setMoveBackwardButton(b57);
 		deck.setMoveForwardButton(b58);
-		deck.setLoopActiveButton(PushAdapter.resolution[5]);
+		deck.setLoopActiveButton(b75);
 		deck.setLoopSizeDecButton(b65);
 		deck.setLoopSizeIncButton(b66);
 		deck.setLoopInButton(b67);

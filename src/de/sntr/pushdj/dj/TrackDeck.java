@@ -5,6 +5,7 @@ import static de.sntr.pushdj.traktor.TraktorAdapter.send;
 
 import java.util.Timer;
 
+import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.PushAdapter;
@@ -30,8 +31,8 @@ public class TrackDeck extends Deck {
 		static final int moveOff = MatrixButton.BLUE2_PALE;
 		static final int moveSizeOn = MatrixButton.BLUE3_BRIGHT;
 		static final int moveSizeOff = MatrixButton.BLUE3_PALE;
-		static final int loopActiveOn = TitleButton.BRIGHT_BLINK_FAST;
-		static final int loopActiveOff = TitleButton.BRIGHT_ON;
+		static final int loopActiveOn = MatrixButton.BLUEGREEN_BRIGHT;
+		static final int loopActiveOff = MatrixButton.BLUEGREEN_DARK;
 		static final int loopSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
 		static final int loopSizeOff = MatrixButton.BLUEGREEN_MEDIUM;
 		static final int loopInOutOn = MatrixButton.BLUEGREEN_BRIGHT;
@@ -199,6 +200,8 @@ public class TrackDeck extends Deck {
 	Timer jogTurnFineBackwardTimer;
 	Timer jogTurnCoarseForwardTimer;
 	Timer jogTurnCoarseBackwardTimer;
+	
+	MatrixBlink loopActiveBlink;
 	
 	public TrackDeck(DJController djc) {
 		this.djc = djc;
@@ -785,12 +788,14 @@ public class TrackDeck extends Deck {
 		else if(message == loopActiveReturnMessage) {
 			if(message.data2 == 0) {
 				loopActive = false;
-				setColor(loopActiveControl, Colors.loopActiveOff);
+				if(loopActiveBlink != null) {
+					loopActiveBlink.running = false;
+				}
 			}
 			else {
 				loopActive = true;
-				setColor(loopActiveControl, Colors.loopActiveOn);
-System.out.println("on");
+				loopActiveBlink = new MatrixBlink(loopActiveControl, Colors.loopActiveOn, Colors.loopActiveOff, 200, 300);
+				loopActiveBlink.start();
 			}
 		}
 		else if(message == loopSizeReturnMessage) {
