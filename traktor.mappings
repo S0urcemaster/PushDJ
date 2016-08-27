@@ -106,6 +106,42 @@ loopOutDeckA,176,1,55,1
 loopActiveReturnDeckA,176,1,56,1
 loopSizeReturnDeckA,176,1,57,1
 
+loopSizeSelectSetf32DeckA,176,1,58,1
+loopSizeSelectSetf16DeckA,176,1,59,1
+loopSizeSelectSetf8DeckA,176,1,60,1
+loopSizeSelectSetf4DeckA,176,1,61,1
+loopSizeSelectSetf2DeckA,176,1,62,1
+loopSizeSelectSeti1DeckA,176,1,63,1
+loopSizeSelectSeti2DeckA,176,1,64,1
+loopSizeSelectSeti4DeckA,176,1,65,1
+loopSizeSelectSeti8DeckA,176,1,66,1
+loopSizeSelectSeti16DeckA,176,1,67,1
+loopSizeSelectSeti32DeckA,176,1,68,1
+loopSizeSelectSetBackwardf32DeckA,176,1,69,1
+loopSizeSelectSetBackwardf16DeckA,176,1,70,1
+loopSizeSelectSetBackwardf8DeckA,176,1,71,1
+loopSizeSelectSetBackwardf4DeckA,176,1,72,1
+loopSizeSelectSetBackwardf2DeckA,176,1,73,1
+loopSizeSelectSetBackwardi1DeckA,176,1,74,1
+loopSizeSelectSetBackwardi2DeckA,176,1,75,1
+loopSizeSelectSetBackwardi4DeckA,176,1,76,1
+loopSizeSelectSetBackwardi8DeckA,176,1,77,1
+loopSizeSelectSetBackwardi16DeckA,176,1,78,1
+loopSizeSelectSetBackwardi32DeckA,176,1,79,1
+
+loopMoveIncDeckA,176,1,80,1
+loopMoveDecDeckA,176,1,81,1
+loopInMoveIncDeckA,176,1,82,1
+loopInMoveDecDeckA,176,1,83,1
+loopOutMoveIncDeckA,176,1,84,1
+loopOutMoveDecDeckA,176,1,85,1
+
+moveModeBeatJumpDeckA,176,1,86,1
+moveModeLoopDeckA,176,1,87,1
+moveModeLoopInDeckA,176,1,88,1
+moveModeLoopOutDeckA,176,1,89,1
+
+
 ###   DECK B   ###
 
 loadDeckB,176,2,0,1
@@ -174,10 +210,39 @@ loopSizeIncDeckBPress,176,2,50,1
 loopSizeDecDeckBPress,176,2,51,1
 loopSizeIncDeckBRelease,176,2,50,0
 loopSizeDecDeckBRelease,176,2,51,0
-loopInDeckB,176,2,54,1
-loopOutDeckB,176,2,55,1
+#loopInDeckB,176,2,54,1
+#loopOutDeckB,176,2,55,1
 loopActiveReturnDeckB,176,2,56,1
 loopSizeReturnDeckB,176,2,57,1
+
+loopSizeSelectSetf32DeckB,176,1,58,1
+loopSizeSelectSetf16DeckB,176,1,59,1
+loopSizeSelectSetf8DeckB,176,1,60,1
+loopSizeSelectSetf4DeckB,176,1,61,1
+loopSizeSelectSetf2DeckB,176,1,62,1
+loopSizeSelectSeti1DeckB,176,1,63,1
+loopSizeSelectSeti2DeckB,176,1,64,1
+loopSizeSelectSeti4DeckB,176,1,65,1
+loopSizeSelectSeti8DeckB,176,1,66,1
+loopSizeSelectSeti16DeckB,176,1,67,1
+loopSizeSelectSeti32DeckB,176,1,68,1
+loopSizeSelectSetBackwardf32DeckB,176,1,69,1
+loopSizeSelectSetBackwardf16DeckB,176,1,70,1
+loopSizeSelectSetBackwardf8DeckB,176,1,71,1
+loopSizeSelectSetBackwardf4DeckB,176,1,72,1
+loopSizeSelectSetBackwardf2DeckB,176,1,73,1
+loopSizeSelectSetBackwardi1DeckB,176,1,74,1
+loopSizeSelectSetBackwardi2DeckB,176,1,75,1
+loopSizeSelectSetBackwardi4DeckB,176,1,76,1
+loopSizeSelectSetBackwardi8DeckB,176,1,77,1
+loopSizeSelectSetBackwardi16DeckB,176,1,78,1
+loopSizeSelectSetBackwardi32DeckB,176,1,79,1
+loopMoveIncDeckB,176,1,80,1
+loopMoveDecDeckB,176,1,81,1
+loopInMoveIncDeckB,176,1,82,1
+loopInMoveDecDeckB,176,1,83,1
+loopOutMoveIncDeckB,176,1,84,1
+loopOutMoveDecDeckB,176,1,85,1
 
 
 ###   DECK C   ###

@@ -2,7 +2,7 @@ package de.sntr.pushdj.dj;
 
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.PushAdapter;
-import de.sntr.pushdj.traktor.TraktorAdapter;
+import static de.sntr.pushdj.traktor.TraktorAdapter.*;
 
 public class DeckInit {
 
@@ -134,11 +134,19 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b52);
 		deck.setMoveBackwardButton(b53);
 		deck.setMoveForwardButton(b54);
-		deck.setLoopActiveButton(b71);
+		deck.setLoopActiveButton(b81);
 		deck.setLoopSizeDecButton(b61);
 		deck.setLoopSizeIncButton(b62);
-		deck.setLoopInButton(b63);
-		deck.setLoopOutButton(b64);
+//		deck.setLoopInButton(b63);
+//		deck.setLoopOutButton(b64);
+		deck.setLoopMoveIncButton(b83);
+		deck.setLoopMoveDecButton(b84);
+		deck.setLoopInMoveIncButton(b71);
+		deck.setLoopInMoveDecButton(b72);
+		deck.setLoopOutMoveIncButton(b73);
+		deck.setLoopOutMoveDecButton(b74);
+		deck.setLoopSizeSelectSetButton(b63);
+		deck.setLoopSizeSelectSetBackwardButton(b64);
 	}
 	
 	private static void initTrackDeckButtonsRight(TrackDeck deck) {
@@ -164,146 +172,142 @@ public class DeckInit {
 		deck.setMoveSizeForwardButton(b56);
 		deck.setMoveBackwardButton(b57);
 		deck.setMoveForwardButton(b58);
-		deck.setLoopActiveButton(b75);
+		deck.setLoopActiveButton(b85);
 		deck.setLoopSizeDecButton(b65);
 		deck.setLoopSizeIncButton(b66);
-		deck.setLoopInButton(b67);
-		deck.setLoopOutButton(b68);
+//		deck.setLoopInButton(b67);
+//		deck.setLoopOutButton(b68);
+		deck.setLoopMoveIncButton(b87);
+		deck.setLoopMoveDecButton(b88);
+		deck.setLoopInMoveIncButton(b75);
+		deck.setLoopInMoveDecButton(b76);
+		deck.setLoopOutMoveIncButton(b77);
+		deck.setLoopOutMoveDecButton(b78);
+		deck.setLoopSizeSelectSetButton(b67);
+		deck.setLoopSizeSelectSetBackwardButton(b68);
 	}
 	
 	private static void initTrackDeckAMessages(TrackDeck deck) {
-		deck.setPlayMessage(TraktorAdapter.playDeckA,
-				TraktorAdapter.pauseDeckA, TraktorAdapter.playReturnDeckA);
-		deck.setCueMessage(TraktorAdapter.cueDeckAPress,
-				TraktorAdapter.cueDeckARelease);
-		deck.setSyncMessage(TraktorAdapter.syncOnDeckA,
-				TraktorAdapter.phaseSyncDeckA, TraktorAdapter.syncOnReturnDeckA);
-		deck.setTempoMasterMessage(TraktorAdapter.tempoMasterDeckA,
-				TraktorAdapter.tempoMasterDeckAReturn);
-		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckA, TraktorAdapter.moveModeDeckAReturn);
-		deck.setMoveSizeBackwardMessage(
-				TraktorAdapter.moveSizeDeckABackwardPress,
-				TraktorAdapter.moveSizeDeckABackwardRelease,
-				TraktorAdapter.moveSizeDeckAReturn);
-		deck.setMoveBackwardMessage(
-				TraktorAdapter.moveDeckABackwardPress,
-				TraktorAdapter.moveDeckABackwardRelease);
-		deck.setMoveSizeForwardMessage(
-				TraktorAdapter.moveSizeDeckAForwardPress,
-				TraktorAdapter.moveSizeDeckAForwardRelease);
-		deck.setMoveForwardMessage(
-				TraktorAdapter.moveDeckAForwardPress,
-				TraktorAdapter.moveDeckAForwardRelease);
-		deck.setLoopActiveMessage(TraktorAdapter.loopActiveDeckA, TraktorAdapter.loopActiveReturnDeckA);
-		deck.setLoopInMessage(TraktorAdapter.loopInDeckA);
-		deck.setLoopOutMessage(TraktorAdapter.loopOutDeckA);
-		deck.setLoopSizeIncMessage(TraktorAdapter.loopSizeIncDeckAPress, TraktorAdapter.loopSizeIncDeckARelease, TraktorAdapter.loopSizeReturnDeckA);
-		deck.setLoopSizeDecMessage(TraktorAdapter.loopSizeDecDeckAPress, TraktorAdapter.loopSizeDecDeckARelease);
-		deck.setHotcue1Message(TraktorAdapter.selectSetHotcueDeckA1Press,
-				TraktorAdapter.selectSetHotcueDeckA1Release,
-				TraktorAdapter.deleteHotcueDeckA1,
-				TraktorAdapter.hotcueTypeDeckA1);
-		deck.setHotcue2Message(TraktorAdapter.selectSetHotcueDeckA2Press,
-				TraktorAdapter.selectSetHotcueDeckA2Release,
-				TraktorAdapter.deleteHotcueDeckA2,
-				TraktorAdapter.hotcueTypeDeckA2);
-		deck.setHotcue3Message(TraktorAdapter.selectSetHotcueDeckA3Press,
-				TraktorAdapter.selectSetHotcueDeckA3Release,
-				TraktorAdapter.deleteHotcueDeckA3,
-				TraktorAdapter.hotcueTypeDeckA3);
-		deck.setHotcue4Message(TraktorAdapter.selectSetHotcueDeckA4Press,
-				TraktorAdapter.selectSetHotcueDeckA4Release,
-				TraktorAdapter.deleteHotcueDeckA4,
-				TraktorAdapter.hotcueTypeDeckA4);
-		deck.setHotcue5Message(TraktorAdapter.selectSetHotcueDeckA5Press,
-				TraktorAdapter.selectSetHotcueDeckA5Release,
-				TraktorAdapter.deleteHotcueDeckA5,
-				TraktorAdapter.hotcueTypeDeckA5);
-		deck.setHotcue6Message(TraktorAdapter.selectSetHotcueDeckA6Press,
-				TraktorAdapter.selectSetHotcueDeckA6Release,
-				TraktorAdapter.deleteHotcueDeckA6,
-				TraktorAdapter.hotcueTypeDeckA6);
-		deck.setHotcue7Message(TraktorAdapter.selectSetHotcueDeckA7Press,
-				TraktorAdapter.selectSetHotcueDeckA7Release,
-				TraktorAdapter.deleteHotcueDeckA7,
-				TraktorAdapter.hotcueTypeDeckA7);
-		deck.setHotcue8Message(TraktorAdapter.selectSetHotcueDeckA8Press,
-				TraktorAdapter.selectSetHotcueDeckA8Release,
-				TraktorAdapter.deleteHotcueDeckA8,
-				TraktorAdapter.hotcueTypeDeckA8);
+		deck.setPlayMessage(playDeckA, pauseDeckA, playReturnDeckA);
+		deck.setCueMessage(cueDeckAPress, cueDeckARelease);
+		deck.setSyncMessage(syncOnDeckA, phaseSyncDeckA, syncOnReturnDeckA);
+		deck.setTempoMasterMessage(tempoMasterDeckA, tempoMasterDeckAReturn);
+		deck.setMoveModeMessage(moveModeDeckA, moveModeDeckAReturn);
+		deck.setMoveSizeBackwardMessage(moveSizeDeckABackwardPress,	moveSizeDeckABackwardRelease, moveSizeDeckAReturn);
+		deck.setMoveBackwardMessage(moveDeckABackwardPress,	moveDeckABackwardRelease);
+		deck.setMoveSizeForwardMessage(moveSizeDeckAForwardPress, moveSizeDeckAForwardRelease);
+		deck.setMoveForwardMessage(moveDeckAForwardPress, moveDeckAForwardRelease);
+		deck.setLoopActiveMessage(loopActiveDeckA, loopActiveReturnDeckA);
+//		deck.setLoopInMessage(loopInDeckA);
+//		deck.setLoopOutMessage(loopOutDeckA);
+		deck.setLoopSizeIncMessage(loopSizeIncDeckAPress, loopSizeIncDeckARelease, loopSizeReturnDeckA);
+		deck.setLoopSizeDecMessage(loopSizeDecDeckAPress, loopSizeDecDeckARelease);
+		deck.setLoopMoveIncMessage(loopMoveIncDeckA);
+		deck.setLoopMoveDecMessage(loopMoveDecDeckA);
+		deck.setLoopInMoveIncMessage(loopInMoveIncDeckA);
+		deck.setLoopInMoveDecMessage(loopInMoveDecDeckA);
+		deck.setLoopOutMoveIncMessage(loopOutMoveIncDeckA);
+		deck.setLoopOutMoveDecMessage(loopOutMoveDecDeckA);
+		deck.setLoopSizeSelectSetMessage(loopSizeSelectSetf32DeckA, 
+				loopSizeSelectSetf16DeckA, 
+				loopSizeSelectSetf8DeckA, 
+				loopSizeSelectSetf4DeckA, 
+				loopSizeSelectSetf2DeckA, 
+				loopSizeSelectSeti32DeckA, 
+				loopSizeSelectSeti16DeckA, 
+				loopSizeSelectSeti8DeckA, 
+				loopSizeSelectSeti4DeckA, 
+				loopSizeSelectSeti2DeckA, 
+				loopSizeSelectSeti1DeckA);
+		deck.setLoopSizeSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckA, 
+				loopSizeSelectSetBackwardf16DeckA, 
+				loopSizeSelectSetBackwardf8DeckA, 
+				loopSizeSelectSetBackwardf4DeckA, 
+				loopSizeSelectSetBackwardf2DeckA, 
+				loopSizeSelectSetBackwardi32DeckA, 
+				loopSizeSelectSetBackwardi16DeckA, 
+				loopSizeSelectSetBackwardi8DeckA, 
+				loopSizeSelectSetBackwardi4DeckA, 
+				loopSizeSelectSetBackwardi2DeckA, 
+				loopSizeSelectSetBackwardi1DeckA);
+		
+		deck.setMoveModeBeatJumpMessage(moveModeBeatJumpDeckA);
+		deck.setMoveModeLoopMessage(moveModeLoopDeckA);
+		deck.setMoveModeLoopInMessage(moveModeLoopInDeckA);
+		deck.setMoveModeLoopOutMessage(moveModeLoopOutDeckA);
+		
+		deck.setHotcue1Message(selectSetHotcueDeckA1Press, selectSetHotcueDeckA1Release, deleteHotcueDeckA1, hotcueTypeDeckA1);
+		deck.setHotcue2Message(selectSetHotcueDeckA2Press, selectSetHotcueDeckA2Release, deleteHotcueDeckA2, hotcueTypeDeckA2);
+		deck.setHotcue3Message(selectSetHotcueDeckA3Press, selectSetHotcueDeckA3Release, deleteHotcueDeckA3, hotcueTypeDeckA3);
+		deck.setHotcue4Message(selectSetHotcueDeckA4Press, selectSetHotcueDeckA4Release, deleteHotcueDeckA4, hotcueTypeDeckA4);
+		deck.setHotcue5Message(selectSetHotcueDeckA5Press, selectSetHotcueDeckA5Release, deleteHotcueDeckA5, hotcueTypeDeckA5);
+		deck.setHotcue6Message(selectSetHotcueDeckA6Press, selectSetHotcueDeckA6Release, deleteHotcueDeckA6, hotcueTypeDeckA6);
+		deck.setHotcue7Message(selectSetHotcueDeckA7Press, selectSetHotcueDeckA7Release, deleteHotcueDeckA7, hotcueTypeDeckA7);
+		deck.setHotcue8Message(selectSetHotcueDeckA8Press, selectSetHotcueDeckA8Release, deleteHotcueDeckA8, hotcueTypeDeckA8);
 
-		deck.setJogTurnCoarseBackwardMessage(TraktorAdapter.jogTurnDeckACoarseBackward);
-		deck.setJogTurnFineBackwardMessage(TraktorAdapter.jogTurnDeckAFineBackward);
-		deck.setJogTurnFineForwardMessage(TraktorAdapter.jogTurnDeckAFineForward);
-		deck.setJogTurnCoarseForwardMessage(TraktorAdapter.jogTurnDeckACoarseForward);
+		deck.setJogTurnCoarseBackwardMessage(jogTurnDeckACoarseBackward);
+		deck.setJogTurnFineBackwardMessage(jogTurnDeckAFineBackward);
+		deck.setJogTurnFineForwardMessage(jogTurnDeckAFineForward);
+		deck.setJogTurnCoarseForwardMessage(jogTurnDeckACoarseForward);
 
 	}
 	
 	private static void initTrackDeckBMessages(TrackDeck deck) {
-		deck.setPlayMessage(TraktorAdapter.playDeckB,
-				TraktorAdapter.pauseDeckB, TraktorAdapter.playReturnDeckB);
-		deck.setCueMessage(TraktorAdapter.cueDeckBPress,
-				TraktorAdapter.cueDeckBRelease);
-		deck.setSyncMessage(TraktorAdapter.syncOnDeckB,
-				TraktorAdapter.phaseSyncDeckB, TraktorAdapter.syncOnReturnDeckB);
-		deck.setTempoMasterMessage(TraktorAdapter.tempoMasterDeckB,
-				TraktorAdapter.tempoMasterDeckBReturn);
-		deck.setMoveModeMessage(TraktorAdapter.moveModeDeckB, TraktorAdapter.moveModeDeckBReturn);
-		deck.setMoveSizeBackwardMessage(
-				TraktorAdapter.moveSizeDeckBBackwardPress,
-				TraktorAdapter.moveSizeDeckBBackwardRelease,
-				TraktorAdapter.moveSizeDeckBReturn);
-		deck.setMoveBackwardMessage(
-				TraktorAdapter.moveDeckBBackwardPress,
-				TraktorAdapter.moveDeckBBackwardRelease);
-		deck.setMoveSizeForwardMessage(
-				TraktorAdapter.moveSizeDeckBForwardPress,
-				TraktorAdapter.moveSizeDeckBForwardRelease);
-		deck.setMoveForwardMessage(
-				TraktorAdapter.moveDeckBForwardPress,
-				TraktorAdapter.moveDeckBForwardRelease);
-		deck.setLoopActiveMessage(TraktorAdapter.loopActiveDeckB, TraktorAdapter.loopActiveReturnDeckB);
-		deck.setLoopInMessage(TraktorAdapter.loopInDeckB);
-		deck.setLoopOutMessage(TraktorAdapter.loopOutDeckB);
-		deck.setLoopSizeIncMessage(TraktorAdapter.loopSizeIncDeckBPress, TraktorAdapter.loopSizeIncDeckBRelease, TraktorAdapter.loopSizeReturnDeckB);
-		deck.setLoopSizeDecMessage(TraktorAdapter.loopSizeDecDeckBPress, TraktorAdapter.loopSizeDecDeckBRelease);
-		deck.setHotcue1Message(TraktorAdapter.selectSetHotcueDeckB1Press,
-				TraktorAdapter.selectSetHotcueDeckB1Release,
-				TraktorAdapter.deleteHotcueDeckB1,
-				TraktorAdapter.hotcueTypeDeckB1);
-		deck.setHotcue2Message(TraktorAdapter.selectSetHotcueDeckB2Press,
-				TraktorAdapter.selectSetHotcueDeckB2Release,
-				TraktorAdapter.deleteHotcueDeckB2,
-				TraktorAdapter.hotcueTypeDeckB2);
-		deck.setHotcue3Message(TraktorAdapter.selectSetHotcueDeckB3Press,
-				TraktorAdapter.selectSetHotcueDeckB3Release,
-				TraktorAdapter.deleteHotcueDeckB3,
-				TraktorAdapter.hotcueTypeDeckB3);
-		deck.setHotcue4Message(TraktorAdapter.selectSetHotcueDeckB4Press,
-				TraktorAdapter.selectSetHotcueDeckB4Release,
-				TraktorAdapter.deleteHotcueDeckB4,
-				TraktorAdapter.hotcueTypeDeckB4);
-		deck.setHotcue5Message(TraktorAdapter.selectSetHotcueDeckB5Press,
-				TraktorAdapter.selectSetHotcueDeckB5Release,
-				TraktorAdapter.deleteHotcueDeckB5,
-				TraktorAdapter.hotcueTypeDeckB5);
-		deck.setHotcue6Message(TraktorAdapter.selectSetHotcueDeckB6Press,
-				TraktorAdapter.selectSetHotcueDeckB6Release,
-				TraktorAdapter.deleteHotcueDeckB6,
-				TraktorAdapter.hotcueTypeDeckB6);
-		deck.setHotcue7Message(TraktorAdapter.selectSetHotcueDeckB7Press,
-				TraktorAdapter.selectSetHotcueDeckB7Release,
-				TraktorAdapter.deleteHotcueDeckB7,
-				TraktorAdapter.hotcueTypeDeckB7);
-		deck.setHotcue8Message(TraktorAdapter.selectSetHotcueDeckB8Press,
-				TraktorAdapter.selectSetHotcueDeckB8Release,
-				TraktorAdapter.deleteHotcueDeckB8,
-				TraktorAdapter.hotcueTypeDeckB8);
+		deck.setPlayMessage(playDeckB, pauseDeckB, playReturnDeckB);
+		deck.setCueMessage(cueDeckBPress, cueDeckBRelease);
+		deck.setSyncMessage(syncOnDeckB, phaseSyncDeckB, syncOnReturnDeckB);
+		deck.setTempoMasterMessage(tempoMasterDeckB, tempoMasterDeckBReturn);
+		deck.setMoveModeMessage(moveModeDeckB, moveModeDeckBReturn);
+		deck.setMoveSizeBackwardMessage(moveSizeDeckBBackwardPress,	moveSizeDeckBBackwardRelease, moveSizeDeckBReturn);
+		deck.setMoveBackwardMessage(moveDeckBBackwardPress,	moveDeckBBackwardRelease);
+		deck.setMoveSizeForwardMessage(moveSizeDeckBForwardPress, moveSizeDeckBForwardRelease);
+		deck.setMoveForwardMessage(moveDeckBForwardPress, moveDeckBForwardRelease);
+		deck.setLoopActiveMessage(loopActiveDeckB, loopActiveReturnDeckB);
+//		deck.setLoopInMessage(loopInDeckB);
+//		deck.setLoopOutMessage(loopOutDeckB);
+		deck.setLoopSizeIncMessage(loopSizeIncDeckBPress, loopSizeIncDeckBRelease, loopSizeReturnDeckB);
+		deck.setLoopSizeDecMessage(loopSizeDecDeckBPress, loopSizeDecDeckBRelease);
+		deck.setLoopMoveIncMessage(loopMoveIncDeckB);
+		deck.setLoopMoveDecMessage(loopMoveDecDeckB);
+		deck.setLoopInMoveIncMessage(loopInMoveIncDeckB);
+		deck.setLoopInMoveDecMessage(loopInMoveDecDeckB);
+		deck.setLoopOutMoveIncMessage(loopOutMoveIncDeckB);
+		deck.setLoopOutMoveDecMessage(loopOutMoveDecDeckB);
+		deck.setLoopSizeSelectSetMessage(loopSizeSelectSetf32DeckB, 
+				loopSizeSelectSetf16DeckB, 
+				loopSizeSelectSetf8DeckB, 
+				loopSizeSelectSetf4DeckB, 
+				loopSizeSelectSetf2DeckB, 
+				loopSizeSelectSeti32DeckB, 
+				loopSizeSelectSeti16DeckB, 
+				loopSizeSelectSeti8DeckB, 
+				loopSizeSelectSeti4DeckB, 
+				loopSizeSelectSeti2DeckB, 
+				loopSizeSelectSeti1DeckB);
+		deck.setLoopSizeSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckB, 
+				loopSizeSelectSetBackwardf16DeckB, 
+				loopSizeSelectSetBackwardf8DeckB, 
+				loopSizeSelectSetBackwardf4DeckB, 
+				loopSizeSelectSetBackwardf2DeckB, 
+				loopSizeSelectSetBackwardi32DeckB, 
+				loopSizeSelectSetBackwardi16DeckB, 
+				loopSizeSelectSetBackwardi8DeckB, 
+				loopSizeSelectSetBackwardi4DeckB, 
+				loopSizeSelectSetBackwardi2DeckB, 
+				loopSizeSelectSetBackwardi1DeckB);
+		deck.setHotcue1Message(selectSetHotcueDeckB1Press, selectSetHotcueDeckB1Release, deleteHotcueDeckB1, hotcueTypeDeckB1);
+		deck.setHotcue2Message(selectSetHotcueDeckB2Press, selectSetHotcueDeckB2Release, deleteHotcueDeckB2, hotcueTypeDeckB2);
+		deck.setHotcue3Message(selectSetHotcueDeckB3Press, selectSetHotcueDeckB3Release, deleteHotcueDeckB3, hotcueTypeDeckB3);
+		deck.setHotcue4Message(selectSetHotcueDeckB4Press, selectSetHotcueDeckB4Release, deleteHotcueDeckB4, hotcueTypeDeckB4);
+		deck.setHotcue5Message(selectSetHotcueDeckB5Press, selectSetHotcueDeckB5Release, deleteHotcueDeckB5, hotcueTypeDeckB5);
+		deck.setHotcue6Message(selectSetHotcueDeckB6Press, selectSetHotcueDeckB6Release, deleteHotcueDeckB6, hotcueTypeDeckB6);
+		deck.setHotcue7Message(selectSetHotcueDeckB7Press, selectSetHotcueDeckB7Release, deleteHotcueDeckB7, hotcueTypeDeckB7);
+		deck.setHotcue8Message(selectSetHotcueDeckB8Press, selectSetHotcueDeckB8Release, deleteHotcueDeckB8, hotcueTypeDeckB8);
 
-		deck.setJogTurnCoarseBackwardMessage(TraktorAdapter.jogTurnDeckBCoarseBackward);
-		deck.setJogTurnFineBackwardMessage(TraktorAdapter.jogTurnDeckBFineBackward);
-		deck.setJogTurnFineForwardMessage(TraktorAdapter.jogTurnDeckBFineForward);
-		deck.setJogTurnCoarseForwardMessage(TraktorAdapter.jogTurnDeckBCoarseForward);
+		deck.setJogTurnCoarseBackwardMessage(jogTurnDeckBCoarseBackward);
+		deck.setJogTurnFineBackwardMessage(jogTurnDeckBFineBackward);
+		deck.setJogTurnFineForwardMessage(jogTurnDeckBFineForward);
+		deck.setJogTurnCoarseForwardMessage(jogTurnDeckBCoarseForward);
 
 	}
 	
