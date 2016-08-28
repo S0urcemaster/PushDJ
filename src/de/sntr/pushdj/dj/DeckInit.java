@@ -125,10 +125,10 @@ public class DeckInit {
 		deck.setHotcue6Button(b32);
 		deck.setHotcue7Button(b33);
 		deck.setHotcue8Button(b34);
-		deck.setJogTurnCoarseBackwardButton(b41);
-		deck.setJogTurnFineBackwardButton(b42);
-		deck.setJogTurnFineForwardButton(b43);
-		deck.setJogTurnCoarseForwardButton(b44);
+//		deck.setJogTurnCoarseBackwardButton(b41);
+//		deck.setJogTurnFineBackwardButton(b42);
+//		deck.setJogTurnFineForwardButton(b43);
+//		deck.setJogTurnCoarseForwardButton(b44);
 		deck.setMoveModeButton(PushAdapter.fixedLength);
 		deck.setMoveSizeBackwardButton(b51);
 		deck.setMoveSizeForwardButton(b52);

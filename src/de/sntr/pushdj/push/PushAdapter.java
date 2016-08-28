@@ -148,6 +148,8 @@ public class PushAdapter {
 		} catch (InvalidMidiDataException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+System.out.println("Button not used");
 		}
 	}
 	

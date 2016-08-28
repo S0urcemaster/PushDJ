@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.2  (Win32)">
+	<META NAME="AUTHOR" CONTENT="Sebastian Teister">
+	<META NAME="CREATED" CONTENT="20160827;3580723">
+	<META NAME="CHANGEDBY" CONTENT="Sebastian Teister">
+	<META NAME="CHANGED" CONTENT="20160827;7141961">
+	<STYLE TYPE="text/css">
+	<!--
+		H1.western { font-family: "Arial", sans-serif }
+		P.western { font-family: "Arial", sans-serif; font-size: 10pt }
+		H2.western { font-family: "Arial", sans-serif }
+		H2.cjk { font-family: "SimSun" }
+		H2.ctl { font-family: "Arial" }
+		H3.western { font-family: "Arial", sans-serif }
+		H3.cjk { font-family: "SimSun" }
+		H3.ctl { font-family: "Arial" }
+		H4.western { font-family: "Arial", sans-serif }
+		H4.cjk { font-family: "SimSun" }
+		H4.ctl { font-family: "Arial" }
+		H5.western { font-family: "Arial", sans-serif }
+		H5.cjk { font-family: "SimSun" }
+		H5.ctl { font-family: "Arial" }
+		PRE { margin-bottom: 0.4cm }
+		PRE.cjk { font-family: "NSimSun", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="de-DE" DIR="LTR">
+<H1 CLASS="western">PushDJ Documentation</H1>
+<P CLASS="western">PushDJ is a software MIDI transceiver to connect
+Ableton Push to Native Instruments' Traktor. It aims on improving the
+workflow of mixing music compared to a common DJ controller.
+Originated more from necessity, it can or already has functions and
+capabilities not found on a common DJ controller and tries to push
+Traktor to its limit.</P>
+<H2 CLASS="western">Setup</H2>
+<OL>
+	<LI><P CLASS="western">Start Traktor and import PushDJ.tsi. Close
+	Traktor again.</P>
+	<LI><P CLASS="western">Start PushDJ.jar. Push's display and buttons
+	change.</P>
+	<LI><P CLASS="western">Start Traktor. Push's display changes again.</P>
+	<LI><P CLASS="western">Load a track into A and push the red button
+	on the bottom left to play the track.</P>
+</OL>
+<H3 CLASS="western">Troubleshooting</H3>
+<P CLASS="western">Connect Ableton Push to your PC and start
+PushDJ.jar, if your windows recognizes executable jar files or
+start.bat if not. PushdJ.jar has the cleaner start as it doesn't open
+a console/cmd window. The additional console windows will display
+errors. Use it if you encounter problems.</P>
+<P CLASS="western">The graphical user interface is unused at the
+moment. Any function of the buttons is not intended and should not be
+used.</P>
+<P CLASS="western">After the PushDJ window pops up, the Push device's
+buttons should change color and the display its text. <B>The push
+buttons and knobs are not working as long as Traktor is not running.</B>
+When starting Traktor, Push's display will change again according to
+the MIDI outs set in Traktor's controller manager.</P>
+<P CLASS="western">Locate PushDJ.tsi in PushDJ's directory and import
+it in Traktor's controller manager:</P>
+<PRE CLASS="western">Add &rarr; Import TSI &rarr; Import other</PRE><P CLASS="western">
+At the moment, Traktor has problems detecting the virtual MIDI device
+set up by PushDJ when Traktor is running. Restart Traktor to make it
+detect the PushDJ device. In controller manager there should be a
+device called</P>
+<PRE CLASS="western">Generic MIDI (PushDJ)</PRE><P CLASS="western">
+If you select it, the IN and OUT port should display</P>
+<PRE CLASS="western">PushDJ</PRE><P CLASS="western">
+There were situations where Push was unresponsible even the setup was
+correct, then it helped to turn Push off and on again.</P>
+<P CLASS="western">If you still have problems, contact me on any of
+my PushDJ videos on Youtube: <A HREF="https://www.youtube.com/channel/UCVTUYV3g5TsByOTehro4oNg">Sebastian
+Teister</A></P>
+<H2 CLASS="western">Controlling Traktor</H2>
+<P CLASS="western"><I>PushDJ is in alpha state and functions will be
+added in the future.</I></P>
+<H3 CLASS="western">Overview</H3>
+<P CLASS="western"><A HREF="images/push traktor map.jpg"><IMG SRC="images/push%20traktor%20map.jpg" NAME="Grafik1" ALIGN=LEFT WIDTH=1123 HEIGHT=794 BORDER=0><BR CLEAR=LEFT></A>PushDJ
+is planned to controlling all 4 Traktor decks as Track, Remix and
+Stem decks. In it's current early state only the first 3 decks and
+only the track deck type is implemented. As to Push's nature, any
+function of Traktor that is best used with faders like volume is
+supposed to be used with a different controller. Myself, i'm using a
+Vestax VCM-600 controller which is usually used for production like
+Ableton.</P>
+<P CLASS="western"><B>Volume, EQs and filter knobs and faders are not
+implemented in PushDJ and are not planned to be. For mixing music it
+is stringently required to use another controller together with
+PushDJ.</B></P>
+<P CLASS="western" STYLE="font-weight: normal">For the effects
+section of Traktor, i consider the advantages of implementing it on
+Push but as it is now, the effects are easily mapped on my vestax
+controller and I regard it &bdquo;ok&ldquo; for use in my mixes.</P>
+<H3 CLASS="western">Functions that will most likely not change</H3>
+<P CLASS="western">The biggest advantage of PushDJ compared to a
+common DJ controller is the opened up MOVE and CUE section of
+Traktor. While there are often only 4 cue buttons per deck and the
+other 4 are only accessible through a shift button as well as the
+MOVE section is completely unpresent or only accessible through shift
+buttons as well, Ableton Push has a lot of button to map these
+functions to.</P>
+<H4 CLASS="western">2- Decks view</H4>
+<P CLASS="western">The Push's button matrix is split in two in a left
+and right side which will display the functions for a Traktor deck.
+The only possible layout for a deck at the moment is a track deck.
+Each of the sections of a track deck on Push will be now explained:</P>
+<H5 CLASS="western">Start/Stop, Cue, Sync, Master</H5>
+<P CLASS="western">Simply accords to the Traktor functions and common
+DJ controllers. The Sync button just taps the phase to zero. To
+permanently turn on/off Sync use <B>PushDJ's Shift button</B> which
+is the Play button on push.</P>
+<H5 CLASS="western">8 Cue points</H5>
+<P CLASS="western">This is the common use of cue points. Pressing a
+button will jump to the existant cue point or create a new one. To
+delete a cue point, use <B>PushDJ's Delete-Shift button</B><SPAN STYLE="font-weight: normal">,
+which is the Record button on Push.</SPAN></P>
+<H5 CLASS="western">4 Jog Turn buttons</H5>
+<P CLASS="western">You are not required to use a common DJ controller
+together with PushDJ. It is intended to have only another controller
+for the volume fade and EQ section. So the Jog Turn function will be
+missing if you don't want to mix in sync mode and for positioning
+off-beat. So, the 2 middle buttons are for fine jog and the outer
+buttons for coarse jog movement.</P>
+<H5 CLASS="western">BeatJump and Cue Loops</H5>
+<P CLASS="western">You can set the BeatJump size, of the loop and its
+IN and OUT points directly wtih Push's &bdquo;resolution&ldquo;
+buttons right beside the button matrix. The size applies to any
+movement and any deck. The ability in Traktor to set the move size
+for any deck and loop and BeatJump separately is being considered
+oversized and complicated.</P>
+<P CLASS="western">There are 2 move buttons for left and right
+direction each for BeatJump, Loop in its whole, Loop In and Loop Out.
+<B>The Loop In and Loop Out buttons are not present</B> instead there
+are 2 buttons for setting and activation a loop:</P>
+<PRE CLASS="western">Loop Size Select + Set
+Backward Loop Size Select + Set</PRE><P CLASS="western">
+Loop Size Select + Set is the</P>
+<P CLASS="western">If you push these buttons a loop of the adjusted
+size is created and activated. The intention of the rework is, to
+make it easier to mix songs that are not well known. &bdquo;(Backward)
+Loop Size Select + Set&ldquo; is a feature only present as MIDI
+mapping in Traktor's controller manager and not on the Traktor
+frontend, but i find working with loops much easier with them than
+with the common</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+<P CLASS="western"><BR><BR>
+</P>
+</BODY>
+</HTML>
