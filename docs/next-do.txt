@@ -1,0 +1,14 @@
+- ? Loop per 1,2,4,8,16,32, (1/2,1/4,1/8,1/16,1/32)
+- ? Phase über Touch-Feld und Track Selektor (wie Volume) vielleicht zu langsam?
+- Auto-Select von Track Focus bei Load ?
+- Play-Reihe verdoppeln (Flux-Mode, Sync Lock, ...)
+- Loops
+  - Set/BSet Mode-Toggle
+  - ...
+- Sync Start blinkt im Beat
+- ? EQ auf Push?
+- ? LPF/HPF Bandwith?
+- Buttons unter den Encodern legen Eigenschaft fest: Volume, EQ, Filter, Key
+- Display/Funktionsbereiche umschalten mit 2 oberen Tasten rechts neben Encoder Function Up/Down 
+- !Tempo Sync
+- ? Selten benutzte Funktionen auf Display legen? Z.B. Gain toggle, Reset Zoom
