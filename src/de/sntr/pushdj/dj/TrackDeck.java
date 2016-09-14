@@ -16,10 +16,7 @@ import de.sntr.pushdj.traktor.MoveMode;
 import de.sntr.pushdj.traktor.MoveSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
-public class TrackDeck extends Deck {
-	
-	static final int jogFineRepeatSpeed = 100;
-	static final int jogCoarseRepeatSpeed = 200;
+public final class TrackDeck extends Deck {
 	
 	static class Colors {
 		static final int playOn = MatrixButton.GREEN_BRIGHT;
@@ -68,110 +65,7 @@ public class TrackDeck extends Deck {
 		Colors.hotcueColors[HotcueType.Loop.ordinal()] = MatrixButton.GREEN_MEDIUM;
 	}
 	
-	boolean active = false;
-	int displayColumn = -1;
 
-	Button playControl;
-	TraktorMessage playMessage;
-	TraktorMessage playReturnMessage;
-	TraktorMessage pauseMessage;
-	
-	Button cueControl;
-	TraktorMessage cuePressedMessage;
-	TraktorMessage cueReleasedMessage;
-
-	Button moveModeControl;
-	TraktorMessage moveModeMessage;
-
-	TraktorMessage moveModeReturnMessage;
-	TraktorMessage moveSizeReturnMessage;
-	TraktorMessage moveReturnMessage;
-
-	Button moveSizeBackwardControl;
-	TraktorMessage moveSizeBackwardPressMessage;
-	TraktorMessage moveSizeBackwardReleaseMessage;
-	
-	Button moveSizeForwardControl;
-	TraktorMessage moveSizeForwardPressMessage;
-	TraktorMessage moveSizeForwardReleaseMessage;
-	
-	Button moveBackwardControl;
-	TraktorMessage moveBackwardPressMessage;
-	TraktorMessage moveBackwardReleaseMessage;
-	
-	Button moveForwardControl;
-	TraktorMessage moveForwardPressMessage;
-	TraktorMessage moveForwardReleaseMessage;
-	
-	Button loopActiveControl;
-	TraktorMessage loopActiveMessage;
-	TraktorMessage loopActiveReturnMessage;
-	
-	Button loopInControl;
-	TraktorMessage loopInPressMessage;
-	
-	Button loopOutControl;
-	TraktorMessage loopOutPressMessage;
-	
-	Button loopSizeIncControl;
-	TraktorMessage loopSizeIncPressMessage;
-	TraktorMessage loopSizeIncReleaseMessage;
-	TraktorMessage loopSizeReturnMessage;
-	
-	Button loopSizeDecControl;
-	TraktorMessage loopSizeDecPressMessage;
-	TraktorMessage loopSizeDecReleaseMessage;
-	
-	Button loopSizeSelectSetControl;
-	TraktorMessage loopSizeSelectSetf32Message;
-	TraktorMessage loopSizeSelectSetf16Message;
-	TraktorMessage loopSizeSelectSetf8Message;
-	TraktorMessage loopSizeSelectSetf4Message;
-	TraktorMessage loopSizeSelectSetf2Message;
-	TraktorMessage loopSizeSelectSeti1Message;
-	TraktorMessage loopSizeSelectSeti2Message;
-	TraktorMessage loopSizeSelectSeti4Message;
-	TraktorMessage loopSizeSelectSeti8Message;
-	TraktorMessage loopSizeSelectSeti16Message;
-	TraktorMessage loopSizeSelectSeti32Message;
-	
-	Button loopSizeSelectSetBackwardControl;
-	TraktorMessage loopSizeSelectSetBackwardf32Message;
-	TraktorMessage loopSizeSelectSetBackwardf16Message;
-	TraktorMessage loopSizeSelectSetBackwardf8Message;
-	TraktorMessage loopSizeSelectSetBackwardf4Message;
-	TraktorMessage loopSizeSelectSetBackwardf2Message;
-	TraktorMessage loopSizeSelectSetBackwardi1Message;
-	TraktorMessage loopSizeSelectSetBackwardi2Message;
-	TraktorMessage loopSizeSelectSetBackwardi4Message;
-	TraktorMessage loopSizeSelectSetBackwardi8Message;
-	TraktorMessage loopSizeSelectSetBackwardi16Message;
-	TraktorMessage loopSizeSelectSetBackwardi32Message;
-
-	Button loopMoveIncControl;
-	TraktorMessage loopMoveIncMessage;
-	
-	Button loopMoveDecControl;
-	TraktorMessage loopMoveDecMessage;
-	
-	Button loopInMoveIncControl;
-	TraktorMessage loopInMoveIncMessage;
-
-	Button loopInMoveDecControl;
-	TraktorMessage loopInMoveDecMessage;
-
-	Button loopOutMoveIncControl;
-	TraktorMessage loopOutMoveIncMessage;
-
-	Button loopOutMoveDecControl;
-	TraktorMessage loopOutMoveDecMessage;
-
-	//internal, no button
-	TraktorMessage moveModeBeatJumpMessage;
-	TraktorMessage moveModeLoopMessage;
-	TraktorMessage moveModeLoopInMessage;
-	TraktorMessage moveModeLoopOutMessage;
-	
 	Button hotcue1Control;
 	TraktorMessage hotcue1PressedMessage;
 	TraktorMessage hotcue1ReleasedMessage;
@@ -229,267 +123,8 @@ public class TrackDeck extends Deck {
 	HotcueType hotcue7Type = HotcueType.None;
 	HotcueType hotcue8Type = HotcueType.None;
 	
-	Button jogTurnFineForwardControl;
-	Button jogTurnFineBackwardControl;
-	Button jogTurnCoarseForwardControl;
-	Button jogTurnCoarseBackwardControl;
-	TraktorMessage jogTurnFineForwardMessage;
-	TraktorMessage jogTurnFineBackwardMessage;
-	TraktorMessage jogTurnCoarseForwardMessage;
-	TraktorMessage jogTurnCoarseBackwardMessage;
-	
-	Button syncControl;
-	TraktorMessage phaseSyncMessage;
-	TraktorMessage syncOnMessage;
-	TraktorMessage syncOnReturnMessage;
-	
-	Button tempoMasterControl;
-	TraktorMessage tempoMasterMessage;
-	TraktorMessage tempoMasterReturnMessage;
-	
-	boolean playing = false;
-	boolean sync = false;
-	boolean tempoMaster = false;
-	boolean loopActive = false;
-	
-	DJController djc;
-	
-	Timer jogTurnFineForwardTimer;
-	Timer jogTurnFineBackwardTimer;
-	Timer jogTurnCoarseForwardTimer;
-	Timer jogTurnCoarseBackwardTimer;
-	
-	MatrixBlink loopActiveBlink;
-	
-	LoopSize loopSize = null;
-	
 	public TrackDeck(DJController djc) {
-		this.djc = djc;
-	}
-	
-	void playPause() {
-		if(playing) {
-			send(pauseMessage);
-		}
-		else {
-			send(playMessage);
-		}
-	}
-	
-	/**
-	 * In Traktor cue is mapped as "hold". The released message is mapped as data2 = 0
-	 * but has no explicit mapping in Traktor.
-	 */
-	void cuePressed() {
-		send(cuePressedMessage);
-		if(playing) {
-			playing = false;
-			setColor(cueControl, Colors.cueOff);
-			setColor(playControl, Colors.playOff);
-		} else {
-			setColor(cueControl, Colors.cueOn);
-			setColor(playControl, Colors.playOn);
-		}
-	}
-	
-	void cueReleased() {
-		send(cueReleasedMessage);
-		if (!playing) {
-			setColor(playControl, Colors.playOff);
-		}
-		setColor(cueControl, Colors.cueOff);
-	}
-	
-	void moveModePressed() {
-		send(moveModeMessage);
-	}
-	
-	void moveSizeForwardPressed() {
-		send(moveSizeForwardPressMessage);
-		setColor(moveSizeForwardControl, Colors.moveSizeOn);
-	}
-	
-	void moveSizeForwardReleased() {
-		send(moveSizeForwardReleaseMessage);
-		setColor(moveSizeForwardControl, Colors.moveSizeOff);
-	}
-	
-	void moveSizeBackwardPressed() {
-		send(moveSizeBackwardPressMessage);
-		setColor(moveSizeBackwardControl, Colors.moveSizeOn);
-	}
-	
-	void moveSizeBackwardReleased() {
-		send(moveSizeBackwardReleaseMessage);
-		setColor(moveSizeBackwardControl, Colors.moveSizeOff);
-	}
-	
-	void moveForwardPressed() {
-		send(moveForwardPressMessage);
-		setColor(moveForwardControl, Colors.moveOn);
-	}
-	
-	void moveForwardReleased() {
-		send(moveForwardReleaseMessage);
-		setColor(moveForwardControl, Colors.moveOff);
-	}
-	
-	void moveBackwardPressed() {
-		send(moveBackwardPressMessage);
-		setColor(moveBackwardControl, Colors.moveOn);
-	}
-	
-	void moveBackwardReleased() {
-		send(moveBackwardReleaseMessage);
-		setColor(moveBackwardControl, Colors.moveOff);
-	}
-
-	void loopActivated() {
-		send(loopActiveMessage);
-	}
-
-	void loopInPressed() {
-		send(loopInPressMessage);
-		setColor(loopInControl, Colors.loopInOutOn);
-	}
-	
-	void loopInReleased() {
-		setColor(loopInControl, Colors.loopInOutOff);
-	}
-	
-	void loopOutPressed() {
-		send(loopOutPressMessage);
-		setColor(loopOutControl, Colors.loopInOutOn);
-	}
-
-	void loopOutReleased() {
-		setColor(loopOutControl, Colors.loopInOutOff);
-	}
-	
-	void loopSizeIncPressed() {
-		send(loopSizeIncPressMessage);
-		setColor(loopSizeIncControl, Colors.loopSizeOn);
-	}
-	
-	void loopSizeIncReleased() {
-		send(loopSizeIncReleaseMessage);
-		setColor(loopSizeIncControl, Colors.loopSizeOff);
-	}
-	
-	void loopSizeDecPressed() {
-		send(loopSizeDecPressMessage);
-		setColor(loopSizeDecControl, Colors.loopSizeOn);
-	}
-	
-	void loopSizeDecReleased() {
-		send(loopSizeDecReleaseMessage);
-		setColor(loopSizeDecControl, Colors.loopSizeOff);
-	}
-	
-	void loopMoveIncPressed() {
-		send(moveModeLoopMessage);
-		send(loopMoveIncMessage);
-	}
-
-	void loopMoveDecPressed() {
-		send(moveModeLoopMessage);
-		send(loopMoveIncMessage);
-	}
-
-	void loopInMoveIncPressed() {
-		send(loopInMoveIncMessage);
-	}
-
-	void loopInMoveDecPressed() {
-		send(loopInMoveIncMessage);
-	}
-
-	void loopOutMoveIncPressed() {
-		send(loopOutMoveIncMessage);
-	}
-
-	void loopOutMoveDecPressed() {
-		send(loopOutMoveIncMessage);
-	}
-
-	void loopSizeSelectSetPressed() {
-		switch (loopSize) {
-		case f32:
-			send(loopSizeSelectSetf32Message);
-			break;
-		case f16:
-			send(loopSizeSelectSetf16Message);
-			break;
-		case f8:
-			send(loopSizeSelectSetf8Message);
-			break;
-		case f4:
-			send(loopSizeSelectSetf4Message);
-			break;
-		case f2:
-			send(loopSizeSelectSetf2Message);
-			break;
-		case i32:
-			send(loopSizeSelectSeti32Message);
-			break;
-		case i16:
-			send(loopSizeSelectSeti16Message);
-			break;
-		case i8:
-			send(loopSizeSelectSeti8Message);
-			break;
-		case i4:
-			send(loopSizeSelectSeti4Message);
-			break;
-		case i2:
-			send(loopSizeSelectSeti2Message);
-			break;
-		case i1:
-			send(loopSizeSelectSeti1Message);
-			break;
-		default:
-			break;
-		}
-	}
-	
-	void loopSizeSelectSetBackwardPressed() {
-		switch (loopSize) {
-		case f32:
-			send(loopSizeSelectSetBackwardf32Message);
-			break;
-		case f16:
-			send(loopSizeSelectSetBackwardf16Message);
-			break;
-		case f8:
-			send(loopSizeSelectSetBackwardf8Message);
-			break;
-		case f4:
-			send(loopSizeSelectSetBackwardf4Message);
-			break;
-		case f2:
-			send(loopSizeSelectSetBackwardf2Message);
-			break;
-		case i32:
-			send(loopSizeSelectSetBackwardi32Message);
-			break;
-		case i16:
-			send(loopSizeSelectSetBackwardi16Message);
-			break;
-		case i8:
-			send(loopSizeSelectSetBackwardi8Message);
-			break;
-		case i4:
-			send(loopSizeSelectSetBackwardi4Message);
-			break;
-		case i2:
-			send(loopSizeSelectSetBackwardi2Message);
-			break;
-		case i1:
-			send(loopSizeSelectSetBackwardi1Message);
-			break;
-		default:
-			break;
-		}
+		super(djc);
 	}
 
 	void hotcue1Pressed() {
@@ -661,131 +296,12 @@ public class TrackDeck extends Deck {
 		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
 	}
 	
-	void jogTurnFineForwardPressed() {
-		jogTurnFineForwardTimer = new Timer(true);
-		jogTurnFineForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineForwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOn);
-	}
-	
-	void jogTurnFineForwardReleased() {
-		jogTurnFineForwardTimer.cancel();
-		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
-	}
-	
-	void jogTurnFineBackwardPressed() {
-		jogTurnFineBackwardTimer = new Timer(true);
-		jogTurnFineBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnFineBackwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOn);
-	}
-	
-	void jogTurnFineBackwardReleased() {
-		jogTurnFineBackwardTimer.cancel();
-		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
-	}
-	
-	void jogTurnCoarseForwardPressed() {
-		jogTurnCoarseForwardTimer = new Timer(true);
-		jogTurnCoarseForwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseForwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOn);
-	}
-	
-	void jogTurnCoarseForwardReleased() {
-		jogTurnCoarseForwardTimer.cancel();
-		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
-	}
-	
-	void jogTurnCoarseBackwardPressed() {
-		jogTurnCoarseBackwardTimer = new Timer(true);
-		jogTurnCoarseBackwardTimer.scheduleAtFixedRate(new MessageRepeaterTask(jogTurnCoarseBackwardMessage), 0, 1000/jogFineRepeatSpeed);
-		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOn);
-	}
-	
-	void jogTurnCoarseBackwardReleased() {
-		jogTurnCoarseBackwardTimer.cancel();
-		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
-	}
-	
-	void syncPressed() {
-		if(djc.shiftGreenDown) {
-			send(syncOnMessage);
-		}
-		else {
-			send(phaseSyncMessage);
-		}
-	}
-	
-	void tempoMasterPressed() {
-		send(tempoMasterMessage);
-	}
-	
-	
-	/**
-	 * Will be executed if 'active' is true
-	 */
+
 	@Override
 	public void buttonPressed(Button control) {
+		super.buttonPressed(control);
 		if(active) {
-			if(control == playControl) {
-				playPause();
-			}
-			else if(control == cueControl) {
-				cuePressed();
-			}
-			else if(control == moveModeControl) {
-				moveModePressed();
-			}
-			else if(control == moveSizeBackwardControl) {
-				moveSizeBackwardPressed();
-			}
-			else if(control == moveSizeForwardControl) {
-				moveSizeForwardPressed();
-			}
-			else if(control == moveBackwardControl) {
-				moveBackwardPressed();
-			}
-			else if(control == moveForwardControl) {
-				moveForwardPressed();
-			}
-			else if(control == loopActiveControl) {
-				loopActivated();
-			}
-			else if(control == loopInControl) {
-				loopInPressed();
-			}
-			else if(control == loopOutControl) {
-				loopOutPressed();
-			}
-			else if(control == loopSizeIncControl) {
-				loopSizeIncPressed();
-			}
-			else if(control == loopSizeDecControl) {
-				loopSizeDecPressed();
-			}
-			else if(control == loopMoveIncControl) {
-				loopMoveIncPressed();
-			}
-			else if(control == loopMoveDecControl) {
-				loopMoveDecPressed();
-			}
-			else if(control == loopInMoveIncControl) {
-				loopInMoveIncPressed();
-			}
-			else if(control == loopInMoveDecControl) {
-				loopInMoveDecPressed();
-			}
-			else if(control == loopOutMoveIncControl) {
-				loopOutMoveIncPressed();
-			}
-			else if(control == loopOutMoveDecControl) {
-				loopOutMoveDecPressed();
-			}
-			else if(control == loopSizeSelectSetControl) {
-				loopSizeSelectSetPressed();
-			}
-			else if(control == loopSizeSelectSetBackwardControl) {
-				loopSizeSelectSetBackwardPressed();
-			}
-			else if(control == hotcue1Control) {
+			if(control == hotcue1Control) {
 				hotcue1Pressed();
 			}
 			else if(control == hotcue2Control) {
@@ -809,59 +325,14 @@ public class TrackDeck extends Deck {
 			else if(control == hotcue8Control) {
 				hotcue8Pressed();
 			}
-			else if(control == jogTurnFineForwardControl) {
-				jogTurnFineForwardPressed();
-			}
-			else if(control == jogTurnFineBackwardControl) {
-				jogTurnFineBackwardPressed();
-			}
-			else if(control == jogTurnCoarseForwardControl) {
-				jogTurnCoarseForwardPressed();
-			}
-			else if(control == jogTurnCoarseBackwardControl) {
-				jogTurnCoarseBackwardPressed();
-			}
-			else if(control == syncControl) {
-				syncPressed();
-			}
-			else if(control == tempoMasterControl) {
-				tempoMasterPressed();
-			}
-			
 		}
 	}
 
 	@Override
 	public void buttonReleased(Button control) {
+		super.buttonReleased(control);
 		if(active) {
-			if (control == cueControl) {
-				cueReleased();
-			}
-			else if(control == moveSizeBackwardControl) {
-				moveSizeBackwardReleased();
-			}
-			else if(control == moveSizeForwardControl) {
-				moveSizeForwardReleased();
-			}
-			else if(control == moveBackwardControl) {
-				moveBackwardReleased();
-			}
-			else if(control == moveForwardControl) {
-				moveForwardReleased();
-			}
-			else if(control == loopInControl) {
-				loopInReleased();
-			}
-			else if(control == loopOutControl) {
-				loopOutReleased();
-			}
-			else if(control == loopSizeIncControl) {
-				loopSizeIncReleased();
-			}
-			else if(control == loopSizeDecControl) {
-				loopSizeDecReleased();
-			}
-			else if(control == hotcue1Control) {
+			if(control == hotcue1Control) {
 				hotcue1Released();
 			}
 			else if(control == hotcue2Control) {
@@ -884,18 +355,6 @@ public class TrackDeck extends Deck {
 			}
 			else if(control == hotcue8Control) {
 				hotcue8Released();
-			}
-			else if(control == jogTurnFineForwardControl) {
-				jogTurnFineForwardReleased();
-			}
-			else if(control == jogTurnFineBackwardControl) {
-				jogTurnFineBackwardReleased();
-			}
-			else if(control == jogTurnCoarseForwardControl) {
-				jogTurnCoarseForwardReleased();
-			}
-			else if(control == jogTurnCoarseBackwardControl) {
-				jogTurnCoarseBackwardReleased();
 			}
 		}
 	}
@@ -967,15 +426,8 @@ public class TrackDeck extends Deck {
 				setColor(tempoMasterControl, Colors.tempoMasterOn);
 			}
 		}
-		else if(message == moveModeReturnMessage) {
-			PushAdapter.display.writeOnLine(0, displayColumn, "Move " +MoveMode.values()[message.data2].getName());
-			PushAdapter.display.update();
-		}
-		else if(message == moveSizeReturnMessage) {
-			PushAdapter.display.writeOnLine(1, displayColumn, "Size " +MoveSize.values()[message.data2].getName());
-			PushAdapter.display.update();
-		}
-		else if(message == loopActiveReturnMessage) {
+		
+		else if(message == loopOnOffReturnMessage) {
 			if(message.data2 == 0) {
 				loopActive = false;
 				if(loopActiveBlink != null) {
@@ -984,14 +436,9 @@ public class TrackDeck extends Deck {
 			}
 			else {
 				loopActive = true;
-				loopActiveBlink = new MatrixBlink(loopActiveControl, Colors.loopActiveOn, Colors.loopActiveOff, 200, 300);
+				loopActiveBlink = new MatrixBlink(loopOnOffControl, Colors.loopActiveOn, Colors.loopActiveOff, 200, 300);
 				loopActiveBlink.start();
 			}
-		}
-		else if(message == loopSizeReturnMessage) {
-			loopSize = LoopSize.values()[message.data2];
-			PushAdapter.display.writeOnLine(2, displayColumn, "Loop " +loopSize.getName());
-			PushAdapter.display.update();
 		}
 	}
 	
@@ -1008,16 +455,9 @@ System.out.println("Deck already active");
 			setColor(playControl, Colors.playOff);
 		}
 		setColor(cueControl, Colors.cueOff);
-		setColor(moveModeControl, Colors.moveMode);
-		setColor(moveSizeBackwardControl, Colors.moveSizeOff);
-		setColor(moveSizeForwardControl, Colors.moveSizeOff);
-		setColor(moveBackwardControl, Colors.moveOff);
-		setColor(moveForwardControl, Colors.moveOff);
-		setColor(loopActiveControl, Colors.loopActiveOff);
-//		setColor(loopInControl, Colors.loopInOutOff);
-//		setColor(loopOutControl, Colors.loopInOutOff);
-		setColor(loopSizeIncControl, Colors.loopSizeOff);
-		setColor(loopSizeDecControl, Colors.loopSizeOff);
+		setColor(beatJumpBackwardControl, Colors.moveOff);
+		setColor(beatJumpForwardControl, Colors.moveOff);
+		setColor(loopOnOffControl, Colors.loopActiveOff);
 		setColor(loopMoveIncControl, Colors.loopMoveOff);
 		setColor(loopMoveDecControl, Colors.loopMoveOff);
 		setColor(loopInMoveIncControl, Colors.loopInMoveOff);
@@ -1081,109 +521,35 @@ System.out.println("Deck already active");
 		
 	}
 
-	public void setMoveModeButton(Button control) {
-		control.addListener(this);
-		moveModeControl = control;		
-	}
-	
-	public void setMoveModeMessage(TraktorMessage pressMessage, TraktorMessage returnMessage) {
-		moveModeMessage = pressMessage;
-		moveModeReturnMessage = returnMessage;
-		moveModeReturnMessage.addListener(this);
-	}
-
-	public void setMoveSizeBackwardButton(Button control) {
-		control.addListener(this);
-		moveSizeBackwardControl = control;		
-	}
-	
-	public void setMoveSizeBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage returnMessage) {
-		moveSizeBackwardPressMessage = pressMessage;
-		moveSizeBackwardReleaseMessage = releaseMessage;
-		moveSizeReturnMessage = returnMessage;
-		moveSizeReturnMessage.addListener(this);
-	}
-	
-	public void setMoveSizeForwardButton(Button control) {
-		control.addListener(this);
-		moveSizeForwardControl = control;		
-	}
-	
-	public void setMoveSizeForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		moveSizeForwardPressMessage = pressMessage;
-		moveSizeForwardReleaseMessage = releaseMessage;
-		//return see Backward
-	}
-
 	public void setMoveBackwardButton(Button control) {
 		control.addListener(this);
-		moveBackwardControl = control;		
+		beatJumpBackwardControl = control;		
 	}
 	
 	public void setMoveBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		moveBackwardPressMessage = pressMessage;
-		moveBackwardReleaseMessage = releaseMessage;
+		beatJumpBackwardPressMessage = pressMessage;
+		beatJumpBackwardReleaseMessage = releaseMessage;
 	}
 
 	public void setMoveForwardButton(Button control) {
 		control.addListener(this);
-		moveForwardControl = control;
+		beatJumpForwardControl = control;
 	}
 
 	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		moveForwardPressMessage = pressMessage;
-		moveForwardReleaseMessage = releaseMessage;
+		beatJumpForwardPressMessage = pressMessage;
+		beatJumpForwardReleaseMessage = releaseMessage;
 	}
 	
 	public void setLoopActiveButton(Button control) {
 		control.addListener(this);
-		loopActiveControl = control;
+		loopOnOffControl = control;
 	}
 	
 	public void setLoopActiveMessage(TraktorMessage message, TraktorMessage returnMessage) {
-		loopActiveMessage = message;
+		loopOnOffMessage = message;
 		returnMessage.addListener(this);
-		loopActiveReturnMessage = returnMessage;
-	}
-	
-	public void setLoopInButton(Button control) {
-		control.addListener(this);
-		loopInControl = control;
-	}
-	
-	public void setLoopInMessage(TraktorMessage message) {
-		loopInPressMessage = message;
-	}
-	
-	public void setLoopOutButton(Button control) {
-		control.addListener(this);
-		loopOutControl = control;
-	}
-	
-	public void setLoopOutMessage(TraktorMessage message) {
-		loopOutPressMessage = message;
-	}
-	
-	public void setLoopSizeIncButton(Button control) {
-		control.addListener(this);
-		loopSizeIncControl = control;
-	}
-	
-	public void setLoopSizeIncMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage, TraktorMessage returnMessage) {
-		loopSizeIncPressMessage = pressMessage;
-		loopSizeIncReleaseMessage = releaseMessage;
-		returnMessage.addListener(this);
-		loopSizeReturnMessage = returnMessage;
-	}
-	
-	public void setLoopSizeDecButton(Button control) {
-		control.addListener(this);
-		loopSizeDecControl = control;
-	}
-	
-	public void setLoopSizeDecMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		loopSizeDecPressMessage = pressMessage;
-		loopSizeDecReleaseMessage = releaseMessage;
+		loopOnOffReturnMessage = returnMessage;
 	}
 
 	public void setLoopMoveIncButton(Button control) {
@@ -1298,22 +664,6 @@ System.out.println("Deck already active");
 		loopSizeSelectSetBackwardi4Message = i4Message;
 		loopSizeSelectSetBackwardi2Message = i2Message;
 		loopSizeSelectSetBackwardi1Message = i1Message;
-	}
-			
-	public void setMoveModeBeatJumpMessage(TraktorMessage message) {
-		moveModeBeatJumpMessage = message;
-	}
-	
-	public void setMoveModeLoopMessage(TraktorMessage message) {
-		moveModeLoopMessage = message;
-	}
-	
-	public void setMoveModeLoopInMessage(TraktorMessage message) {
-		moveModeLoopInMessage = message;
-	}
-	
-	public void setMoveModeLoopOutMessage(TraktorMessage message) {
-		moveModeLoopOutMessage = message;
 	}
 	
 	public void setHotcue1Button(Button control) {

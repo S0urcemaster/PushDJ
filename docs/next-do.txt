@@ -12,3 +12,29 @@
 - Display/Funktionsbereiche umschalten mit 2 oberen Tasten rechts neben Encoder Function Up/Down 
 - !Tempo Sync
 - ? Selten benutzte Funktionen auf Display legen? Z.B. Gain toggle, Reset Zoom
+
+Liste:
+
+New Functions:
+
+SyncStart()
+Cup()
+TempoSync()
+Step(enum step)
+LoopMoveForward()
+LoopMoveBackward()
+LoopInMoveForward()
+LoopInMoveBackward()
+LoopOutMoveForward()
+LoopOutMoveBackward()
+LoopSet()
+LoopBSet()
+
+New Messages:
+
+SyncStart()
+Cup()
+
+Internal:
+
+Step()
