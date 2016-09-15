@@ -13,8 +13,8 @@ public abstract class Button extends Control {
 
 	protected List<ButtonListener> listeners = new ArrayList<>();
 	
-	protected Button(int command, int data1) {
-		super(command, data1);
+	protected Button(String name, int command, int data1) {
+		super(name, command, data1);
 	}
 
 	public void addListener(ButtonListener listener) {

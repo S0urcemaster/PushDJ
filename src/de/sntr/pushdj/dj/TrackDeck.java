@@ -3,54 +3,16 @@ package de.sntr.pushdj.dj;
 import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
 
-import java.util.Timer;
 
 import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
-import de.sntr.pushdj.push.PushAdapter;
-import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
-import de.sntr.pushdj.traktor.LoopSize;
-import de.sntr.pushdj.traktor.MoveMode;
-import de.sntr.pushdj.traktor.MoveSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
 public final class TrackDeck extends Deck {
 	
-	static class Colors {
-		static final int playOn = MatrixButton.GREEN_BRIGHT;
-		static final int playOff = MatrixButton.RED_BRIGHT;
-		static final int cueOn = MatrixButton.BLUE2_BRIGHT;
-		static final int cueOff = MatrixButton.BLUE2_MEDIUM;
-		static final int moveMode = TitleButton.BRIGHT_ON;
-		static final int moveOn = MatrixButton.BLUE2_BRIGHT;
-		static final int moveOff = MatrixButton.BLUE2_PALE;
-		static final int moveSizeOn = MatrixButton.BLUE3_BRIGHT;
-		static final int moveSizeOff = MatrixButton.BLUE3_PALE;
-		static final int loopActiveOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int loopActiveOff = MatrixButton.BLUEGREEN_DARK;
-		static final int loopSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int loopSizeOff = MatrixButton.BLUEGREEN_MEDIUM;
-		static final int loopInOutOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int loopInOutOff = MatrixButton.BLUEGREEN_PALE;
-		static final int loopInMoveOff = MatrixButton.VIOLET_MEDIUM1;
-		static final int loopInMoveOn = MatrixButton.VIOLET_BRIGHT;
-		static final int loopOutMoveOff = MatrixButton.VIOLET_MEDIUM1;
-		static final int loopOutMoveOn = MatrixButton.VIOLET_BRIGHT;
-		static final int loopMoveOff = MatrixButton.VIOLET_DARK2;
-		static final int loopMoveOn = MatrixButton.VIOLET_MEDIUM2;
-		static final int loopSizeSelectSetOff = MatrixButton.GREEN_DARK;
-		static final int loopSizeSelectSetBackwardOff = MatrixButton.GREEN_DARK1;
-		static final int jogTurnFineOn = MatrixButton.ORANGE1_BRIGHT;
-		static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
-		static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
-		static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
-		static final int syncOn = MatrixButton.YELLOW2;
-		static final int syncOff = MatrixButton.YELLOW_MEDIUM;
-		static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
-		static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
-	
+	static class Colors extends Deck.Colors {
 		static final int[] hotcueColors = new int[7];
 		static final int hotcuePlay = MatrixButton.YELLOW2;
 	}
@@ -360,7 +322,7 @@ public final class TrackDeck extends Deck {
 	}
 
 	@Override
-	public void outSent(TraktorMessage message) {
+	public void traktorMessageSent(TraktorMessage message) {
 		if(!active) {
 			return;
 		}
@@ -406,14 +368,14 @@ public final class TrackDeck extends Deck {
 				setColor(playControl, Colors.playOn);
 			}
 		}
-		else if(message == syncOnReturnMessage) {
+		else if(message == syncOnOffReturnMessage) {
 			if(message.data2 == 0) {
 				sync = false;
-				setColor(syncControl, Colors.syncOff);
+				setColor(phaseSyncControl, Colors.syncOff);
 			}
 			else {
 				sync = true;
-				setColor(syncControl, Colors.syncOn);
+				setColor(phaseSyncControl, Colors.syncOn);
 			}
 		}
 		else if(message == tempoMasterReturnMessage) {
@@ -464,8 +426,8 @@ System.out.println("Deck already active");
 		setColor(loopInMoveDecControl, Colors.loopInMoveOff);
 		setColor(loopOutMoveIncControl, Colors.loopOutMoveOff);
 		setColor(loopOutMoveDecControl, Colors.loopOutMoveOff);
-		setColor(loopSizeSelectSetControl, Colors.loopSizeSelectSetOff);
-		setColor(loopSizeSelectSetBackwardControl, Colors.loopSizeSelectSetBackwardOff);
+		setColor(loopSelectSetControl, Colors.loopSelectSetOff);
+		setColor(loopSelectSetBackwardControl, Colors.loopSelectSetBackwardOff);
 		setColor(loopMoveDecControl, Colors.loopMoveOff);
 		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
@@ -480,10 +442,10 @@ System.out.println("Deck already active");
 		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
 		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
 		if(sync) {
-			setColor(syncControl, Colors.syncOn);
+			setColor(phaseSyncControl, Colors.syncOn);
 		}
 		else {
-			setColor(syncControl, Colors.syncOff);
+			setColor(phaseSyncControl, Colors.syncOff);
 		}
 		if(tempoMaster) {
 			setColor(tempoMasterControl, Colors.tempoMasterOn);
@@ -498,174 +460,9 @@ System.out.println("Deck already active");
 		active = false;
 	}
 
-	public void setPlayButton(Button control) {
-		control.addListener(this);
-		playControl = control;
-		
-	}
-	public void setPlayMessage(TraktorMessage playMessage, TraktorMessage pauseMessage, TraktorMessage playReturn) {
-		this.playMessage = playMessage;
-		this.pauseMessage = pauseMessage;
-		playReturn.addListener(this);
-		playReturnMessage = playReturn;
-		
-	}
-	public void setCueButton(Button control) {
-		control.addListener(this);
-		cueControl = control;
-	}
-
-	public void setCueMessage(TraktorMessage cuePress, TraktorMessage cueRelease) {
-		this.cuePressedMessage = cuePress;
-		this.cueReleasedMessage = cueRelease;
-		
-	}
-
-	public void setMoveBackwardButton(Button control) {
-		control.addListener(this);
-		beatJumpBackwardControl = control;		
-	}
 	
-	public void setMoveBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		beatJumpBackwardPressMessage = pressMessage;
-		beatJumpBackwardReleaseMessage = releaseMessage;
-	}
-
-	public void setMoveForwardButton(Button control) {
-		control.addListener(this);
-		beatJumpForwardControl = control;
-	}
-
-	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
-		beatJumpForwardPressMessage = pressMessage;
-		beatJumpForwardReleaseMessage = releaseMessage;
-	}
-	
-	public void setLoopActiveButton(Button control) {
-		control.addListener(this);
-		loopOnOffControl = control;
-	}
-	
-	public void setLoopActiveMessage(TraktorMessage message, TraktorMessage returnMessage) {
-		loopOnOffMessage = message;
-		returnMessage.addListener(this);
-		loopOnOffReturnMessage = returnMessage;
-	}
-
-	public void setLoopMoveIncButton(Button control) {
-		control.addListener(this);
-		loopMoveIncControl = control;
-	}
-	
-	public void setLoopMoveDecButton(Button control) {
-		control.addListener(this);
-		loopMoveDecControl = control;
-	}
 	
 
-	public void setLoopInMoveIncButton(Button control) {
-		control.addListener(this);
-		loopInMoveIncControl = control;
-	}
-	
-	public void setLoopInMoveDecButton(Button control) {
-		control.addListener(this);
-		loopInMoveDecControl = control;
-	}
-	
-
-	public void setLoopOutMoveIncButton(Button control) {
-		control.addListener(this);
-		loopOutMoveIncControl = control;
-	}
-	
-	public void setLoopOutMoveDecButton(Button control) {
-		control.addListener(this);
-		loopOutMoveDecControl = control;
-	}
-	
-	public void setLoopMoveIncMessage(TraktorMessage message) {
-		loopMoveIncMessage = message;
-	}
-	
-	public void setLoopMoveDecMessage(TraktorMessage message) {
-		loopMoveDecMessage = message;
-	}
-	
-	public void setLoopInMoveIncMessage(TraktorMessage message) {
-		loopInMoveIncMessage = message;
-	}
-	
-	public void setLoopInMoveDecMessage(TraktorMessage message) {
-		loopInMoveDecMessage = message;
-	}
-	
-	public void setLoopOutMoveIncMessage(TraktorMessage message) {
-		loopOutMoveIncMessage = message;
-	}
-	
-	public void setLoopOutMoveDecMessage(TraktorMessage message) {
-		loopOutMoveDecMessage = message;
-	}
-	
-	public void setLoopSizeSelectSetButton(Button control) {
-		loopSizeSelectSetControl = control;
-	}
-	
-	public void setLoopSizeSelectSetBackwardButton(Button control) {
-		loopSizeSelectSetBackwardControl = control;
-	}
-
-	public void setLoopSizeSelectSetMessage(TraktorMessage f32Message, 
-			TraktorMessage f16Message,
-			TraktorMessage f8Message,
-			TraktorMessage f4Message,
-			TraktorMessage f2Message,
-			TraktorMessage i32Message,
-			TraktorMessage i16Message,
-			TraktorMessage i8Message,
-			TraktorMessage i4Message,
-			TraktorMessage i2Message,
-			TraktorMessage i1Message
-			) {
-		loopSizeSelectSetf32Message = f32Message;
-		loopSizeSelectSetf16Message = f16Message;
-		loopSizeSelectSetf8Message = f8Message;
-		loopSizeSelectSetf4Message = f4Message;
-		loopSizeSelectSetf2Message = f2Message;
-		loopSizeSelectSeti32Message = i32Message;
-		loopSizeSelectSeti16Message = i16Message;
-		loopSizeSelectSeti8Message = i8Message;
-		loopSizeSelectSeti4Message = i4Message;
-		loopSizeSelectSeti2Message = i2Message;
-		loopSizeSelectSeti1Message = i1Message;
-	}
-	
-	public void setLoopSizeSelectSetBackwardMessage(TraktorMessage f32Message, 
-			TraktorMessage f16Message,
-			TraktorMessage f8Message,
-			TraktorMessage f4Message,
-			TraktorMessage f2Message,
-			TraktorMessage i32Message,
-			TraktorMessage i16Message,
-			TraktorMessage i8Message,
-			TraktorMessage i4Message,
-			TraktorMessage i2Message,
-			TraktorMessage i1Message
-			) {
-		loopSizeSelectSetBackwardf32Message = f32Message;
-		loopSizeSelectSetBackwardf16Message = f16Message;
-		loopSizeSelectSetBackwardf8Message = f8Message;
-		loopSizeSelectSetBackwardf4Message = f4Message;
-		loopSizeSelectSetBackwardf2Message = f2Message;
-		loopSizeSelectSetBackwardi32Message = i32Message;
-		loopSizeSelectSetBackwardi16Message = i16Message;
-		loopSizeSelectSetBackwardi8Message = i8Message;
-		loopSizeSelectSetBackwardi4Message = i4Message;
-		loopSizeSelectSetBackwardi2Message = i2Message;
-		loopSizeSelectSetBackwardi1Message = i1Message;
-	}
-	
 	public void setHotcue1Button(Button control) {
 		control.addListener(this);
 		hotcue1Control = control;
@@ -768,65 +565,6 @@ System.out.println("Deck already active");
 		hotcue8DeleteMessage = delete;
 		typeReturn.addListener(this);
 		hotcue8TypeReturnMessage = typeReturn;
-	}
-	
-	public void setJogTurnFineForwardButton(Button control) {
-		control.addListener(this);
-		jogTurnFineForwardControl = control;
-	}
-
-	public void setJogTurnFineForwardMessage(TraktorMessage message) {
-		jogTurnFineForwardMessage = message;
-	}
-
-	public void setJogTurnFineBackwardButton(Button control) {
-		control.addListener(this);
-		jogTurnFineBackwardControl = control;
-	}
-
-	public void setJogTurnFineBackwardMessage(TraktorMessage message) {
-		jogTurnFineBackwardMessage = message;
-	}
-
-	public void setJogTurnCoarseForwardButton(Button control) {
-		control.addListener(this);
-		jogTurnCoarseForwardControl = control;
-	}
-
-	public void setJogTurnCoarseForwardMessage(TraktorMessage message) {
-		jogTurnCoarseForwardMessage = message;
-	}
-
-	public void setJogTurnCoarseBackwardButton(Button control) {
-		control.addListener(this);
-		jogTurnCoarseBackwardControl = control;
-	}
-
-	public void setJogTurnCoarseBackwardMessage(TraktorMessage message) {
-		jogTurnCoarseBackwardMessage = message;
-	}
-	
-	public void setSyncButton(Button control) {
-		control.addListener(this);
-		syncControl = control;
-	}
-	
-	public void setSyncMessage(TraktorMessage syncOnMessage, TraktorMessage phaseSyncMessage, TraktorMessage syncReturnMessage) {
-		this.syncOnMessage = syncOnMessage;
-		this.phaseSyncMessage = phaseSyncMessage;
-		this.syncOnReturnMessage = syncReturnMessage;
-		this.syncOnReturnMessage.addListener(this);
-	}
-	
-	public void setTempoMasterButton(Button control) {
-		control.addListener(this);
-		tempoMasterControl = control;
-	}
-	
-	public void setTempoMasterMessage(TraktorMessage message, TraktorMessage returnMessage) {
-		tempoMasterMessage = message;
-		tempoMasterReturnMessage = returnMessage;
-		tempoMasterReturnMessage.addListener(this);
 	}
 	
 }

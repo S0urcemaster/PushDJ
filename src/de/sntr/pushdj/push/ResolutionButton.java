@@ -33,8 +33,8 @@ public class ResolutionButton extends Button {
 	public static final int GREEN_BRIGHT_BLINK_SLOW = 23;
 	public static final int GREEN_BRIGHT_BLINK_FAST = 24;
 	
-	protected ResolutionButton(int data1) {
-		super(ShortMessage.CONTROL_CHANGE, data1);
+	protected ResolutionButton(String name, int data1) {
+		super(name, ShortMessage.CONTROL_CHANGE, data1);
 	}
 
 }

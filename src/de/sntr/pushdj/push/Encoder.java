@@ -10,8 +10,8 @@ public class Encoder extends Control {
 
 	protected List<EncoderListener> listeners = new ArrayList<>();
 	
-	public Encoder(int command, int data1) {
-		super(command, data1);
+	public Encoder(String name, int command, int data1) {
+		super(name, command, data1);
 	}
 	
 	public void addListener(EncoderListener l) {

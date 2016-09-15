@@ -131,8 +131,8 @@ public class MatrixButton extends Button {
 	public static final int ORANGE2 = 126;
 	public static final int ORANGE_MEDIUM5 = 127;
 	
-	public MatrixButton(int command, int data1) {
-		super(command, data1);
+	public MatrixButton(String name, int command, int data1) {
+		super(name, command, data1);
 	}
 	
 }

@@ -89,28 +89,25 @@ public class VirtualMIDIReceiver extends Thread {
 							TraktorAdapter.playReturnDeckA.sent();
 							break;
 						case 44:
-							TraktorAdapter.syncOnReturnDeckA.data2 = sm.getData2();
-							TraktorAdapter.syncOnReturnDeckA.sent();
+							TraktorAdapter.syncOnOffReturnDeckA.data2 = sm.getData2();
+							TraktorAdapter.syncOnOffReturnDeckA.sent();
 							break;
 						case 46:
 							TraktorAdapter.tempoMasterDeckAReturn.data2 = sm.getData2();
 							TraktorAdapter.tempoMasterDeckAReturn.sent();
 							break;
 						case 47:
-							TraktorAdapter.moveModeDeckAReturn.data2 = sm.getData2();
-							TraktorAdapter.moveModeDeckAReturn.sent();
+							
 							break;
 						case 48:
-							TraktorAdapter.moveSizeDeckAReturn.data2 = sm.getData2();
-							TraktorAdapter.moveSizeDeckAReturn.sent();
+							
 							break;
 						case 56:
 							TraktorAdapter.loopActiveReturnDeckA.data2 = sm.getData2();
 							TraktorAdapter.loopActiveReturnDeckA.sent();
 							break;
 						case 57:
-							TraktorAdapter.loopSizeReturnDeckA.data2 = sm.getData2();
-							TraktorAdapter.loopSizeReturnDeckA.sent();
+							
 							break;
 						default:
 							break;
@@ -156,28 +153,25 @@ public class VirtualMIDIReceiver extends Thread {
 							TraktorAdapter.playReturnDeckB.sent();
 							break;
 						case 44:
-							TraktorAdapter.syncOnReturnDeckB.data2 = sm.getData2();
-							TraktorAdapter.syncOnReturnDeckB.sent();
+							TraktorAdapter.syncOnOffReturnDeckB.data2 = sm.getData2();
+							TraktorAdapter.syncOnOffReturnDeckB.sent();
 							break;
 						case 46:
 							TraktorAdapter.tempoMasterDeckBReturn.data2 = sm.getData2();
 							TraktorAdapter.tempoMasterDeckBReturn.sent();
 							break;
 						case 47:
-							TraktorAdapter.moveModeDeckBReturn.data2 = sm.getData2();
-							TraktorAdapter.moveModeDeckBReturn.sent();
+							
 							break;
 						case 48:
-							TraktorAdapter.moveSizeDeckBReturn.data2 = sm.getData2();
-							TraktorAdapter.moveSizeDeckBReturn.sent();
+							
 							break;
 						case 56:
 							TraktorAdapter.loopActiveReturnDeckB.data2 = sm.getData2();
 							TraktorAdapter.loopActiveReturnDeckB.sent();
 							break;
 						case 57:
-							TraktorAdapter.loopSizeReturnDeckB.data2 = sm.getData2();
-							TraktorAdapter.loopSizeReturnDeckB.sent();
+							
 							break;
 						default:
 							break;

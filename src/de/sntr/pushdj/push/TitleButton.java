@@ -12,8 +12,8 @@ public class TitleButton extends Button {
 	public static final int BRIGHT_BLINK_FAST = 6;
 	
 	
-	protected TitleButton(int data1) {
-		super(ShortMessage.CONTROL_CHANGE, data1);
+	protected TitleButton(String name, int data1) {
+		super(name, ShortMessage.CONTROL_CHANGE, data1);
 	}
 
 }
