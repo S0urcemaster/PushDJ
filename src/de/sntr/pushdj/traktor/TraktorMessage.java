@@ -3,8 +3,6 @@ package de.sntr.pushdj.traktor;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.sntr.pushdj.dj.TraktorMessageListener;
-
 public class TraktorMessage {
 
 	public String name;

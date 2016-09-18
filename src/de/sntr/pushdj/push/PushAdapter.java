@@ -149,7 +149,7 @@ public class PushAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NullPointerException e) {
-System.out.println("Button not used: " +control.name);
+System.out.println("Button not used");
 		}
 	}
 	

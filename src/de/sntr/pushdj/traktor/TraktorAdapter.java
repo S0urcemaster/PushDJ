@@ -44,12 +44,18 @@ public class TraktorAdapter {
 	public static TraktorMessage loadDeckA;
 	public static TraktorMessage cueDeckAPress;
 	public static TraktorMessage cueDeckARelease;
+	public static TraktorMessage cupDeckAPress;
+	public static TraktorMessage cupDeckARelease;
+	public static TraktorMessage fluxOnOffDeckA;
+	public static TraktorMessage fluxOnOffDeckAReturn;
 	
-	public static TraktorMessage moveDeckAForwardPress;
-	public static TraktorMessage moveDeckABackwardPress;
-	public static TraktorMessage moveDeckAForwardRelease;
-	public static TraktorMessage moveDeckABackwardRelease;
+	public static TraktorMessage beatJumpDeckAForwardPress;
+	public static TraktorMessage beatJumpDeckABackwardPress;
+	public static TraktorMessage beatJumpDeckAForwardRelease;
+	public static TraktorMessage beatJumpDeckABackwardRelease;
 
+	public static TraktorMessage beatPhaseReturnDeckA;
+	
 	public static TraktorMessage loopActiveDeckA;
 	public static TraktorMessage loopActiveReturnDeckA;
 
@@ -258,11 +264,25 @@ public class TraktorAdapter {
         pauseDeckA = getMessage("pauseDeckA");
         cueDeckAPress = getMessage("cueDeckAPress");
         cueDeckARelease = getMessage("cueDeckARelease");
-        moveDeckAForwardPress = getMessage("moveDeckAForwardPress");
-        moveDeckABackwardPress = getMessage("moveDeckABackwardPress");
-        moveDeckAForwardRelease = getMessage("moveDeckAForwardRelease");
-        moveDeckABackwardRelease = getMessage("moveDeckABackwardRelease");
-    	loopActiveDeckA = getMessage("loopActiveDeckA");
+        cupDeckAPress = getMessage("cupDeckAPress");
+        cupDeckARelease = getMessage("cupDeckARelease");
+    	phaseSyncDeckA = getMessage("phaseSyncDeckA");
+    	tempoSyncDeckA = getMessage("tempoSyncDeckA");
+    	syncOnOffDeckA = getMessage("syncOnDeckA");
+    	syncOnOffReturnDeckA = getMessage("syncOnReturnDeckA");
+    	tempoMasterDeckA = getMessage("tempoMasterDeckA");
+    	tempoMasterDeckAReturn = getMessage("tempoMasterReturnDeckA");
+    	fluxOnOffDeckA = getMessage("fluxDeckA");
+        fluxOnOffDeckAReturn = getMessage("fluxReturnDeckA");
+        
+        beatJumpDeckAForwardPress = getMessage("beatjumpDeckAForwardPress");
+        beatJumpDeckABackwardPress = getMessage("beatjumpDeckABackwardPress");
+        beatJumpDeckAForwardRelease = getMessage("beatjumpDeckAForwardRelease");
+        beatJumpDeckABackwardRelease = getMessage("beatjumpDeckABackwardRelease");
+    	
+        beatPhaseReturnDeckA = getMessage("beatPhaseReturnDeckA");
+        
+        loopActiveDeckA = getMessage("loopActiveDeckA");
     	loopActiveReturnDeckA = getMessage("loopActiveReturnDeckA");
     	
     	loopSizeSelectSetf32DeckA = getMessage("loopSizeSelectSetf32DeckA");
@@ -361,11 +381,6 @@ public class TraktorAdapter {
     	jogTurnDeckAFineBackward = getMessage("jogTurnDeckAFineBackward");
     	jogTurnDeckACoarseForward = getMessage("jogTurnDeckACoarseForward");
     	jogTurnDeckACoarseBackward = getMessage("jogTurnDeckACoarseBackward");
-    	phaseSyncDeckA = getMessage("phaseSyncDeckA");
-    	syncOnOffDeckA = getMessage("syncOnDeckA");
-    	syncOnOffReturnDeckA = getMessage("syncOnReturnDeckA");
-    	tempoMasterDeckA = getMessage("tempoMasterDeckA");
-    	tempoMasterDeckAReturn = getMessage("tempoMasterReturnDeckA");
     	
     	// B
     	loadDeckB = getMessage("loadDeckB");

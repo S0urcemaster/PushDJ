@@ -4,6 +4,7 @@ import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
 
 
+import de.sntr.pushdj.dj.Deck.Colors;
 import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
@@ -18,12 +19,12 @@ public final class TrackDeck extends Deck {
 	}
 	
 	static {
-		Colors.hotcueColors[HotcueType.None.ordinal()] = MatrixButton.YELLOW_DARK;
-		Colors.hotcueColors[HotcueType.Cue.ordinal()] = MatrixButton.CYAN_MEDIUM;
+		Colors.hotcueColors[HotcueType.None.ordinal()] = MatrixButton.YELLOW_MEDIUM;
+		Colors.hotcueColors[HotcueType.Cue.ordinal()] = MatrixButton.CYAN_PALE1;
 		Colors.hotcueColors[HotcueType.FadeIn.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
 		Colors.hotcueColors[HotcueType.FadeOut.ordinal()] = MatrixButton.ORANGE1_MEDIUM;
 		Colors.hotcueColors[HotcueType.Load.ordinal()] = MatrixButton.YELLOW_BRIGHT;
-		Colors.hotcueColors[HotcueType.Grid.ordinal()] = MatrixButton.BLUE1_PALE;
+		Colors.hotcueColors[HotcueType.Grid.ordinal()] = MatrixButton.YELLOW_WHITE1;
 		Colors.hotcueColors[HotcueType.Loop.ordinal()] = MatrixButton.GREEN_MEDIUM;
 	}
 	
@@ -85,9 +86,78 @@ public final class TrackDeck extends Deck {
 	HotcueType hotcue7Type = HotcueType.None;
 	HotcueType hotcue8Type = HotcueType.None;
 	
+	
 	public TrackDeck(DJController djc) {
 		super(djc);
 	}
+
+	
+	@Override
+	public void activate() {
+		if(active) {
+System.out.println("Deck already active");
+		}
+		active = true;
+		if(playing) {
+			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
+		}
+		else {
+			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
+		}
+		if(sync) {
+			setColor(syncOnOffControl, Colors.syncOn);
+		}
+		else {
+			setColor(syncOnOffControl, Colors.syncOff);
+		}
+		if(tempoMaster) {
+			setColor(tempoMasterControl, Colors.tempoMasterOn);
+		}
+		else {
+			setColor(tempoMasterControl, Colors.tempoMasterOff);
+		}
+		if (flux) {
+			setColor(fluxOnOffControl, Colors.fluxOn);
+		}
+		else {
+			setColor(fluxOnOffControl, Colors.fluxOff);
+		}
+		setColor(cueControl, Colors.cueOff);
+		setColor(cupControl, Colors.cupOff);
+		setColor(phaseSyncControl, Colors.phaseSyncOff);
+		setColor(beatJumpBackwardControl, Colors.beatJumpOff);
+		setColor(beatJumpForwardControl, Colors.beatJumpOff);
+		setColor(loopOnOffControl, Colors.loopActiveOff);
+		setColor(loopMoveIncControl, Colors.loopMoveOff);
+		setColor(loopMoveDecControl, Colors.loopMoveOff);
+		setColor(loopInMoveIncControl, Colors.loopInMoveOff);
+		setColor(loopInMoveDecControl, Colors.loopInMoveOff);
+		setColor(loopOutMoveIncControl, Colors.loopOutMoveOff);
+		setColor(loopOutMoveDecControl, Colors.loopOutMoveOff);
+		setColor(loopSelectSetControl, Colors.loopSelectSetOff);
+		setColor(loopSelectSetBackwardControl, Colors.loopSelectSetBackwardOff);
+		setColor(loopMoveDecControl, Colors.loopMoveOff);
+		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
+		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
+		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
+		setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
+		setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
+		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
+		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
+		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
+		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
+		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
+		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
+		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
+	}
+
+	@Override
+	public void deactivate() {
+		active = false;
+	}
+
 
 	void hotcue1Pressed() {
 		if(djc.shiftRedDown) {
@@ -98,14 +168,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue1Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue1Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue1Released() {
+		cuePlaying = false;
 		send(hotcue1ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 	}
@@ -119,14 +193,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue2Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue2Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue2Released() {
+		cuePlaying = false;
 		send(hotcue2ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
 	}
@@ -140,15 +218,19 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue3Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue3Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	
 	void hotcue3Released() {
+		cuePlaying = false;
 		send(hotcue3ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
 	}
@@ -162,14 +244,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue4Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue4Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue4Released() {
+		cuePlaying = false;
 		send(hotcue4ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
 	}
@@ -183,14 +269,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue5Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue5Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue5Released() {
+		cuePlaying = false;
 		send(hotcue5ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
 	}
@@ -204,14 +294,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue6Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue6Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue6Released() {
+		cuePlaying = false;
 		send(hotcue6ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
 	}
@@ -225,14 +319,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue7Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue7Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue7Released() {
+		cuePlaying = false;
 		send(hotcue7ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
 	}
@@ -246,14 +344,18 @@ public final class TrackDeck extends Deck {
 		if(playing) {
 			setColor(hotcue8Control, Colors.hotcuePlay);
 		} else {
+			cuePlaying = true;
 			setColor(hotcue8Control, Colors.hotcuePlay);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	void hotcue8Released() {
+		cuePlaying = false;
 		send(hotcue8ReleasedMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
 	}
@@ -326,6 +428,7 @@ public final class TrackDeck extends Deck {
 		if(!active) {
 			return;
 		}
+		super.traktorMessageSent(message);
 		if (message == hotcue1TypeReturnMessage) {
 			hotcue1Type = HotcueType.values()[message.data2];
 			setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
@@ -358,111 +461,8 @@ public final class TrackDeck extends Deck {
 			hotcue8Type = HotcueType.values()[message.data2];
 			setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
 		}
-		else if(message == playReturnMessage) {
-			if(message.data2 == 0) {
-				playing = false;
-				setColor(playControl, Colors.playOff);
-			}
-			else {
-				playing = true;
-				setColor(playControl, Colors.playOn);
-			}
-		}
-		else if(message == syncOnOffReturnMessage) {
-			if(message.data2 == 0) {
-				sync = false;
-				setColor(phaseSyncControl, Colors.syncOff);
-			}
-			else {
-				sync = true;
-				setColor(phaseSyncControl, Colors.syncOn);
-			}
-		}
-		else if(message == tempoMasterReturnMessage) {
-			if(message.data2 == 0) {
-				tempoMaster = false;
-				setColor(tempoMasterControl, Colors.tempoMasterOff);
-			}
-			else {
-				tempoMaster = true;
-				setColor(tempoMasterControl, Colors.tempoMasterOn);
-			}
-		}
-		
-		else if(message == loopOnOffReturnMessage) {
-			if(message.data2 == 0) {
-				loopActive = false;
-				if(loopActiveBlink != null) {
-					loopActiveBlink.running = false;
-				}
-			}
-			else {
-				loopActive = true;
-				loopActiveBlink = new MatrixBlink(loopOnOffControl, Colors.loopActiveOn, Colors.loopActiveOff, 200, 300);
-				loopActiveBlink.start();
-			}
-		}
 	}
 	
-	@Override
-	public void activate() {
-		if(active) {
-System.out.println("Deck already active");
-		}
-		active = true;
-		if(playing) {
-			setColor(playControl, Colors.playOn);
-		}
-		else {
-			setColor(playControl, Colors.playOff);
-		}
-		setColor(cueControl, Colors.cueOff);
-		setColor(beatJumpBackwardControl, Colors.moveOff);
-		setColor(beatJumpForwardControl, Colors.moveOff);
-		setColor(loopOnOffControl, Colors.loopActiveOff);
-		setColor(loopMoveIncControl, Colors.loopMoveOff);
-		setColor(loopMoveDecControl, Colors.loopMoveOff);
-		setColor(loopInMoveIncControl, Colors.loopInMoveOff);
-		setColor(loopInMoveDecControl, Colors.loopInMoveOff);
-		setColor(loopOutMoveIncControl, Colors.loopOutMoveOff);
-		setColor(loopOutMoveDecControl, Colors.loopOutMoveOff);
-		setColor(loopSelectSetControl, Colors.loopSelectSetOff);
-		setColor(loopSelectSetBackwardControl, Colors.loopSelectSetBackwardOff);
-		setColor(loopMoveDecControl, Colors.loopMoveOff);
-		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
-		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
-		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
-		setColor(hotcue4Control, Colors.hotcueColors[hotcue4Type.ordinal()]);
-		setColor(hotcue5Control, Colors.hotcueColors[hotcue5Type.ordinal()]);
-		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
-		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
-		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
-		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
-		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
-		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
-		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
-		if(sync) {
-			setColor(phaseSyncControl, Colors.syncOn);
-		}
-		else {
-			setColor(phaseSyncControl, Colors.syncOff);
-		}
-		if(tempoMaster) {
-			setColor(tempoMasterControl, Colors.tempoMasterOn);
-		}
-		else {
-			setColor(tempoMasterControl, Colors.tempoMasterOff);
-		}
-	}
-
-	@Override
-	public void deactivate() {
-		active = false;
-	}
-
-	
-	
-
 	public void setHotcue1Button(Button control) {
 		control.addListener(this);
 		hotcue1Control = control;

@@ -9,7 +9,6 @@ import de.sntr.pushdj.dj.TrackDeck.Colors;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
-import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.StepSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
@@ -20,21 +19,30 @@ public abstract class Deck extends ButtonGroup {
 	static final int jogCoarseRepeatSpeed = 200;
 	
 	static class Colors {
+		static final int off = MatrixButton.OFF;
 		static final int playOn = MatrixButton.GREEN_BRIGHT;
 		static final int playOff = MatrixButton.RED_BRIGHT;
+		static final int syncPlayOn = MatrixButton.GREEN_BRIGHT;
+		static final int syncPlayOff = MatrixButton.RED_BRIGHT;
+		
+		static final int syncOn = MatrixButton.YELLOW3;
+		static final int syncOff = MatrixButton.YELLOW_BRIGHT2;
+		static final int phaseSyncOff = MatrixButton.YELLOW_BRIGHT2;
+		
 		static final int cueOn = MatrixButton.BLUE2_BRIGHT;
 		static final int cueOff = MatrixButton.BLUE2_MEDIUM;
-		static final int moveMode = TitleButton.BRIGHT_ON;
-		static final int moveOn = MatrixButton.BLUE2_BRIGHT;
-		static final int moveOff = MatrixButton.BLUE2_PALE;
-		static final int moveSizeOn = MatrixButton.BLUE3_BRIGHT;
-		static final int moveSizeOff = MatrixButton.BLUE3_PALE;
+		static final int cupOn = MatrixButton.BLUE2_BRIGHT;
+		static final int cupOff = MatrixButton.BLUE2_MEDIUM;
+
+		static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
+		static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
+		static final int fluxOn = MatrixButton.PINK1_BRIGHT;
+		static final int fluxOff = MatrixButton.PINK1_MEDIUM;
+		
+		static final int beatJumpOn = MatrixButton.BLUE2_BRIGHT;
+		static final int beatJumpOff = MatrixButton.BLUE2_PALE;
 		static final int loopActiveOn = MatrixButton.BLUEGREEN_BRIGHT;
 		static final int loopActiveOff = MatrixButton.BLUEGREEN_DARK;
-		static final int loopSizeOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int loopSizeOff = MatrixButton.BLUEGREEN_MEDIUM;
-		static final int loopInOutOn = MatrixButton.BLUEGREEN_BRIGHT;
-		static final int loopInOutOff = MatrixButton.BLUEGREEN_PALE;
 		static final int loopInMoveOff = MatrixButton.VIOLET_MEDIUM1;
 		static final int loopInMoveOn = MatrixButton.VIOLET_BRIGHT;
 		static final int loopOutMoveOff = MatrixButton.VIOLET_MEDIUM1;
@@ -47,10 +55,6 @@ public abstract class Deck extends ButtonGroup {
 		static final int jogTurnFineOff = MatrixButton.ORANGE1_MEDIUM;
 		static final int jogTurnCoarseOn = MatrixButton.ORANGE_BRIGHT;
 		static final int jogTurnCoarseOff = MatrixButton.ORANGE_MEDIUM;
-		static final int syncOn = MatrixButton.YELLOW2;
-		static final int syncOff = MatrixButton.YELLOW_MEDIUM;
-		static final int tempoMasterOn = MatrixButton.BLUE3_BRIGHT;
-		static final int tempoMasterOff = MatrixButton.BLUE3_MEDIUM;
 
 	}
 	
@@ -96,6 +100,8 @@ public abstract class Deck extends ButtonGroup {
 	Button beatJumpForwardControl;
 	TraktorMessage beatJumpForwardPressMessage;
 	TraktorMessage beatJumpForwardReleaseMessage;
+	
+	TraktorMessage beatPhaseReturnMessage;
 	
 	Button loopOnOffControl;
 	TraktorMessage loopOnOffMessage;
@@ -163,9 +169,11 @@ public abstract class Deck extends ButtonGroup {
 	TraktorMessage jogTurnCoarseBackwardMessage;
 	
 	boolean playing = false;
+	boolean cuePlaying = false;
 	boolean sync = false;
 	boolean tempoMaster = false;
 	boolean loopActive = false;
+	boolean flux = false;
 	
 
 	DJController djc;
@@ -184,7 +192,7 @@ public abstract class Deck extends ButtonGroup {
 		this.djc = djc;
 	}
 
-	void playPause() {
+	void playPressed() {
 		if(playing) {
 			send(pauseMessage);
 		}
@@ -193,29 +201,73 @@ public abstract class Deck extends ButtonGroup {
 		}
 	}
 	
+	void syncPlayPressed() {
+		// first macro
+		if (playing) {
+			send(pauseMessage);
+		}
+		else {
+			send(playMessage);
+			send(phaseSyncMessage);
+		}
+	}
+	
 
 	/**
-	 * In Traktor cue is mapped as "hold". The released message is mapped as data2 = 0
-	 * but has no explicit mapping in Traktor.
+	 * Cue press does not produce a playReleased message like Cup does
 	 */
 	void cuePressed() {
 		send(cuePressMessage);
 		if(playing) {
 			playing = false;
 			setColor(cueControl, Colors.cueOff);
-			setColor(playControl, Colors.playOff);
 		} else {
+			cuePlaying = true;
 			setColor(cueControl, Colors.cueOn);
 			setColor(playControl, Colors.playOn);
+			setColor(syncPlayControl, Colors.syncPlayOn);
 		}
 	}
 	
 	void cueReleased() {
+		cuePlaying = false;
 		send(cueReleaseMessage);
 		if (!playing) {
 			setColor(playControl, Colors.playOff);
+			setColor(syncPlayControl, Colors.syncPlayOff);
 		}
 		setColor(cueControl, Colors.cueOff);
+	}
+	
+	void cupPressed() {
+		send(cupPressMessage);
+		setColor(cupControl, Colors.cupOn);
+	}
+	
+	void cupReleased() {
+		send(cupReleaseMessage);
+		setColor(cupControl, Colors.cupOff);
+	}
+	
+	void phaseSyncPressed() {
+		if(djc.shiftGreenDown) {
+			send(tempoSyncMessage);
+		}
+		else {
+			send(phaseSyncMessage);
+		}
+	}
+	
+	void syncOnOffPressed() {
+		send(syncOnOffMessage);
+	}
+	
+	void tempoMasterPressed() {
+		send(tempoMasterMessage);
+	}
+	
+	void fluxOnOffPressed() {
+		send(fluxOnOffMessage);
 	}
 	
 	void stepi32ButtonPressed() {
@@ -270,22 +322,22 @@ public abstract class Deck extends ButtonGroup {
 
 	void beatJumpForwardPressed() {
 		send(beatJumpForwardPressMessage);
-		setColor(beatJumpForwardControl, Colors.moveOn);
+		setColor(beatJumpForwardControl, Colors.beatJumpOn);
 	}
 	
 	void beatJumpForwardReleased() {
 		send(beatJumpForwardReleaseMessage);
-		setColor(beatJumpForwardControl, Colors.moveOff);
+		setColor(beatJumpForwardControl, Colors.beatJumpOff);
 	}
 	
 	void beatJumpBackwardPressed() {
 		send(beatJumpBackwardPressMessage);
-		setColor(beatJumpBackwardControl, Colors.moveOn);
+		setColor(beatJumpBackwardControl, Colors.beatJumpOn);
 	}
 	
 	void beatJumpBackwardReleased() {
 		send(beatJumpBackwardReleaseMessage);
-		setColor(beatJumpBackwardControl, Colors.moveOff);
+		setColor(beatJumpBackwardControl, Colors.beatJumpOff);
 	}
 
 	void loopOnOffToggle() {
@@ -442,27 +494,23 @@ public abstract class Deck extends ButtonGroup {
 		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
 	}
 	
-	void syncPressed() {
-		if(djc.shiftGreenDown) {
-			send(syncOnOffMessage);
-		}
-		else {
-			send(phaseSyncMessage);
-		}
-	}
-	
-	void tempoMasterPressed() {
-		send(tempoMasterMessage);
-	}
-	
 	@Override
 	public void buttonPressed(Button control) {
 		if(active) {
 			if(control == playControl) {
-				playPause();
+				playPressed();
+			}
+			else if (control == syncPlayControl) {
+				syncPlayPressed();
 			}
 			else if(control == cueControl) {
 				cuePressed();
+			}
+			else if(control == cupControl) {
+				cupPressed();
+			}
+			else if(control == fluxOnOffControl) {
+				fluxOnOffPressed();
 			}
 			else if(control == beatJumpBackwardControl) {
 				beatJumpBackwardPressed();
@@ -522,7 +570,7 @@ public abstract class Deck extends ButtonGroup {
 				jogTurnCoarseBackwardPressed();
 			}
 			else if(control == phaseSyncControl) {
-				syncPressed();
+				phaseSyncPressed();
 			}
 			else if(control == tempoMasterControl) {
 				tempoMasterPressed();
@@ -536,6 +584,9 @@ public abstract class Deck extends ButtonGroup {
 		if(active) {
 			if (control == cueControl) {
 				cueReleased();
+			}
+			else if (control == cupControl) {
+				cupReleased();
 			}
 			else if(control == beatJumpBackwardControl) {
 				beatJumpBackwardReleased();
@@ -563,14 +614,33 @@ public abstract class Deck extends ButtonGroup {
 	public void traktorMessageSent(TraktorMessage message) {
 		if(!active) {
 			return;
-		}if(message == playReturnMessage) {
+		}
+		if (message == beatPhaseReturnMessage) {
+			if(message.data2 == 0) {
+				setColor(syncPlayControl, Colors.off);
+				if (flux) {
+					setColor(fluxOnOffControl, Colors.fluxOff);
+				}
+			}
+			else {
+				if (flux) {
+					setColor(fluxOnOffControl, Colors.fluxOn);
+				}
+				if (playing || cuePlaying) {
+					setColor(syncPlayControl, Colors.syncPlayOn);
+				}
+			}
+		}
+		else if(message == playReturnMessage) {
 			if(message.data2 == 0) {
 				playing = false;
 				setColor(playControl, Colors.playOff);
+				setColor(syncPlayControl, Colors.playOff);
 			}
 			else {
 				playing = true;
 				setColor(playControl, Colors.playOn);
+				setColor(syncPlayControl, Colors.playOn);
 			}
 		}
 		else if(message == syncOnOffReturnMessage) {
@@ -581,6 +651,16 @@ public abstract class Deck extends ButtonGroup {
 			else {
 				sync = true;
 				setColor(phaseSyncControl, Colors.syncOn);
+			}
+		}
+		else if(message == fluxOnOffReturnMessage) {
+			if(message.data2 == 0) {
+				flux = false;
+				setColor(fluxOnOffControl, Colors.fluxOff);
+			}
+			else {
+				flux = true;
+				setColor(fluxOnOffControl, Colors.fluxOn);
 			}
 		}
 		else if(message == tempoMasterReturnMessage) {
@@ -672,6 +752,7 @@ public abstract class Deck extends ButtonGroup {
 	public void setFluxOnOffMessage(TraktorMessage message, TraktorMessage returnMessage) {
 		fluxOnOffMessage = message;
 		fluxOnOffReturnMessage = returnMessage;
+		fluxOnOffReturnMessage.addListener(this);
 	}
 	
 	public void setSyncPlayButton(Button control) {
@@ -701,7 +782,7 @@ public abstract class Deck extends ButtonGroup {
 		beatJumpBackwardControl = control;		
 	}
 	
-	public void setMoveBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+	public void setBeatJumpBackwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
 		beatJumpBackwardPressMessage = pressMessage;
 		beatJumpBackwardReleaseMessage = releaseMessage;
 	}
@@ -711,9 +792,14 @@ public abstract class Deck extends ButtonGroup {
 		beatJumpForwardControl = control;
 	}
 
-	public void setMoveForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
+	public void setBeatJumpForwardMessage(TraktorMessage pressMessage, TraktorMessage releaseMessage) {
 		beatJumpForwardPressMessage = pressMessage;
 		beatJumpForwardReleaseMessage = releaseMessage;
+	}
+	
+	public void setBeatPhaseReturnMessage(TraktorMessage message) {
+		message.addListener(this);
+		beatPhaseReturnMessage = message;
 	}
 	
 	public void setLoopActiveButton(Button control) {
@@ -759,30 +845,30 @@ public abstract class Deck extends ButtonGroup {
 		loopOutMoveDecControl = control;
 	}
 	
-	public void setLoopMoveIncMessage(TraktorMessage message) {
+	public void setLoopMoveForwardMessage(TraktorMessage message) {
 		loopMoveIncMessage = message;
 	}
 	
-	public void setLoopMoveDecMessage(TraktorMessage message) {
+	public void setLoopMoveBackwardMessage(TraktorMessage message) {
 		loopMoveDecMessage = message;
 	}
 	
-	public void setLoopInMoveIncMessage(TraktorMessage message) {
+	public void setLoopInMoveForwardMessage(TraktorMessage message) {
 		loopInMoveIncMessage = message;
 	}
 	
-	public void setLoopInMoveDecMessage(TraktorMessage message) {
+	public void setLoopInMoveBackwardMessage(TraktorMessage message) {
 		loopInMoveDecMessage = message;
 	}
 	
-	public void setLoopOutMoveIncMessage(TraktorMessage message) {
+	public void setLoopOutMoveForwardMessage(TraktorMessage message) {
 		loopOutMoveIncMessage = message;
 	}
 	
-	public void setLoopOutMoveDecMessage(TraktorMessage message) {
+	public void setLoopOutMoveBackwardMessage(TraktorMessage message) {
 		loopOutMoveDecMessage = message;
 	}
-
+	
 	public void setStepi32Button(Button control) {
 		control.addListener(this);
 		stepi32Control = control;
@@ -825,7 +911,7 @@ public abstract class Deck extends ButtonGroup {
 	}
 	
 	
-	public void setLoopSizeSelectSetMessage(TraktorMessage f32Message, 
+	public void setLoopSelectSetMessage(TraktorMessage f32Message, 
 			TraktorMessage f16Message,
 			TraktorMessage f8Message,
 			TraktorMessage f4Message,
@@ -850,7 +936,7 @@ public abstract class Deck extends ButtonGroup {
 		loopSizeSelectSeti1Message = i1Message;
 	}
 	
-	public void setLoopSizeSelectSetBackwardMessage(TraktorMessage f32Message, 
+	public void setLoopSelectSetBackwardMessage(TraktorMessage f32Message, 
 			TraktorMessage f16Message,
 			TraktorMessage f8Message,
 			TraktorMessage f4Message,

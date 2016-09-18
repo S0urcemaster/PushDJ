@@ -1,6 +1,5 @@
-package de.sntr.pushdj.dj;
+package de.sntr.pushdj.traktor;
 
-import de.sntr.pushdj.traktor.TraktorMessage;
 
 public interface TraktorMessageListener {
 

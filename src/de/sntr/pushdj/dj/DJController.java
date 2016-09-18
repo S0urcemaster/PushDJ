@@ -2,7 +2,9 @@ package de.sntr.pushdj.dj;
 
 import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
+import de.sntr.pushdj.push.ButtonListener;
 import de.sntr.pushdj.push.Encoder;
+import de.sntr.pushdj.push.EncoderListener;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.PushAdapter;
 import de.sntr.pushdj.push.Button;
@@ -12,6 +14,12 @@ import de.sntr.pushdj.push.Display.Graphics;
 import de.sntr.pushdj.traktor.TraktorAdapter;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
+/**
+ * Main control class.
+ * Processes all top-level functions
+ * @author adm9
+ *
+ */
 public class DJController implements ButtonListener, EncoderListener {
 
 	static final int deckActiveColor = MatrixButton.GRAY_DARK;

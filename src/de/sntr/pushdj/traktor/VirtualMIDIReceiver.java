@@ -52,6 +52,14 @@ public class VirtualMIDIReceiver extends Thread {
 					}
 					else if(sm.getChannel() == 1) { //deckA
 						switch (sm.getData1()) {
+						case 6:
+							TraktorAdapter.fluxOnOffDeckAReturn.data2 = sm.getData2();
+							TraktorAdapter.fluxOnOffDeckAReturn.sent();
+							break;
+						case 10:
+							TraktorAdapter.beatPhaseReturnDeckA.data2 = sm.getData2();
+							TraktorAdapter.beatPhaseReturnDeckA.sent();
+							break;
 						case 29:
 							TraktorAdapter.hotcueTypeDeckA1.data2 = sm.getData2();
 							TraktorAdapter.hotcueTypeDeckA1.sent();

@@ -14,7 +14,7 @@ public class MatrixButton extends Button {
 	public static final int ORANGE_BRIGHT = 9;
 	public static final int ORANGE_MEDIUM = 10;
 	public static final int ORANGE_DARK = 11;
-	public static final int YELLOW_PALE = 12;
+	public static final int YELLOW_BRIGHT2 = 12;
 	public static final int YELLOW_BRIGHT = 13;
 	public static final int YELLOW_MEDIUM = 14;
 	public static final int YELLOW_DARK = 15;
@@ -87,8 +87,8 @@ public class MatrixButton extends Button {
 	public static final int VIOLET4 = 82;
 	public static final int ORANGE_DARK1 = 83;
 	public static final int ORANGE1 = 84;
-	public static final int YELLOW_DARK1 = 85;
-	public static final int YELLOW_PALE1 = 86;
+	public static final int YELLOW_BRIGHT3 = 85;
+	public static final int YELLOW_GREEN_BRIGHT = 86;
 	public static final int GREEN_BRIGHT1 = 87;
 	public static final int GREEN_MEDIUM1 = 88;
 	public static final int GREEN_PALE1 = 89;
@@ -111,11 +111,11 @@ public class MatrixButton extends Button {
 	public static final int RED2 = 106;
 	public static final int RED_PALE1 = 107;
 	public static final int ORANGE_PALE1 = 108;
-	public static final int YELLOW_PALE2 = 109;
+	public static final int YELLOW_BRIGHT1 = 109;
 	public static final int LIME_PALE1 = 110;
 	public static final int LIME_MEDIUM1 = 111;
 	public static final int PINK_DARK1 = 112;
-	public static final int YELLOW_PALE3 = 113;
+	public static final int YELLOW_WHITE1 = 113;
 	public static final int GREEN_PALE2 = 114;
 	public static final int VIOLET_PALE1 = 115;
 	public static final int VIOLET_MEDIUM2 = 116;

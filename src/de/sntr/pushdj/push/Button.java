@@ -3,8 +3,6 @@ package de.sntr.pushdj.push;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.sntr.pushdj.dj.ButtonListener;
-
 public abstract class Button extends Control {
 
 	public static final int OFF = 0;

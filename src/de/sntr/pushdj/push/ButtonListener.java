@@ -1,6 +1,5 @@
-package de.sntr.pushdj.dj;
+package de.sntr.pushdj.push;
 
-import de.sntr.pushdj.push.Button;
 
 public interface ButtonListener {
 

@@ -159,7 +159,8 @@ public class DeckInit {
 		deck.setPlayButton(b15);
 		deck.setCueButton(b16);
 		deck.setPhaseSyncButton(b17);
-		deck.setTempoMasterButton(b18);
+		deck.setFluxOnOffButton(b18);
+		deck.setTempoMasterButton(b28);
 		deck.setHotcue1Button(b25);
 		deck.setHotcue2Button(b26);
 		deck.setHotcue3Button(b27);
@@ -186,19 +187,22 @@ public class DeckInit {
 	private static void initTrackDeckAMessages(TrackDeck deck) {
 		deck.setPlayMessage(playDeckA, pauseDeckA, playReturnDeckA);
 		deck.setCueMessage(cueDeckAPress, cueDeckARelease);
+		deck.setCupMessage(cupDeckAPress, cupDeckARelease);
 		deck.setPhaseSyncMessage(phaseSyncDeckA, tempoSyncDeckA);
 		deck.setSyncOnOffMessage(syncOnOffDeckA, syncOnOffReturnDeckA);
+		deck.setFluxOnOffMessage(fluxOnOffDeckA, fluxOnOffDeckAReturn);
 		deck.setTempoMasterMessage(tempoMasterDeckA, tempoMasterDeckAReturn);
-		deck.setMoveBackwardMessage(moveDeckABackwardPress,	moveDeckABackwardRelease);
-		deck.setMoveForwardMessage(moveDeckAForwardPress, moveDeckAForwardRelease);
+		deck.setBeatPhaseReturnMessage(beatPhaseReturnDeckA);
+		deck.setBeatJumpBackwardMessage(beatJumpDeckABackwardPress,	beatJumpDeckABackwardRelease);
+		deck.setBeatJumpForwardMessage(beatJumpDeckAForwardPress, beatJumpDeckAForwardRelease);
 		deck.setLoopActiveMessage(loopActiveDeckA, loopActiveReturnDeckA);
-		deck.setLoopMoveIncMessage(loopMoveForwardDeckA);
-		deck.setLoopMoveDecMessage(loopMoveBackwardDeckA);
-		deck.setLoopInMoveIncMessage(loopInMoveForwardDeckA);
-		deck.setLoopInMoveDecMessage(loopInMoveBackwardDeckA);
-		deck.setLoopOutMoveIncMessage(loopOutMoveForwardDeckA);
-		deck.setLoopOutMoveDecMessage(loopOutMoveBackwardDeckA);
-		deck.setLoopSizeSelectSetMessage(loopSizeSelectSetf32DeckA, 
+		deck.setLoopMoveForwardMessage(loopMoveForwardDeckA);
+		deck.setLoopMoveBackwardMessage(loopMoveBackwardDeckA);
+		deck.setLoopInMoveForwardMessage(loopInMoveForwardDeckA);
+		deck.setLoopInMoveBackwardMessage(loopInMoveBackwardDeckA);
+		deck.setLoopOutMoveForwardMessage(loopOutMoveForwardDeckA);
+		deck.setLoopOutMoveBackwardMessage(loopOutMoveBackwardDeckA);
+		deck.setLoopSelectSetMessage(loopSizeSelectSetf32DeckA, 
 				loopSizeSelectSetf16DeckA, 
 				loopSizeSelectSetf8DeckA, 
 				loopSizeSelectSetf4DeckA, 
@@ -209,7 +213,7 @@ public class DeckInit {
 				loopSizeSelectSeti4DeckA, 
 				loopSizeSelectSeti2DeckA, 
 				loopSizeSelectSeti1DeckA);
-		deck.setLoopSizeSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckA, 
+		deck.setLoopSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckA, 
 				loopSizeSelectSetBackwardf16DeckA, 
 				loopSizeSelectSetBackwardf8DeckA, 
 				loopSizeSelectSetBackwardf4DeckA, 
@@ -243,16 +247,16 @@ public class DeckInit {
 		deck.setPhaseSyncMessage(phaseSyncDeckB, tempoSyncDeckB);
 		deck.setSyncOnOffMessage(syncOnOffDeckB, syncOnOffReturnDeckB);
 		deck.setTempoMasterMessage(tempoMasterDeckB, tempoMasterDeckBReturn);
-		deck.setMoveBackwardMessage(moveDeckBBackwardPress,	moveDeckBBackwardRelease);
-		deck.setMoveForwardMessage(moveDeckBForwardPress, moveDeckBForwardRelease);
+		deck.setBeatJumpBackwardMessage(moveDeckBBackwardPress,	moveDeckBBackwardRelease);
+		deck.setBeatJumpForwardMessage(moveDeckBForwardPress, moveDeckBForwardRelease);
 		deck.setLoopActiveMessage(loopActiveDeckB, loopActiveReturnDeckB);
-		deck.setLoopMoveIncMessage(loopMoveForwardDeckB);
-		deck.setLoopMoveDecMessage(loopMoveBackwardDeckB);
-		deck.setLoopInMoveIncMessage(loopInMoveForwardDeckB);
-		deck.setLoopInMoveDecMessage(loopInMoveBackwardDeckB);
-		deck.setLoopOutMoveIncMessage(loopOutMoveForwardDeckB);
-		deck.setLoopOutMoveDecMessage(loopOutMoveBackwardDeckB);
-		deck.setLoopSizeSelectSetMessage(loopSizeSelectSetf32DeckB, 
+		deck.setLoopMoveForwardMessage(loopMoveForwardDeckB);
+		deck.setLoopMoveBackwardMessage(loopMoveBackwardDeckB);
+		deck.setLoopInMoveForwardMessage(loopInMoveForwardDeckB);
+		deck.setLoopInMoveBackwardMessage(loopInMoveBackwardDeckB);
+		deck.setLoopOutMoveForwardMessage(loopOutMoveForwardDeckB);
+		deck.setLoopOutMoveBackwardMessage(loopOutMoveBackwardDeckB);
+		deck.setLoopSelectSetMessage(loopSizeSelectSetf32DeckB, 
 				loopSizeSelectSetf16DeckB, 
 				loopSizeSelectSetf8DeckB, 
 				loopSizeSelectSetf4DeckB, 
@@ -263,7 +267,7 @@ public class DeckInit {
 				loopSizeSelectSeti4DeckB, 
 				loopSizeSelectSeti2DeckB, 
 				loopSizeSelectSeti1DeckB);
-		deck.setLoopSizeSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckB, 
+		deck.setLoopSelectSetBackwardMessage(loopSizeSelectSetBackwardf32DeckB, 
 				loopSizeSelectSetBackwardf16DeckB, 
 				loopSizeSelectSetBackwardf8DeckB, 
 				loopSizeSelectSetBackwardf4DeckB, 

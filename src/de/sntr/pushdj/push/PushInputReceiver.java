@@ -399,13 +399,15 @@ public class PushInputReceiver implements Receiver {
 				int note = sm.getData1();
 				switch (note) {
 				//row1
-				case 37:PushAdapter.matrix[1].released(); break;
-				case 38:PushAdapter.matrix[2].released(); break;
-				case 39:PushAdapter.matrix[3].released(); break;
+				case 36: PushAdapter.matrix[0].released(); break;
+				case 37: PushAdapter.matrix[1].released(); break;
+				case 38: PushAdapter.matrix[2].released(); break;
+				case 39: PushAdapter.matrix[3].released(); break;
+				case 40: PushAdapter.matrix[4].released(); break;
+				case 41: PushAdapter.matrix[5].released(); break;
+				case 42: PushAdapter.matrix[6].released(); break;
+				case 43: PushAdapter.matrix[7].released(); break;
 				
-				case 41:PushAdapter.matrix[5].released(); break;
-				case 42:PushAdapter.matrix[6].released(); break;
-				case 43:PushAdapter.matrix[7].released(); break;
 				//row2
 				case 44: PushAdapter.matrix[8].released(); break;
 				case 45: PushAdapter.matrix[9].released(); break;
@@ -415,6 +417,7 @@ public class PushInputReceiver implements Receiver {
 				case 49: PushAdapter.matrix[13].released(); break;
 				case 50: PushAdapter.matrix[14].released(); break;
 				case 51: PushAdapter.matrix[15].released(); break;
+
 				//row3
 				case 52: PushAdapter.matrix[16].released(); break;
 				case 53: PushAdapter.matrix[17].released(); break;
@@ -451,6 +454,24 @@ public class PushInputReceiver implements Receiver {
 				case 81: PushAdapter.matrix[45].released(); break;
 				case 82: PushAdapter.matrix[46].released(); break;
 				case 83: PushAdapter.matrix[47].released(); break;
+				//row7
+				case 84: PushAdapter.matrix[48].released(); break;
+				case 85: PushAdapter.matrix[49].released(); break;
+				case 86: PushAdapter.matrix[50].released(); break;
+				case 87: PushAdapter.matrix[51].released(); break;
+				case 88: PushAdapter.matrix[52].released(); break;
+				case 89: PushAdapter.matrix[53].released(); break;
+				case 90: PushAdapter.matrix[54].released(); break;
+				case 91: PushAdapter.matrix[55].released(); break;
+				//row8
+				case 92: PushAdapter.matrix[56].released(); break;
+				case 93: PushAdapter.matrix[57].released(); break;
+				case 94: PushAdapter.matrix[58].released(); break;
+				case 95: PushAdapter.matrix[59].released(); break;
+				case 96: PushAdapter.matrix[60].released(); break;
+				case 97: PushAdapter.matrix[61].released(); break;
+				case 98: PushAdapter.matrix[62].released(); break;
+				case 99: PushAdapter.matrix[63].released(); break;
 				default:
 					break;
 				}

@@ -1,0 +1,17 @@
+Push ->
+-> PushInputReceiver
+|> ButtonListener.pressed()|.released()
+|> EncoderListener.incerased()|.decreased()
+|> ButtonGroup::Deck::TrackDeck
+|> DJController
+
+Traktor ->
+-> VirtualMIDIReceiver
+>> TraktorMessage
+>> TraktorMessageListener.traktorMessageSent(TraktorMessage)
+>> ButtonGroup::Deck::TrackDeck
+
+
+Button Farbe ändern: Deck/ TrackDeck
+Push Funktion hinzufügen/ändern: Deck/TrackDeck.pressed() .released()
+ : Traktor return verarbeiten: Deck.traktorMessageSent()

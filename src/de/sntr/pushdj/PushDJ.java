@@ -37,6 +37,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * main() class
+ * Creates MainFrame
+ * Passes control to DJController
+ * @author adm9
+ *
+ */
 public class PushDJ {
 	
 	JFrame frmPushdj;

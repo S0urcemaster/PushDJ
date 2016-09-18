@@ -3,8 +3,6 @@ package de.sntr.pushdj.push;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.sntr.pushdj.dj.EncoderListener;
-
 
 public class Encoder extends Control {
 
