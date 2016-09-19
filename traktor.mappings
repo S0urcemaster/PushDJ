@@ -141,6 +141,21 @@ moveModeLoopDeckA,176,1,87,1
 moveModeLoopInDeckA,176,1,88,1
 moveModeLoopOutDeckA,176,1,89,1
 
+sizeSelectorf32DeckA,176,1,86,1
+sizeSelectorf16DeckA,176,1,87,1
+sizeSelectorf8DeckA,176,1,88,1
+sizeSelectorf4DeckA,176,1,89,1
+sizeSelectorf2DeckA,176,1,90,1
+sizeSelectori1DeckA,176,1,91,1
+sizeSelectori2DeckA,176,1,92,1
+sizeSelectori4DeckA,176,1,93,1
+sizeSelectori8DeckA,176,1,94,1
+sizeSelectori16DeckA,176,1,95,1
+sizeSelectori32DeckA,176,1,96,1
+
+sizeSelectorReturnDeckA,176,1,97,1
+
+
 
 ###   DECK B   ###
 

@@ -114,8 +114,10 @@ public class VirtualMIDIReceiver extends Thread {
 							TraktorAdapter.loopActiveReturnDeckA.data2 = sm.getData2();
 							TraktorAdapter.loopActiveReturnDeckA.sent();
 							break;
-						case 57:
-							
+						
+						case 97:
+							TraktorAdapter.sizeSelectorReturnDeckA.data2 = sm.getData2();
+							TraktorAdapter.sizeSelectorReturnDeckA.sent();
 							break;
 						default:
 							break;

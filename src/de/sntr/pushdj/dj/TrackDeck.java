@@ -8,6 +8,7 @@ import de.sntr.pushdj.dj.Deck.Colors;
 import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
 import de.sntr.pushdj.push.Button;
+import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.HotcueType;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
@@ -151,6 +152,10 @@ System.out.println("Deck already active");
 		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
 		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
 		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
+		// TODO step button will be undefined - unlid - from start
+		// return message needed but too much effort
+		activeStepButton = step4Control;
+//		setColor(activeStepButton, TitleButton.BRIGHT_ON);
 	}
 
 	@Override

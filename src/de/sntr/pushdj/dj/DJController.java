@@ -86,10 +86,11 @@ public class DJController implements ButtonListener, EncoderListener {
 		
 		setBrowserUp(PushAdapter.up);
 		setBrowserDown(PushAdapter.down);
-		setLoadDeckA(PushAdapter.note);
-		setLoadDeckB(PushAdapter.session);
-		setLoadDeckC(PushAdapter.select);
-		setLoadDeckD(PushAdapter.shift);
+		setLoadDeckA(PushAdapter.left);
+		setLoadDeckB(PushAdapter.left);
+		//long press:
+//		setLoadDeckC(PushAdapter.select);
+//		setLoadDeckD(PushAdapter.shift);
 
 		setViewLeftDeckAControl(PushAdapter.trackBottom[0]);
 		setViewLeftDeckBControl(PushAdapter.trackBottom[1]);

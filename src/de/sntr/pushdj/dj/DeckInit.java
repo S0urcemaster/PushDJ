@@ -152,6 +152,13 @@ public class DeckInit {
 		deck.setLoopActiveButton(b81);
 		deck.setLoopSelectSetButton(b83);
 		deck.setLoopSelectSetBackwardButton(b84);
+		
+		deck.setStep32Button(PushAdapter.scales);
+		deck.setStep16Button(PushAdapter.repeat);
+		deck.setStep8Button(PushAdapter.octaveDown);
+		deck.setStep4Button(PushAdapter.addEffect);
+		deck.setStep2Button(PushAdapter.note);
+		deck.setStep1Button(PushAdapter.select);
 	}
 	
 	private static void initTrackDeckButtonsRight(TrackDeck deck) {
@@ -224,6 +231,18 @@ public class DeckInit {
 				loopSizeSelectSetBackwardi4DeckA, 
 				loopSizeSelectSetBackwardi2DeckA, 
 				loopSizeSelectSetBackwardi1DeckA);
+		deck.setSizeSelectorMessage(sizeSelectorf32DeckA, 
+				sizeSelectorf16DeckA, 
+				sizeSelectorf8DeckA, 
+				sizeSelectorf4DeckA, 
+				sizeSelectorf2DeckA, 
+				sizeSelectori32DeckA, 
+				sizeSelectori16DeckA, 
+				sizeSelectori8DeckA, 
+				sizeSelectori4DeckA, 
+				sizeSelectori2DeckA, 
+				sizeSelectori1DeckA,
+				sizeSelectorReturnDeckA);
 		
 		deck.setHotcue1Message(selectSetHotcueDeckA1Press, selectSetHotcueDeckA1Release, deleteHotcueDeckA1, hotcueTypeDeckA1);
 		deck.setHotcue2Message(selectSetHotcueDeckA2Press, selectSetHotcueDeckA2Release, deleteHotcueDeckA2, hotcueTypeDeckA2);

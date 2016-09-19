@@ -9,6 +9,7 @@ import de.sntr.pushdj.dj.TrackDeck.Colors;
 import de.sntr.pushdj.push.Button;
 import de.sntr.pushdj.push.MatrixBlink;
 import de.sntr.pushdj.push.MatrixButton;
+import de.sntr.pushdj.push.TitleButton;
 import de.sntr.pushdj.traktor.StepSize;
 import de.sntr.pushdj.traktor.TraktorMessage;
 
@@ -107,12 +108,13 @@ public abstract class Deck extends ButtonGroup {
 	TraktorMessage loopOnOffMessage;
 	TraktorMessage loopOnOffReturnMessage;
 	
-	Button stepi32Control;
-	Button stepi16Control;
-	Button stepi8Control;
-	Button stepi4Control;
-	Button stepi2Control;
-	Button stepi1Control;
+	// internal, no message:
+	Button step32Control; // 1/32 with shift
+	Button step16Control; // ...
+	Button step8Control;
+	Button step4Control;
+	Button step2Control;
+	Button step1Control; // no shift
 
 	TraktorMessage loopSizeSelectSetf32Message;
 	TraktorMessage loopSizeSelectSetf16Message;
@@ -138,6 +140,20 @@ public abstract class Deck extends ButtonGroup {
 	TraktorMessage loopSizeSelectSetBackwardi16Message;
 	TraktorMessage loopSizeSelectSetBackwardi32Message;
 
+	TraktorMessage sizeSelectorf32;
+	TraktorMessage sizeSelectorf16;
+	TraktorMessage sizeSelectorf8;
+	TraktorMessage sizeSelectorf4;
+	TraktorMessage sizeSelectorf2;
+	TraktorMessage sizeSelectori1;
+	TraktorMessage sizeSelectori2;
+	TraktorMessage sizeSelectori4;
+	TraktorMessage sizeSelectori8;
+	TraktorMessage sizeSelectori16;
+	TraktorMessage sizeSelectori32;
+
+	TraktorMessage sizeSelectorReturn;
+	
 	Button loopMoveIncControl;
 	TraktorMessage loopMoveIncMessage;
 	
@@ -186,7 +202,7 @@ public abstract class Deck extends ButtonGroup {
 	MatrixBlink loopActiveBlink;
 	
 	StepSize stepSize = null;
-	
+	Button activeStepButton = null;
 	
 	protected Deck(DJController djc) {
 		this.djc = djc;
@@ -270,53 +286,97 @@ public abstract class Deck extends ButtonGroup {
 		send(fluxOnOffMessage);
 	}
 	
-	void stepi32ButtonPressed() {
+	void step32ButtonPressed() {
 		if(!djc.shiftGreenDown) {
 			stepSize = StepSize.i32;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step32Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_ON);
+			send(sizeSelectori32);
 		}
 		else {
 			stepSize = StepSize.f32;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step32Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_BLINK_FAST);
+			send(sizeSelectorf32);
 		}
 	}
 	
-	void stepi16ButtonPressed() {
+	void step16ButtonPressed() {
 		if(!djc.shiftGreenDown) {
 			stepSize = StepSize.i16;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step16Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_ON);
+			send(sizeSelectori16);
 		}
 		else {
 			stepSize = StepSize.f16;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step16Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_BLINK_FAST);
+			send(sizeSelectorf16);
 		}
 	}
 	
-	void stepi8ButtonPressed() {
+	void step8ButtonPressed() {
 		if(!djc.shiftGreenDown) {
 			stepSize = StepSize.i8;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step8Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_ON);
+			send(sizeSelectori8);
 		}
 		else {
 			stepSize = StepSize.f8;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step8Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_BLINK_FAST);
+			send(sizeSelectorf8);
 		}
 	}
 	
-	void stepi4ButtonPressed() {
+	void step4ButtonPressed() {
 		if(!djc.shiftGreenDown) {
 			stepSize = StepSize.i4;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step4Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_ON);
+			send(sizeSelectori4);
 		}
 		else {
 			stepSize = StepSize.f4;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step4Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_BLINK_FAST);
+			send(sizeSelectorf4);
 		}
 	}
 	
-	void stepi2ButtonPressed() {
+	void step2ButtonPressed() {
 		if(!djc.shiftGreenDown) {
 			stepSize = StepSize.i2;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step2Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_ON);
+			send(sizeSelectori2);
 		}
 		else {
 			stepSize = StepSize.f2;
+			setColor(activeStepButton, TitleButton.OFF);
+			activeStepButton = step2Control;
+			setColor(activeStepButton, TitleButton.BRIGHT_BLINK_FAST);
+			send(sizeSelectorf2);
 		}
 	}
 	
-	void stepi1ButtonPressed() {
+	void step1ButtonPressed() {
 		stepSize = StepSize.i1;
+		setColor(activeStepButton, TitleButton.OFF);
+		activeStepButton = step1Control;
+		setColor(activeStepButton, TitleButton.BRIGHT_ON);
+		send(sizeSelectori1);
 	}
 	
 
@@ -539,23 +599,23 @@ public abstract class Deck extends ButtonGroup {
 			else if(control == loopOutMoveDecControl) {
 				loopOutMoveDecPressed();
 			}
-			else if (control == stepi32Control) {
-				stepi32ButtonPressed();
+			else if (control == step32Control) {
+				step32ButtonPressed();
 			}
-			else if (control == stepi16Control) {
-				stepi16ButtonPressed();
+			else if (control == step16Control) {
+				step16ButtonPressed();
 			}
-			else if (control == stepi8Control) {
-				stepi8ButtonPressed();
+			else if (control == step8Control) {
+				step8ButtonPressed();
 			}
-			else if (control == stepi4Control) {
-				stepi4ButtonPressed();
+			else if (control == step4Control) {
+				step4ButtonPressed();
 			}
-			else if (control == stepi2Control) {
-				stepi2ButtonPressed();
+			else if (control == step2Control) {
+				step2ButtonPressed();
 			}
-			else if (control == stepi1Control) {
-				stepi1ButtonPressed();
+			else if (control == step1Control) {
+				step1ButtonPressed();
 			}
 			else if(control == jogTurnFineForwardControl) {
 				jogTurnFineForwardPressed();
@@ -609,7 +669,10 @@ public abstract class Deck extends ButtonGroup {
 		}
 	}
 	
-
+	boolean onceTrigger = true;
+	/**
+	 * 
+	 */
 	@Override
 	public void traktorMessageSent(TraktorMessage message) {
 		if(!active) {
@@ -685,6 +748,15 @@ public abstract class Deck extends ButtonGroup {
 				loopActiveBlink = new MatrixBlink(loopOnOffControl, Colors.loopActiveOn, Colors.loopActiveOff, 200, 300);
 				loopActiveBlink.start();
 			}
+		}
+		else if (message == sizeSelectorReturn) {
+			// TODO irregular results.. bugged in Traktor?
+//			int size = message.data2-1;
+//			if (size < 0) {
+//				size = 0;
+//			}
+//			stepSize = StepSize.fromOrdinal(size);
+//System.out.println(message.data2);
 		}
 	}
 
@@ -869,34 +941,34 @@ public abstract class Deck extends ButtonGroup {
 		loopOutMoveDecMessage = message;
 	}
 	
-	public void setStepi32Button(Button control) {
+	public void setStep32Button(Button control) {
 		control.addListener(this);
-		stepi32Control = control;
+		step32Control = control;
 	}
 
-	public void setStepi16Button(Button control) {
+	public void setStep16Button(Button control) {
 		control.addListener(this);
-		stepi16Control = control;
+		step16Control = control;
 	}
 
-	public void setStepi8Button(Button control) {
+	public void setStep8Button(Button control) {
 		control.addListener(this);
-		stepi8Control = control;
+		step8Control = control;
 	}
 
-	public void setStepi4Button(Button control) {
+	public void setStep4Button(Button control) {
 		control.addListener(this);
-		stepi4Control = control;
+		step4Control = control;
 	}
 
-	public void setStepi2Button(Button control) {
+	public void setStep2Button(Button control) {
 		control.addListener(this);
-		stepi2Control = control;
+		step2Control = control;
 	}
 
-	public void setStepi1Button(Button control) {
+	public void setStep1Button(Button control) {
 		control.addListener(this);
-		stepi1Control = control;
+		step1Control = control;
 	}
 
 	public void setLoopSelectSetButton(Button control) {
@@ -959,6 +1031,34 @@ public abstract class Deck extends ButtonGroup {
 		loopSizeSelectSetBackwardi4Message = i4Message;
 		loopSizeSelectSetBackwardi2Message = i2Message;
 		loopSizeSelectSetBackwardi1Message = i1Message;
+	}
+	
+	public void setSizeSelectorMessage(TraktorMessage f32,
+			TraktorMessage f16,
+			TraktorMessage f8,
+			TraktorMessage f4,
+			TraktorMessage f2,
+			TraktorMessage i32,
+			TraktorMessage i16,
+			TraktorMessage i8,
+			TraktorMessage i4,
+			TraktorMessage i2,
+			TraktorMessage i1,
+			TraktorMessage retur
+			){
+		sizeSelectorf32 = f32;
+		sizeSelectorf16 = f16;
+		sizeSelectorf8 = f8;
+		sizeSelectorf4 = f4;
+		sizeSelectorf2 = f2;
+		sizeSelectori32 = i32;
+		sizeSelectori16 = i16;
+		sizeSelectori8 = i8;
+		sizeSelectori4 = i4;
+		sizeSelectori2 = i2;
+		sizeSelectori1 = i1;
+		sizeSelectorReturn = retur;
+		retur.addListener(this);
 	}
 	
 	public void setJogTurnFineForwardButton(Button control) {

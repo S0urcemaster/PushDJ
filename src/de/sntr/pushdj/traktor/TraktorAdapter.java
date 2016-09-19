@@ -102,22 +102,6 @@ public class TraktorAdapter {
 	public static TraktorMessage tempoMasterDeckA;
 	public static TraktorMessage tempoMasterDeckAReturn;
 	
-	// DeckB, channel 2
-	public static TraktorMessage playDeckB;
-	public static TraktorMessage pauseDeckB;
-	public static TraktorMessage playReturnDeckB;
-	public static TraktorMessage loadDeckB;
-	public static TraktorMessage cueDeckBPress;
-	public static TraktorMessage cueDeckBRelease;
-
-	public static TraktorMessage moveDeckBForwardPress;
-	public static TraktorMessage moveDeckBBackwardPress;
-	public static TraktorMessage moveDeckBForwardRelease;
-	public static TraktorMessage moveDeckBBackwardRelease;
-
-	public static TraktorMessage loopActiveDeckB;
-	public static TraktorMessage loopActiveReturnDeckB;
-
 	public static TraktorMessage loopSizeSelectSetf32DeckA;
 	public static TraktorMessage loopSizeSelectSetf16DeckA;
 	public static TraktorMessage loopSizeSelectSetf8DeckA;
@@ -148,6 +132,36 @@ public class TraktorAdapter {
 	public static TraktorMessage loopOutMoveForwardDeckA;
 	public static TraktorMessage loopOutMoveBackwardDeckA;
 	
+	public static TraktorMessage sizeSelectorf32DeckA;
+	public static TraktorMessage sizeSelectorf16DeckA;
+	public static TraktorMessage sizeSelectorf8DeckA;
+	public static TraktorMessage sizeSelectorf4DeckA;
+	public static TraktorMessage sizeSelectorf2DeckA;
+	public static TraktorMessage sizeSelectori1DeckA;
+	public static TraktorMessage sizeSelectori2DeckA;
+	public static TraktorMessage sizeSelectori4DeckA;
+	public static TraktorMessage sizeSelectori8DeckA;
+	public static TraktorMessage sizeSelectori16DeckA;
+	public static TraktorMessage sizeSelectori32DeckA;
+	
+	public static TraktorMessage sizeSelectorReturnDeckA;
+
+	// DeckB, channel 2
+	public static TraktorMessage playDeckB;
+	public static TraktorMessage pauseDeckB;
+	public static TraktorMessage playReturnDeckB;
+	public static TraktorMessage loadDeckB;
+	public static TraktorMessage cueDeckBPress;
+	public static TraktorMessage cueDeckBRelease;
+
+	public static TraktorMessage moveDeckBForwardPress;
+	public static TraktorMessage moveDeckBBackwardPress;
+	public static TraktorMessage moveDeckBForwardRelease;
+	public static TraktorMessage moveDeckBBackwardRelease;
+
+	public static TraktorMessage loopActiveDeckB;
+	public static TraktorMessage loopActiveReturnDeckB;
+
 	public static TraktorMessage loopSizeSelectSetf32DeckB;
 	public static TraktorMessage loopSizeSelectSetf16DeckB;
 	public static TraktorMessage loopSizeSelectSetf8DeckB;
@@ -315,6 +329,20 @@ public class TraktorAdapter {
     	loopOutMoveForwardDeckA = getMessage("loopOutMoveIncDeckA");
     	loopOutMoveBackwardDeckA = getMessage("loopOutMoveDecDeckA");
     	
+    	sizeSelectorf32DeckA = getMessage("sizeSelectorf32DeckA");
+    	sizeSelectorf16DeckA = getMessage("sizeSelectorf16DeckA");
+    	sizeSelectorf8DeckA = getMessage("sizeSelectorf8DeckA");
+    	sizeSelectorf4DeckA = getMessage("sizeSelectorf4DeckA");
+    	sizeSelectorf2DeckA = getMessage("sizeSelectorf2DeckA");
+    	sizeSelectori1DeckA = getMessage("sizeSelectori1DeckA");
+    	sizeSelectori2DeckA = getMessage("sizeSelectori2DeckA");
+    	sizeSelectori4DeckA = getMessage("sizeSelectori4DeckA");
+    	sizeSelectori8DeckA = getMessage("sizeSelectori8DeckA");
+    	sizeSelectori16DeckA = getMessage("sizeSelectori16DeckA");
+    	sizeSelectori32DeckA = getMessage("sizeSelectori32DeckA");
+    	
+    	sizeSelectorReturnDeckA = getMessage("sizeSelectorReturnDeckA");
+
     	loopSizeSelectSetf32DeckB = getMessage("loopSizeSelectSetf32DeckB");
     	loopSizeSelectSetf16DeckB = getMessage("loopSizeSelectSetf16DeckB");
     	loopSizeSelectSetf8DeckB = getMessage("loopSizeSelectSetf8DeckB");
