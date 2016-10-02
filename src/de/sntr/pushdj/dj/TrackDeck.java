@@ -95,51 +95,7 @@ public final class TrackDeck extends Deck {
 	
 	@Override
 	public void activate() {
-		if(active) {
-System.out.println("Deck already active");
-		}
-		active = true;
-		if(playing) {
-			setColor(playControl, Colors.playOn);
-			setColor(syncPlayControl, Colors.syncPlayOn);
-		}
-		else {
-			setColor(playControl, Colors.playOff);
-			setColor(syncPlayControl, Colors.syncPlayOff);
-		}
-		if(sync) {
-			setColor(syncOnOffControl, Colors.syncOn);
-		}
-		else {
-			setColor(syncOnOffControl, Colors.syncOff);
-		}
-		if(tempoMaster) {
-			setColor(tempoMasterControl, Colors.tempoMasterOn);
-		}
-		else {
-			setColor(tempoMasterControl, Colors.tempoMasterOff);
-		}
-		if (flux) {
-			setColor(fluxOnOffControl, Colors.fluxOn);
-		}
-		else {
-			setColor(fluxOnOffControl, Colors.fluxOff);
-		}
-		setColor(cueControl, Colors.cueOff);
-		setColor(cupControl, Colors.cupOff);
-		setColor(phaseSyncControl, Colors.phaseSyncOff);
-		setColor(beatJumpBackwardControl, Colors.beatJumpOff);
-		setColor(beatJumpForwardControl, Colors.beatJumpOff);
-		setColor(loopOnOffControl, Colors.loopActiveOff);
-		setColor(loopMoveIncControl, Colors.loopMoveOff);
-		setColor(loopMoveDecControl, Colors.loopMoveOff);
-		setColor(loopInMoveIncControl, Colors.loopInMoveOff);
-		setColor(loopInMoveDecControl, Colors.loopInMoveOff);
-		setColor(loopOutMoveIncControl, Colors.loopOutMoveOff);
-		setColor(loopOutMoveDecControl, Colors.loopOutMoveOff);
-		setColor(loopSelectSetControl, Colors.loopSelectSetOff);
-		setColor(loopSelectSetBackwardControl, Colors.loopSelectSetBackwardOff);
-		setColor(loopMoveDecControl, Colors.loopMoveOff);
+		super.activate();
 		setColor(hotcue1Control, Colors.hotcueColors[hotcue1Type.ordinal()]);
 		setColor(hotcue2Control, Colors.hotcueColors[hotcue2Type.ordinal()]);
 		setColor(hotcue3Control, Colors.hotcueColors[hotcue3Type.ordinal()]);
@@ -148,19 +104,6 @@ System.out.println("Deck already active");
 		setColor(hotcue6Control, Colors.hotcueColors[hotcue6Type.ordinal()]);
 		setColor(hotcue7Control, Colors.hotcueColors[hotcue7Type.ordinal()]);
 		setColor(hotcue8Control, Colors.hotcueColors[hotcue8Type.ordinal()]);
-		setColor(jogTurnFineForwardControl, Colors.jogTurnFineOff);
-		setColor(jogTurnFineBackwardControl, Colors.jogTurnFineOff);
-		setColor(jogTurnCoarseForwardControl, Colors.jogTurnCoarseOff);
-		setColor(jogTurnCoarseBackwardControl, Colors.jogTurnCoarseOff);
-		// TODO step button will be undefined - unlid - from start
-		// return message needed but too much effort
-		activeStepButton = step4Control;
-//		setColor(activeStepButton, TitleButton.BRIGHT_ON);
-	}
-
-	@Override
-	public void deactivate() {
-		active = false;
 	}
 
 

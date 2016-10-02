@@ -2,6 +2,7 @@ package de.sntr.pushdj.dj;
 
 import static de.sntr.pushdj.push.PushAdapter.setColor;
 import static de.sntr.pushdj.traktor.TraktorAdapter.send;
+import de.sntr.pushdj.dj.Deck.Colors;
 import de.sntr.pushdj.push.ButtonListener;
 import de.sntr.pushdj.push.Encoder;
 import de.sntr.pushdj.push.EncoderListener;
@@ -36,7 +37,7 @@ public class DJController implements ButtonListener, EncoderListener {
 	Button browserUpControl, browserDownControl;
 	TraktorMessage browserUpMessage, browserDownMessage;
 	
-	Button loadDeckAControl, loadDeckBControl, loadDeckCControl, loadDeckDControl;
+	Button loadLeftControl, loadRightControl;
 	TraktorMessage loadDeckAMessage, loadDeckBMessage, loadDeckCMessage, loadDeckDMessage;
 	
 	Button viewLeftDeckAControl, viewLeftDeckBControl, viewLeftDeckCControl, viewLeftDeckDControl;
@@ -56,6 +57,7 @@ public class DJController implements ButtonListener, EncoderListener {
 	public boolean shiftGreenDown = false;
 	public boolean shiftRedDown = false;
 
+
 	Focus focus = Focus.Clock;
 
 	public DJController() {
@@ -68,8 +70,8 @@ public class DJController implements ButtonListener, EncoderListener {
 		DeckInit.initTrackDeckARight(deckARight);
 		DeckInit.initTrackDeckBLeft(deckBLeft);
 		DeckInit.initTrackDeckBRight(deckBRight);
-//		DeckInit.initTrackDeckCLeft(deckCLeft);
-//		DeckInit.initTrackDeckCRight(deckCRight);
+		DeckInit.initTrackDeckCLeft(deckCLeft);
+		DeckInit.initTrackDeckCRight(deckCRight);
 //		DeckInit.initTrackDeckDLeft(deckDLeft);
 //		DeckInit.initTrackDeckDRight(deckDRight);
 		
@@ -86,11 +88,8 @@ public class DJController implements ButtonListener, EncoderListener {
 		
 		setBrowserUp(PushAdapter.up);
 		setBrowserDown(PushAdapter.down);
-		setLoadDeckA(PushAdapter.left);
-		setLoadDeckB(PushAdapter.left);
-		//long press:
-//		setLoadDeckC(PushAdapter.select);
-//		setLoadDeckD(PushAdapter.shift);
+		setLoadLeft(PushAdapter.left);
+		setLoadRight(PushAdapter.right);
 
 		setViewLeftDeckAControl(PushAdapter.trackBottom[0]);
 		setViewLeftDeckBControl(PushAdapter.trackBottom[1]);
@@ -102,20 +101,18 @@ public class DJController implements ButtonListener, EncoderListener {
 		setViewRightDeckCControl(PushAdapter.trackBottom[6]);
 		setViewRightDeckDControl(PushAdapter.trackBottom[7]);
 		
-		runButtons();
+		activate();
 	}
 	
-	private void runButtons() {
+	private void activate() {
 
-		setColor(shiftGreenControl, TitleButton.MEDIUM_ON);
-		setColor(shiftRedControl, TitleButton.MEDIUM_ON);
+		setColor(shiftGreenControl, TitleButton.BRIGHT_ON);
+		setColor(shiftRedControl, TitleButton.BRIGHT_ON);
 		
-		setColor(browserUpControl, TitleButton.MEDIUM_ON);
-		setColor(browserDownControl, TitleButton.MEDIUM_ON);
-		setColor(loadDeckAControl, TitleButton.MEDIUM_ON);
-		setColor(loadDeckBControl, TitleButton.MEDIUM_ON);
-		setColor(loadDeckCControl, TitleButton.MEDIUM_ON);
-		setColor(loadDeckDControl, TitleButton.MEDIUM_ON);
+		setColor(browserUpControl, TitleButton.BRIGHT_ON);
+		setColor(browserDownControl, TitleButton.BRIGHT_ON);
+		setColor(loadLeftControl, TitleButton.BRIGHT_ON);
+		setColor(loadRightControl, TitleButton.BRIGHT_ON);
 
 		setColor(viewLeftDeckAControl, viewDeckLowerOn);
 		setColor(viewLeftDeckBControl, viewDeckLowerOff);
@@ -132,6 +129,57 @@ public class DJController implements ButtonListener, EncoderListener {
 
 	}
 
+//	public Button getActiveStepButton(Deck deck) {
+//		if(deck == deckALeft || deck == deckARight) {
+//			return activeStepButtonDeckA;
+//		}
+//		if(deck == deckBLeft || deck == deckBRight) {
+//			return activeStepButtonDeckB;
+//		}
+//		if(deck == deckCLeft || deck == deckCRight) {
+//			return activeStepButtonDeckC;
+//		}
+//		if(deck == deckDLeft || deck == deckDRight) {
+//			return activeStepButtonDeckD;
+//		}
+//		return null;
+//	}
+	
+//	public Button setActiveStepButton(Deck deck, Button button) {
+//		if(deck == deckALeft || deck == deckARight) {
+//			activeStepButtonDeckA = button;
+//		}
+//		if(deck == deckBLeft || deck == deckBRight) {
+//			activeStepButtonDeckB = button;
+//		}
+//		if(deck == deckCLeft || deck == deckCRight) {
+//			activeStepButtonDeckC = button;
+//		}
+//		if(deck == deckDLeft || deck == deckDRight) {
+//			activeStepButtonDeckD = button;
+//		}
+//		return null;
+//	}
+	
+	public void setActiveStepButton(Deck deck, Button button) {
+		if(deck == deckALeft || deck == deckARight) {
+			deckALeft.activeStepButton = button;
+			deckARight.activeStepButton = button;
+		}
+		if(deck == deckBLeft || deck == deckBRight) {
+			deckBLeft.activeStepButton = button;
+			deckBRight.activeStepButton = button;
+		}
+		if(deck == deckCLeft || deck == deckCRight) {
+			deckCLeft.activeStepButton = button;
+			deckCRight.activeStepButton = button;
+		}
+		if(deck == deckDLeft || deck == deckDRight) {
+			deckDLeft.activeStepButton = button;
+			deckDRight.activeStepButton = button;
+		}
+	}
+	
 	/**
 	 * Internal Focus
 	 * 
@@ -177,25 +225,16 @@ public class DJController implements ButtonListener, EncoderListener {
 		browserDownControl.addListener(this);
 	}
 
-	public void setLoadDeckA(Button button) {
-		loadDeckAControl = button;
-		loadDeckAControl.addListener(this);
+	public void setLoadLeft(Button button) {
+		loadLeftControl = button;
+		loadLeftControl.addListener(this);
 	}
 
-	public void setLoadDeckB(Button button) {
-		loadDeckBControl = button;
-		loadDeckBControl.addListener(this);
+	public void setLoadRight(Button button) {
+		loadRightControl = button;
+		loadRightControl.addListener(this);
 	}
 
-	public void setLoadDeckC(Button button) {
-		loadDeckCControl = button;
-		loadDeckCControl.addListener(this);
-	}
-
-	public void setLoadDeckD(Button button) {
-		loadDeckDControl = button;
-		loadDeckDControl.addListener(this);
-	}
 	
 	public void setShiftGreenControl(Button button) {
 		shiftGreenControl = button;
@@ -270,11 +309,11 @@ public class DJController implements ButtonListener, EncoderListener {
 		else if(control == browserDownControl) {
 			browserDownPressed();
 		}
-		else if(control == loadDeckAControl) {
-			loadDeckAPressed();
+		else if(control == loadLeftControl) {
+			loadLeftPressed();
 		}
-		else if(control == loadDeckBControl) {
-			loadDeckBPressed();
+		else if(control == loadRightControl) {
+			loadRightPressed();
 		}
 		else if(control == viewLeftDeckAControl) {
 			viewLeftDeckAPressed();
@@ -282,11 +321,17 @@ public class DJController implements ButtonListener, EncoderListener {
 		else if(control == viewLeftDeckBControl) {
 			viewLeftDeckBPressed();
 		}
+		else if(control == viewLeftDeckCControl) {
+			viewLeftDeckCPressed();
+		}
 		else if(control == viewRightDeckAControl) {
 			viewRightDeckAPressed();
 		}
 		else if(control == viewRightDeckBControl) {
 			viewRightDeckBPressed();
+		}
+		else if(control == viewRightDeckCControl) {
+			viewRightDeckCPressed();
 		}
 	}
 
@@ -535,22 +580,24 @@ public class DJController implements ButtonListener, EncoderListener {
 		send(TraktorAdapter.browserDownRelease);
 	}
 	
-	void loadDeckAPressed() {
-		send(TraktorAdapter.loadDeckA);
+	void loadLeftPressed() {
+		if (shiftGreenDown) {
+			send(TraktorAdapter.loadDeckC);
+		}
+		else {
+			send(TraktorAdapter.loadDeckA);
+		}
 	}
 	
-	void loadDeckBPressed() {
-		send(TraktorAdapter.loadDeckB);
-	}
-
-	void loadDeckCPressed() {
-//		send(TraktorAdapter.loadDeckC);
+	void loadRightPressed() {
+		if (shiftGreenDown) {
+//			send(TraktorAdapter.loadDeckD);
+		}
+		else {
+			send(TraktorAdapter.loadDeckB);
+		}
 	}
 	
-	void loadDeckDPressed() {
-//		send(TraktorAdapter.loadDeckD);
-	}
-
 	void viewLeftDeckAPressed() {
 		if(deckALeft.active) {
 			send(TraktorAdapter.sendMonitorState);
@@ -564,22 +611,6 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.update();
 		leftViewButtonsOff();
 		setColor(viewLeftDeckAControl, viewDeckLowerOn);
-		send(TraktorAdapter.sendMonitorState);
-	}
-	
-	void viewLeftDeckBPressed() {
-		if(deckBLeft.active) {
-			send(TraktorAdapter.sendMonitorState);
-			return;
-		}
-		deckALeft.deactivate();
-		deckCLeft.deactivate();
-		deckDLeft.deactivate();
-		deckBLeft.activate();
-		PushAdapter.display.writeColumn(0, Graphics.BigB);
-		PushAdapter.display.update();
-		leftViewButtonsOff();
-		setColor(viewLeftDeckBControl, viewDeckLowerOn);
 		send(TraktorAdapter.sendMonitorState);
 	}
 
@@ -599,6 +630,22 @@ public class DJController implements ButtonListener, EncoderListener {
 		send(TraktorAdapter.sendMonitorState);
 	}
 	
+	void viewLeftDeckBPressed() {
+		if(deckBLeft.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckALeft.deactivate();
+		deckCLeft.deactivate();
+		deckDLeft.deactivate();
+		deckBLeft.activate();
+		PushAdapter.display.writeColumn(0, Graphics.BigB);
+		PushAdapter.display.update();
+		leftViewButtonsOff();
+		setColor(viewLeftDeckBControl, viewDeckLowerOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+
 	void viewRightDeckBPressed() {
 		if(deckBRight.active) {
 			send(TraktorAdapter.sendMonitorState);
@@ -612,6 +659,39 @@ public class DJController implements ButtonListener, EncoderListener {
 		PushAdapter.display.update();
 		rightViewButtonsOff();
 		setColor(viewRightDeckBControl, viewDeckLowerOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+
+	
+	void viewLeftDeckCPressed() {
+		if(deckCLeft.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckALeft.deactivate();
+		deckBLeft.deactivate();
+		deckDLeft.deactivate();
+		deckCLeft.activate();
+		PushAdapter.display.writeColumn(0, Graphics.BigC);
+		PushAdapter.display.update();
+		leftViewButtonsOff();
+		setColor(viewLeftDeckCControl, viewDeckLowerOn);
+		send(TraktorAdapter.sendMonitorState);
+	}
+
+	void viewRightDeckCPressed() {
+		if(deckCRight.active) {
+			send(TraktorAdapter.sendMonitorState);
+			return;
+		}
+		deckARight.deactivate();
+		deckBRight.deactivate();
+		deckDRight.deactivate();
+		deckCRight.activate();
+		PushAdapter.display.writeColumn(3, Graphics.BigC);
+		PushAdapter.display.update();
+		rightViewButtonsOff();
+		setColor(viewRightDeckCControl, viewDeckLowerOn);
 		send(TraktorAdapter.sendMonitorState);
 	}
 

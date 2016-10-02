@@ -26,7 +26,7 @@ public class TraktorMessage {
 	}
 	
 	public void sent() {
-System.out.println("TR in> " +command +":"+channel+","+data1+","+data2);
+System.out.println("Msg> " +command +":"+channel+","+data1+","+data2);
 		for (TraktorMessageListener l : listeners) {
 			l.traktorMessageSent(this);
 		}

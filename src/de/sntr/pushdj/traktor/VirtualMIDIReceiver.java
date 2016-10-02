@@ -111,13 +111,15 @@ public class VirtualMIDIReceiver extends Thread {
 							
 							break;
 						case 56:
+							break;
+
+						case 97:
+							TraktorAdapter.deckLoadedReturnDeckA.data2 = sm.getData2();
+							TraktorAdapter.deckLoadedReturnDeckA.sent();
+							break;
+						case 98:
 							TraktorAdapter.loopActiveReturnDeckA.data2 = sm.getData2();
 							TraktorAdapter.loopActiveReturnDeckA.sent();
-							break;
-						
-						case 97:
-							TraktorAdapter.sizeSelectorReturnDeckA.data2 = sm.getData2();
-							TraktorAdapter.sizeSelectorReturnDeckA.sent();
 							break;
 						default:
 							break;
@@ -126,6 +128,14 @@ public class VirtualMIDIReceiver extends Thread {
 					}
 					else if(sm.getChannel() == 2) { //deckB
 						switch (sm.getData1()) {
+						case 6:
+							TraktorAdapter.fluxOnOffDeckBReturn.data2 = sm.getData2();
+							TraktorAdapter.fluxOnOffDeckBReturn.sent();
+							break;
+						case 10:
+							TraktorAdapter.beatPhaseReturnDeckB.data2 = sm.getData2();
+							TraktorAdapter.beatPhaseReturnDeckB.sent();
+							break;
 						case 29:
 							TraktorAdapter.hotcueTypeDeckB1.data2 = sm.getData2();
 							TraktorAdapter.hotcueTypeDeckB1.sent();
@@ -177,16 +187,94 @@ public class VirtualMIDIReceiver extends Thread {
 							
 							break;
 						case 56:
+							break;
+
+						case 97:
+							TraktorAdapter.deckLoadedReturnDeckB.data2 = sm.getData2();
+							TraktorAdapter.deckLoadedReturnDeckB.sent();
+							break;
+						case 98:
 							TraktorAdapter.loopActiveReturnDeckB.data2 = sm.getData2();
 							TraktorAdapter.loopActiveReturnDeckB.sent();
 							break;
-						case 57:
+						default:
+							break;
+						}	
+					}
+					else if(sm.getChannel() == 3) { //deckC
+						switch (sm.getData1()) {
+						case 6:
+							TraktorAdapter.fluxOnOffDeckCReturn.data2 = sm.getData2();
+							TraktorAdapter.fluxOnOffDeckCReturn.sent();
+							break;
+						case 10:
+							TraktorAdapter.beatPhaseReturnDeckC.data2 = sm.getData2();
+							TraktorAdapter.beatPhaseReturnDeckC.sent();
+							break;
+						case 29:
+							TraktorAdapter.hotcueTypeDeckC1.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC1.sent();
+							break;
+						case 30:
+							TraktorAdapter.hotcueTypeDeckC2.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC2.sent();
+							break;
+						case 31:
+							TraktorAdapter.hotcueTypeDeckC3.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC3.sent();
+							break;
+						case 32:
+							TraktorAdapter.hotcueTypeDeckC4.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC4.sent();
+							break;
+						case 33:
+							TraktorAdapter.hotcueTypeDeckC5.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC5.sent();
+							break;
+						case 34:
+							TraktorAdapter.hotcueTypeDeckC6.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC6.sent();
+							break;
+						case 35:
+							TraktorAdapter.hotcueTypeDeckC7.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC7.sent();
+							break;
+						case 36:
+							TraktorAdapter.hotcueTypeDeckC8.data2 = sm.getData2();
+							TraktorAdapter.hotcueTypeDeckC8.sent();
+							break;
+						case 37:
+							TraktorAdapter.playReturnDeckC.data2 = sm.getData2();
+							TraktorAdapter.playReturnDeckC.sent();
+							break;
+						case 44:
+							TraktorAdapter.syncOnOffReturnDeckC.data2 = sm.getData2();
+							TraktorAdapter.syncOnOffReturnDeckC.sent();
+							break;
+						case 46:
+							TraktorAdapter.tempoMasterDeckCReturn.data2 = sm.getData2();
+							TraktorAdapter.tempoMasterDeckCReturn.sent();
+							break;
+						case 47:
 							
+							break;
+						case 48:
+							
+							break;
+						case 56:
+							break;
+
+						case 97:
+							TraktorAdapter.deckLoadedReturnDeckC.data2 = sm.getData2();
+							TraktorAdapter.deckLoadedReturnDeckC.sent();
+							break;
+						case 98:
+							TraktorAdapter.loopActiveReturnDeckC.data2 = sm.getData2();
+							TraktorAdapter.loopActiveReturnDeckC.sent();
 							break;
 						default:
 							break;
 						}
-							
 					}
 				}
 				System.out.println("VMR> " +TeVirtualMIDITest.byteArrayToString(message));
